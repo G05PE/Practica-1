@@ -1,4 +1,6 @@
 package control;
+import java.util.List;
+
 import model.manager;
 import model.observer;
 public class controller {
@@ -13,9 +15,9 @@ public class controller {
 		manager.addObserver(o);
 	}
 	
-	public void establecerFuncion(int funcion) {
+	public void establecerFuncion(int funcion, List<Double> valores) {
 		
-		manager.establecerFuncion(funcion);
+		manager.establecerFuncion(funcion, valores);
 	}
 	public void iniciarPoblacion(int tam, double precision) {
 		manager.iniciarPoblacion(tam, precision);

@@ -3,6 +3,8 @@ package funciones;
 import java.util.ArrayList;
 import java.util.List;
 
+import genetica.gen;
+
 public abstract class funcion {
 	private List<Double> x;
 	private double res;
@@ -47,6 +49,9 @@ public abstract class funcion {
 	}
 	protected void setRes(double res) {
 		this.res=res;
+	}
+	public int getSize() {
+		return x.size();
 	}
 	public double getX(int i) {
 		return x.get(i);
