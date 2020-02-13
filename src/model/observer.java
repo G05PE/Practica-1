@@ -1,7 +1,7 @@
 package model;
 
 public interface observer {
-	public void onChangedFunction();
+	public void onChangedFunction(int funcion);
 	public void onChangedFunctionParameters();
 	public void onChangedPoblationSize();
 	public void onChangedGeneration();

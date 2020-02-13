@@ -1,48 +1,42 @@
 package funciones;
-public class funcion1 {
-	private double x1, x2;
-	private double res=0;
-	private final double minX1=-3;
-	private final double maxX1=12.1;
-	private final double minX2=4.1;
-	private final double maxX2=5.8;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class funcion1 extends funcion{
 	
-	public funcion1(double x1, double x2) {
-		if(rangoCorrecto(x1, x2)) {
-			this.setX1(x1);
-			this.setX2(x2);
-			res=calcularFuncion1();
-		}
+	public funcion1(List<Double> x) {
+		super(x);
+		establecerMinimosMaximos();
+		super.ini();
 	}
-	public boolean rangoCorrecto(double x1, double x2){
-		if(x1 >= minX1 && x1 <= maxX1){
-			if(x2 >= minX2 && x2 <= maxX2){
+	public void establecerMinimosMaximos() {
+		List<Double>minimos=new ArrayList<Double>(2);
+		minimos.add(-3.0);
+		minimos.add(4.1);
+		super.setMinX(minimos);
+		
+		List<Double>maximos=new ArrayList<Double>(2);
+		maximos.add(12.1);
+		maximos.add(5.8);
+		super.setMaxX(maximos);
+	}
+	
+	/*@Override
+	public boolean rangoCorrecto() {
+		if(getX(1) >= getMinX(1) && getX(1) <= getMaxX(1)) {
+			if(getX(2) >= getMinX(2) && getX(2) <= getMaxX(2)) {
 				return true;
 			}
 		}
 		return false;
-	}
+	}*/
 	
 	/*21.5 + x1.sen(4pi x1)+x2.sen(20pi x2)*/
-	public double calcularFuncion1() {
+	public void calcularFuncion() {
 		double resultado=0;
-		resultado=21.5 + x1*Math.sin(4*Math.PI*x1) + x2*Math.sin(20*Math.PI*x2);
-		return resultado;
-	}
-	public double getRes() {
-		return res;
-	}
-	public double getX1() {
-		return x1;
-	}
-	public void setX1(double x1) {
-		this.x1 = x1;
-	}
-	public double getX2() {
-		return x2;
-	}
-	public void setX2(double x2) {
-		this.x2 = x2;
+		resultado=21.5 + getX(0)*Math.sin(4*Math.PI*getX(0)) + getX(1)*Math.sin(20*Math.PI*getX(1));
+		setRes(resultado);
 	}
 	
 }

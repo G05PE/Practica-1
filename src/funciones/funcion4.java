@@ -3,48 +3,37 @@ package funciones;
 import java.util.ArrayList;
 import java.util.List;
 
-public class funcion4 {
-	private List<Double> x;
-	private double res=0;
-	private final double minX=0;
-	private final double maxX=Math.PI;
+public class funcion4 extends funcion{
+	
+	private int size;
 	
 	public funcion4(List<Double> x) {
-		this.x=x;
-		if(rangoCorrecto()) {
-			calcularFuncion4();
-		}
-		else {
-			x.clear();
-		}
-	}
-	public boolean rangoCorrecto(){
-		int i=0;
-		while(i < x.size()) {
-			if(x.get(i) < minX || x.get(i) > maxX)
-			{
-				return false;
-			}
-			i++;
-		}
-		return true;
+		super(x);
+		size=x.size();
+		establecerMinimosMaximos();
+		super.ini();
 	}
 	
-	public void calcularFuncion4() {
+	public void establecerMinimosMaximos() {
+		List<Double>minimos=new ArrayList<Double>();
+		for(int i=0; i < size; i++) {
+			minimos.add(0.0);
+		}
+		super.setMinX(minimos);
+		
+		List<Double>maximos=new ArrayList<Double>();
+		for(int i=0; i < size; i++) {
+			maximos.add(Math.PI);
+		}
+		super.setMaxX(maximos);
+	}
+
+	public void calcularFuncion() {
 		double resultado=0;
-		for(int i=0; i < x.size(); i++) {
+		for(int i=0; i < size; i++) {
 			//TO DO
 		}
-		res=-resultado;
+		setRes(-resultado);
 	}
 	
-	public double getRes() {
-		return res;
-	}
-	public List<Double> getX() {
-		return x;
-	}
-	public void setX(List<Double> x) {
-		this.x=new ArrayList<Double>(x);
-	}
 }

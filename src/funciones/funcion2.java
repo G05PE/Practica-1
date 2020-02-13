@@ -1,49 +1,37 @@
 package funciones;
 
-public class funcion2 {
-	private double x, y;
-	private double res=0;
-	private final double minX=-10;
-	private final double maxX=10;
-	private final double minY=-10;
-	private final double maxY=10;
+import java.util.ArrayList;
+import java.util.List;
+
+public class funcion2 extends funcion{
 	
-	public funcion2(double x, double y) {
-		if(rangoCorrecto(x, y)) {
-			this.x=x;
-			this.y=y;
-			res=calcularFuncion2();
-		}
+	public funcion2(List<Double> x) {
+		super(x);
+		establecerMinimosMaximos();
+		super.ini();
 	}
-	public boolean rangoCorrecto(double x1, double x2){
-		if(x >= minX && x <= maxX){
-			if(y >= minY && y <= maxY){
-				return true;
-			}
+	
+	public void establecerMinimosMaximos() {
+		List<Double>minimos=new ArrayList<Double>(2);
+		for(int i=0; i < 2; i++) {
+			minimos.add(-10.0);
 		}
-		return false;
+		super.setMinX(minimos);
+		
+		List<Double>maximos=new ArrayList<Double>(2);
+		for(int i=0; i < 2; i++) {
+			maximos.add(10.0);
+		}
+		super.setMaxX(maximos);
 	}
+
 	/*expcomponent = exp( abs(1 - (sqrt(X .^2 + Y .^ 2) / pi)) );
       scores = -abs(sin(X) .* cos(Y) .* expcomponent);*/
-	public double calcularFuncion2() {
+	public void calcularFuncion() {
 		double resultado=0;
-		double excomponent=Math.exp(Math.abs(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2))/Math.PI));
-		resultado= -Math.abs(Math.sin(x) * Math.cos(y) * excomponent);
-		return resultado;
-	}
-	public double getRes() {
-		return res;
-	}
-	public double getX() {
-		return x;
-	}
-	public void setX(double x) {
-		this.x = x;
-	}
-	public double getY() {
-		return y;
-	}
-	public void setY(double y) {
-		this.y = y;
+		double raiz=Math.sqrt(Math.pow(getX(0), 2) + Math.pow(getX(1), 2));
+		double excomponent=Math.exp(Math.abs( 1 - raiz/Math.PI));
+		resultado= -Math.abs(Math.sin(getX(0)) * Math.cos(getX(1)) * excomponent);
+		setRes(resultado);
 	}
 }
