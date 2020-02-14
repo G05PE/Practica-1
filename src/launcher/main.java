@@ -17,6 +17,7 @@ import funciones.funcion2;
 import funciones.funcion3;
 import funciones.funcion4;
 import model.manager;
+import poblacion.individuo;
  
 public class main
 {
@@ -46,8 +47,9 @@ public class main
                l4.add(2.0);
                l4.add(3.0);
                funcion f[]= {new funcion1(),
-            		   new funcion2(), new funcion3(), new funcion4()};
+            		   new funcion2(), new funcion3(2), new funcion4(3)};
               
+               individuo i=new individuo(f[0], 0.001);
             	   f[0].test(l1);
             	   f[1].test(l2);
             	   f[2].test(l3);

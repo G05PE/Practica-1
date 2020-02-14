@@ -10,8 +10,13 @@ public abstract class funcion {
 	private double res;
 	private List<Double> minX;
 	private List<Double> maxX;
+	private int size=0;
+	public funcion(int var) {
+		setSize(var);
+		establecerMinimosMaximos();
+	}
 	
-	public boolean rangoCorrecto(){
+	/*public boolean rangoCorrecto(){
 		this.x=x;
 		int i=0;
 		while(i < x.size()) {
@@ -22,8 +27,8 @@ public abstract class funcion {
 			i++;
 		}
 		return true;
-	}
-	public abstract void calcularFuncion(List<Double> x);
+	}*/
+	public abstract double calcularFuncion(List<Double> x);
 	public abstract void establecerMinimosMaximos();
 	public void test(List<Double> x) {
 		calcularFuncion(x);
@@ -42,7 +47,7 @@ public abstract class funcion {
 		this.res=res;
 	}
 	public int getSize() {
-		return x.size();
+		return size;
 	}
 	public double getX(int i) {
 		return x.get(i);
@@ -55,6 +60,9 @@ public abstract class funcion {
 	}
 	protected void setMaxX(List<Double> max) {
 		maxX=max;
+	}
+	public void setSize(int size) {
+		this.size = size;
 	}
 	
 }
