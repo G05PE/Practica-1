@@ -11,18 +11,8 @@ public abstract class funcion {
 	private List<Double> minX;
 	private List<Double> maxX;
 	
-	public funcion(List<Double> x) {
-		this.x=x;
-	}
-	public void ini() {
-		if(rangoCorrecto()) {
-			calcularFuncion();
-		}
-		else {
-			x.clear();
-		}
-	}
 	public boolean rangoCorrecto(){
+		this.x=x;
 		int i=0;
 		while(i < x.size()) {
 			if(x.get(i) < minX.get(i) || x.get(i) > maxX.get(i))
@@ -33,9 +23,10 @@ public abstract class funcion {
 		}
 		return true;
 	}
-	public abstract void calcularFuncion();
+	public abstract void calcularFuncion(List<Double> x);
 	public abstract void establecerMinimosMaximos();
-	public void test() {
+	public void test(List<Double> x) {
+		calcularFuncion(x);
 		System.out.println("El resultado es "+ res);
 	}
 	public double getMinX(int i) {

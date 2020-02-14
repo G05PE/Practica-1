@@ -15,6 +15,7 @@ import funciones.funcion;
 import funciones.funcion1;
 import funciones.funcion2;
 import funciones.funcion3;
+import funciones.funcion4;
 import model.manager;
  
 public class main
@@ -38,12 +39,20 @@ public class main
          
                l3.add(-10.0);
                l3.add(10.0);
-               funcion f[]= {new funcion1(l1),
-            		   new funcion2(l2), new funcion3(l3)};
-               for(int i=0; i<3; i++)
-               {
-            	   f[i].test();
-               }
+               
+               List<Double> l4=new ArrayList<Double>();
+               
+               l4.add(1.0);
+               l4.add(2.0);
+               l4.add(3.0);
+               funcion f[]= {new funcion1(),
+            		   new funcion2(), new funcion3(), new funcion4()};
+              
+            	   f[0].test(l1);
+            	   f[1].test(l2);
+            	   f[2].test(l3);
+            	   f[3].test(l4);
+               
  
         }
  

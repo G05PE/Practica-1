@@ -1,17 +1,26 @@
 package genetica;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import funciones.funcion;
 public class gen {
-	private List<Integer> genotipo;
+	private List<Boolean> genotipo;
 	private double fenotipo;
 	private funcion funcion;
 	private double tam;
-	
-	public gen(funcion f, double precision, double tam, double x) {
+	private Random rand;
+	public gen(funcion f, double precision, double tam) {
 		funcion=f;
 		this.tam=tam;
-		fenotipo=x;
+		generarGen();
 	}
-	
+	public void generarGen() {
+		genotipo=new ArrayList<Boolean>();
+		rand=new Random();
+		for(int i=0; i < tam; i++) {
+			genotipo.add(rand.nextBoolean());
+		}
+	}
 }
