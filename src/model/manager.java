@@ -29,27 +29,27 @@ public class manager {
 		poblacion=new poblacion(tam, precision, funcion);
 		//AVISAR observers
 	}
-	public void establecerFuncion(int f, List<Double> valores ) {
+	public void establecerFuncion(int f, int tam ) {
 		switch(f) {
 		case 1:
-			funcion=new funcion1(valores);
+			funcion=new funcion1();
 			break;
 		case 2:
-			funcion=new funcion2(valores);
+			funcion=new funcion2();
 			break;
 		case 3:
-			funcion=new funcion3(valores);
+			funcion=new funcion3(tam);
 			break;
 		case 4:
-			funcion=new funcion4(valores);
+			funcion=new funcion4(tam);
 			break;
 			default:
-				funcion=new funcion1(valores);
+				funcion=new funcion1();
 				break;
 		
 		}
 		for(int i=0; i < observers.size(); i++) {
-			observers.get(i).onChangedFunction(funcion, valores);
+			observers.get(i).onChangedFunction(funcion, tam);
 		}
 	}
 

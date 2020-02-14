@@ -8,20 +8,17 @@ import funciones.funcion;
 public class poblacion {
 	
 	private List<individuo> poblacion;
-	private funcion funcion;
-	private double precision;
+	
 	public poblacion(int tam, double prec, funcion fun) {
 		poblacion=new ArrayList<individuo>(tam);
-		precision=prec;
-		funcion=fun;
-		iniciarPoblacion();
+		iniciarPoblacion(fun, prec);	
 	}
 	
-	public void iniciarPoblacion() {
+	public void iniciarPoblacion(funcion funcion, double precision) {
 		
 		for(int i=0; i < poblacion.size(); i++) {
-			individuo cromosoma=new individuo();
-			poblacion.set(i, )
+			individuo cromosoma=new individuo(funcion, precision);
+			poblacion.add(cromosoma);
 		}
 	}
 }
