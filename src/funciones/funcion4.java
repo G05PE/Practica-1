@@ -3,48 +3,35 @@ package funciones;
 import java.util.ArrayList;
 import java.util.List;
 
-public class funcion4 {
-	private List<Double> x;
-	private double res=0;
-	private final double minX=0;
-	private final double maxX=Math.PI;
+public class funcion4 extends funcion{
 	
-	public funcion4(List<Double> x) {
-		this.x=x;
-		if(rangoCorrecto()) {
-			calcularFuncion4();
-		}
-		else {
-			x.clear();
-		}
+	public funcion4(int var) {
+		super(var);
 	}
-	public boolean rangoCorrecto(){
-		int i=0;
-		while(i < x.size()) {
-			if(x.get(i) < minX || x.get(i) > maxX)
-			{
-				return false;
-			}
-			i++;
+
+	public void establecerMinimosMaximos() {
+		List<Double>minimos=new ArrayList<Double>();
+		for(int i=0; i < getSize(); i++) {
+			minimos.add(0.0);
 		}
-		return true;
+		super.setMinX(minimos);
+		
+		List<Double>maximos=new ArrayList<Double>();
+		for(int i=0; i < getSize(); i++) {
+			maximos.add(Math.PI);
+		}
+		super.setMaxX(maximos);
 	}
-	
-	public void calcularFuncion4() {
+
+	public double calcularFuncion(List<Double> x) {//No probada
+		setX(x);
 		double resultado=0;
-		for(int i=0; i < x.size(); i++) {
-			//TO DO
+		for(int i=0; i < getSize(); i++) {
+			resultado+=Math.sin(getX(i)*Math.pow(
+					Math.sin((i+1)*Math.pow(getX(i), 2)/Math.PI), 20));
 		}
-		res=-resultado;
+		setRes(-resultado);
+		return -resultado;
 	}
 	
-	public double getRes() {
-		return res;
-	}
-	public List<Double> getX() {
-		return x;
-	}
-	public void setX(List<Double> x) {
-		this.x=new ArrayList<Double>(x);
-	}
 }

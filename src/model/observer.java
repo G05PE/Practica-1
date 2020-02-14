@@ -1,7 +1,11 @@
 package model;
 
+import java.util.List;
+
+import funciones.funcion;
+
 public interface observer {
-	public void onChangedFunction();
+	public void onChangedFunction(funcion f, List<Double> valores);
 	public void onChangedFunctionParameters();
 	public void onChangedPoblationSize();
 	public void onChangedGeneration();
