@@ -31,7 +31,8 @@ public class funcion4 extends funcion{
 	public void calcularFuncion() {
 		double resultado=0;
 		for(int i=0; i < size; i++) {
-			//TO DO
+			resultado+=Math.sin(getX(i)*Math.pow(
+					Math.sin((i+1)*Math.pow(getX(i), 2)/Math.PI), 20));
 		}
 		setRes(-resultado);
 	}
