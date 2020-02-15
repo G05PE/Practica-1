@@ -50,7 +50,7 @@ public class main
             		   new funcion2(), new funcion3(2), new funcion4(3)};
                c.establecerFuncion(1, 0);
                c.iniciarPoblacion(10, 0.1);
-               c.establecerMetodoSeleccion(0);
+               c.establecerMetodoSeleccion(1, 3);
                
                
               /* individuo i=new individuo(f[0], 0.001);

@@ -20,8 +20,8 @@ public class controller {
 		manager.establecerFuncion(funcion, tam);
 	}
 	
-	public void establecerMetodoSeleccion(int metodo) {
-		manager.establerMetodoSeleccion(metodo);
+	public void establecerMetodoSeleccion(int metodo, int k) {
+		manager.establerMetodoSeleccion(metodo, k);
 	}
 	public void iniciarPoblacion(int tam, double precision) {
 		manager.iniciarPoblacion(tam, precision);

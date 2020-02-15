@@ -10,12 +10,14 @@ import funciones.funcion4;
 import poblacion.poblacion;
 import seleccion.algoritmoRuleta;
 import seleccion.algoritmoSeleccion;
+import seleccion.algoritmoTorneoDeter;
 
 public class manager {
 	
 	private List<observer> observers;
 	private poblacion poblacion;
 	private funcion funcion;
+	private int idFun;
 	private algoritmoSeleccion algSel;
 	
 	public manager() {
@@ -33,6 +35,7 @@ public class manager {
 		//AVISAR observers
 	}
 	public void establecerFuncion(int f, int tam ) {
+		idFun=f;
 		switch(f) {
 		case 1:
 			funcion=new funcion1();
@@ -55,11 +58,14 @@ public class manager {
 			observers.get(i).onChangedFunction(funcion, tam);
 		}
 	}
-	public void establerMetodoSeleccion(int metodo) {
+	public void establerMetodoSeleccion(int metodo, int k) {
 		switch(metodo)
 		{
 		case 0://ruleta
 			algSel=new algoritmoRuleta(poblacion);
+			break;
+		case 1:
+			algSel=new algoritmoTorneoDeter(poblacion, k, idFun);
 			break;
 		}
 	}
