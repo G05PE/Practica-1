@@ -48,13 +48,18 @@ public class main
                l4.add(3.0);
                funcion f[]= {new funcion1(),
             		   new funcion2(), new funcion3(2), new funcion4(3)};
-              
-               individuo i=new individuo(f[0], 0.001);
+               c.establecerFuncion(1, 0);
+               c.iniciarPoblacion(10, 0.1);
+               c.establecerMetodoSeleccion(0);
+               
+               
+              /* individuo i=new individuo(f[0], 0.001);
             	   f[0].test(l1);
             	   f[1].test(l2);
             	   f[2].test(l3);
-            	   f[3].test(l4);
+            	   f[3].test(l4);*/
                
+            	   
  
         }
  

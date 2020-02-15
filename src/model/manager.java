@@ -8,12 +8,15 @@ import funciones.funcion2;
 import funciones.funcion3;
 import funciones.funcion4;
 import poblacion.poblacion;
+import seleccion.algoritmoRuleta;
+import seleccion.algoritmoSeleccion;
 
 public class manager {
 	
 	private List<observer> observers;
 	private poblacion poblacion;
 	private funcion funcion;
+	private algoritmoSeleccion algSel;
 	
 	public manager() {
 		observers=new ArrayList<observer>();
@@ -50,6 +53,14 @@ public class manager {
 		}
 		for(int i=0; i < observers.size(); i++) {
 			observers.get(i).onChangedFunction(funcion, tam);
+		}
+	}
+	public void establerMetodoSeleccion(int metodo) {
+		switch(metodo)
+		{
+		case 0://ruleta
+			algSel=new algoritmoRuleta(poblacion);
+			break;
 		}
 	}
 

@@ -1,6 +1,5 @@
-/funciones/
-/genetica/
 /poblacion/
-/launcher/
-/model/
 /control/
+/model/
+/seleccion/
+/launcher/
