@@ -3,6 +3,7 @@ import java.util.List;
 
 import model.manager;
 import model.observer;
+import poblacion.poblacion;
 public class controller {
 
     private manager manager;
@@ -15,9 +16,12 @@ public class controller {
 		manager.addObserver(o);
 	}
 	
-	public void establecerFuncion(int funcion, List<Double> valores) {
-		
-		manager.establecerFuncion(funcion, valores);
+	public void establecerFuncion(int funcion, int tam) {
+		manager.establecerFuncion(funcion, tam);
+	}
+	
+	public void establecerMetodoSeleccion(int metodo, int k) {
+		manager.establerMetodoSeleccion(metodo, k);
 	}
 	public void iniciarPoblacion(int tam, double precision) {
 		manager.iniciarPoblacion(tam, precision);
