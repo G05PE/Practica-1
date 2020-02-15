@@ -11,6 +11,7 @@ import poblacion.poblacion;
 import seleccion.algoritmoRuleta;
 import seleccion.algoritmoSeleccion;
 import seleccion.algoritmoTorneoDeter;
+import seleccion.algoritmoTorneoProb;
 
 public class manager {
 	
@@ -66,6 +67,9 @@ public class manager {
 			break;
 		case 1:
 			algSel=new algoritmoTorneoDeter(poblacion, k, idFun);
+			break;
+		case 2:
+			algSel=new algoritmoTorneoProb(poblacion, k, idFun);
 			break;
 		}
 	}

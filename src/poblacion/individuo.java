@@ -16,6 +16,12 @@ public class individuo {
 		setFitness(f.calcularFuncion(fenotipos));        
 	}
 	
+	public individuo(individuo ind) {
+		cromosoma=new ArrayList<gen>(ind.getCromosoma());
+		fenotipos=new ArrayList<Double>(ind.getFenotipos());
+		fitness=ind.getFitness();
+	}
+	
 	public void crearGenes(funcion f, double precision) {
 		fenotipos=new ArrayList<Double>();
 		for(int i=0; i < f.getSize(); i++) {
@@ -47,5 +53,12 @@ public class individuo {
 
 	public void setFitness(double fitness) {
 		this.fitness = fitness;
+	}
+	public List<gen> getCromosoma(){
+		return cromosoma;
+	}
+	
+	public List<Double> getFenotipos(){
+		return fenotipos;
 	}
 }

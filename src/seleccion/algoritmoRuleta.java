@@ -1,13 +1,17 @@
 package seleccion;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import poblacion.poblacion;
 
 public class algoritmoRuleta extends algoritmoSeleccion{
 	private double totalFitness;
+	private List<Double> probSeleccion;
 	
 	public algoritmoRuleta(poblacion p) {
 		super(p);
+		probSeleccion=new ArrayList<Double>();
 		asignarProbabilidades();
 		seleccionar();
 	}
@@ -17,10 +21,10 @@ public class algoritmoRuleta extends algoritmoSeleccion{
 		for(int j=0; j < getSizePoblacion(); j++) {
 			double valor=r.nextDouble() % 1;
 			int i=0;
-			while(i < getSizePoblacion() && valor > getProbSeleccion(i)) {
+			while(i < getSizePoblacion() && valor > probSeleccion.get(i)) {
 				i++;
 			}
-			if(getProbSeleccion(i-1) > valor) i--;
+			if(probSeleccion.get(i-1) > valor) i--;
 			addSeleccionado(getIndividuo(i));
 		}
 	}
@@ -31,9 +35,9 @@ public class algoritmoRuleta extends algoritmoSeleccion{
 			double prob=0;
 			prob=getIndividuo(i).getFitness()/totalFitness;
 			if(i > 0) {
-				prob +=getProbSeleccion(i-1);
+				prob +=probSeleccion.get(i-1);
 			}
-			addProbabilidad(prob);
+			probSeleccion.add(prob);
 		}
 	}
 
