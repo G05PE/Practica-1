@@ -1,10 +1,14 @@
 package launcher;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
- 
+import javax.swing.SwingUtilities;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -48,17 +52,34 @@ public class main
                l4.add(3.0);
                funcion f[]= {new funcion1(),
             		   new funcion2(), new funcion3(2), new funcion4(3)};
-               c.establecerFuncion(1, 0);
+              /*TEST ALGORITMOS SELECCION:  c.establecerFuncion(1, 0);
                c.iniciarPoblacion(10, 0.1);
-               c.establecerMetodoSeleccion(3, 3);
+               c.establecerMetodoSeleccion(3, 3);*/
                
                
-              /* individuo i=new individuo(f[0], 0.001);
+              /* TEST FUNCIONES : individuo i=new individuo(f[0], 0.001);
             	   f[0].test(l1);
             	   f[1].test(l2);
             	   f[2].test(l3);
             	   f[3].test(l4);*/
                
+               try {
+   				SwingUtilities.invokeAndWait(new Runnable() {
+   					public void run() {
+   						view.mainWindow window = new view.mainWindow(c);
+   						window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+   						window.addWindowListener(new WindowAdapter() {
+   							 public void windowClosing(WindowEvent e) {
+   					                window.exit();
+   							 }
+   						});
+   						
+   					}
+   				});
+   		} catch (InvocationTargetException | InterruptedException e) {
+   			System.out.println("Error al iniciar el GUI");
+   			e.printStackTrace();
+   		}
             	   
  
         }
