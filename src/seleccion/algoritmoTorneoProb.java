@@ -8,8 +8,8 @@ public class algoritmoTorneoProb extends algoritmoTorneo{
 	
 	public algoritmoTorneoProb(poblacion pob, int k, int funcion) {
 		super(pob, k, funcion);
-		Random r=new Random();
-		p=r.nextDouble()%1 + 0.5;
+		p=Math.random()%1 + 0.5;
+		if(p > 1) p-=0.5;
 		seleccionar();
 	}
 	
