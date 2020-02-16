@@ -8,6 +8,7 @@ import funciones.funcion2;
 import funciones.funcion3;
 import funciones.funcion4;
 import poblacion.poblacion;
+import seleccion.algoritmoEstocasticoUniv;
 import seleccion.algoritmoRuleta;
 import seleccion.algoritmoSeleccion;
 import seleccion.algoritmoTorneoDeter;
@@ -70,6 +71,9 @@ public class manager {
 			break;
 		case 2:
 			algSel=new algoritmoTorneoProb(poblacion, k, idFun);
+			break;
+		case 3:
+			algSel=new algoritmoEstocasticoUniv(poblacion);
 			break;
 		}
 	}

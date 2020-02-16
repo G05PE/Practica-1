@@ -17,8 +17,14 @@ public class individuo {
 	}
 	
 	public individuo(individuo ind) {
-		cromosoma=new ArrayList<gen>(ind.getCromosoma());
-		fenotipos=new ArrayList<Double>(ind.getFenotipos());
+		cromosoma=new ArrayList<gen>();
+		for(int i=0; i<ind.getCromosoma().size(); i++) {
+			cromosoma.add(new gen(ind.getCromosoma().get(i)));
+		}
+		fenotipos=new ArrayList<Double>();
+		for(int i=0; i < ind.getFenotipos().size(); i++) {
+			fenotipos.add(new Double(ind.getFenotipos().get(i)));
+		}
 		fitness=ind.getFitness();
 	}
 	

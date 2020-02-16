@@ -3,29 +3,40 @@ package seleccion;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import poblacion.poblacion;
 
-public class algoritmoRuleta extends algoritmoSeleccion{
+public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
+
 	private double totalFitness;
 	private List<Double> probSeleccion;
+	private double distancia;
 	
-	public algoritmoRuleta(poblacion p) {
+	public algoritmoEstocasticoUniv(poblacion.poblacion p) {
 		super(p);
 		probSeleccion=new ArrayList<Double>();
 		asignarProbabilidades();
+		distancia=(double)1/getSizePoblacion();
 		seleccionar();
 	}
 
+	@Override
 	public void seleccionar() {
-		Random r=new Random();
-		for(int j=0; j < getSizePoblacion(); j++) {
-			double valor=r.nextDouble() % 1;
-			int i=0;
-			while(i < getSizePoblacion() && valor > probSeleccion.get(i)) {
-				i++;
+		int j=0;
+		Random rand=new Random();
+		double r;
+		for(int k=0; k < getSizePoblacion();) {
+			r=rand.nextDouble()%distancia;
+			j=0;
+			while(j < getSizePoblacion()) {
+				while(j < getSizePoblacion() && r > probSeleccion.get(j)) {
+					j++;
+				}
+				if(j < getSizePoblacion()) {
+					if(j > 0 &&  probSeleccion.get(j-1) > r) j--;
+					addSeleccionado(getIndividuo(j));
+					r+=distancia;
+					k++;
+				}
 			}
-			if(i > 0 && probSeleccion.get(i-1) > valor) i--;
-			addSeleccionado(getIndividuo(i));
 		}
 	}
 

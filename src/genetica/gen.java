@@ -17,11 +17,31 @@ public class gen {
 		generarGen();
 		calcularFenotipo();
 	}
+	
+	public gen(gen gen) {
+		rand=new Random();
+		fenotipo=gen.getFenotipo();
+		funcion=gen.getFuncion();
+		tam=gen.getTam();
+		genotipo=new ArrayList<Boolean>();
+		for(int i=0; i < gen.getGenotipo().size(); i++) {
+			genotipo.add(new Boolean(gen.getGenotipo().get(i)));
+		}
+	}
+	
+	public double getTam() {
+		return tam;
+	}
+
+	public funciones.funcion getFuncion() {
+		return funcion;
+	}
+
 	public void generarGen() {
 		genotipo=new ArrayList<Boolean>();
 		rand=new Random();
 		for(int i=0; i < tam; i++) {
-			genotipo.add(rand.nextBoolean());
+			genotipo.add(new Boolean(rand.nextBoolean()));
 		}
 	}
 	
