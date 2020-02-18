@@ -16,6 +16,11 @@ public class poblacion {
 		iniciarPoblacion(fun, prec);	
 	}
 	
+	public poblacion() {
+		poblacion=new ArrayList<individuo>();
+		this.tam = 0;
+	}
+	
 	public void iniciarPoblacion(funcion funcion, double precision) {
 		
 		for(int i=0; i < tam; i++) {

@@ -28,6 +28,10 @@ public class monopunto extends algoritmoCruce{
 			}
 		}
 		
-		return pb;
+		for(int i = 0; i < b.getSize(); i++) {
+			a.add(b.getIndividuo(i).getCromosoma());
+		}
+		
+		return a;
 	}
 }
