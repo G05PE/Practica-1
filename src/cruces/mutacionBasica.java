@@ -2,9 +2,14 @@ package cruces;
 
 public class mutacionBasica extends mutacion{
 
+  double probMutacion;
+  individuo recibido;
+  
   //Constructor
  public mutacionBasica(double probMutcion, individuo recibido){
     super(probMutcion, individuo);
+    this.probMutacion = probMutacion;
+    this.recibido = recibido;
  }
   
   @Override
@@ -13,8 +18,8 @@ public class mutacionBasica extends mutacion{
     
     for(int i = 0; i < log2(recibido); i++){
       double rand = Math.random()%1;
-      if(rand < PMutacion){ //Que narices es PMutacion en los apuntes del tema 3?
-        mutado.getIndividuo[i].getCromosoma() = !recibido.individuo[i].cromosoma();
+      if(rand < probMutcion){
+        mutado.getIndividuo[i].getCromosoma() = !recibido.getIndividuo[i].getCromosoma();
       }
     }  
     
