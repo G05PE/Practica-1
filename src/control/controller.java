@@ -26,4 +26,7 @@ public class controller {
 	public void iniciarPoblacion(int tam, double precision) {
 		manager.iniciarPoblacion(tam, precision);
 	}
+	public void nextGen() {
+		manager.nextGen();
+	}
 }

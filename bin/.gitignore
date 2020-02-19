@@ -1,5 +1,6 @@
-/seleccion/
-/genetica/
-/poblacion/
 /launcher/
 /model/
+/poblacion/
+/seleccion/
+/view/
+/control/

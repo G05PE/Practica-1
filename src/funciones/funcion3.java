@@ -36,4 +36,14 @@ public class funcion3 extends funcion{
 		setRes(res);
 		return res;
 	}
+
+	@Override
+	public boolean best(double fitness, double best) {
+		return fitness < best;
+	}
+
+	@Override
+	public boolean worst(double fitness, double fitness2) {
+		return fitness > fitness2;
+	}
 }
