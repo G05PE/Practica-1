@@ -67,4 +67,9 @@ public class individuo {
 	public List<Double> getFenotipos(){
 		return fenotipos;
 	}
+	
+	public int getLongitud(){
+		return cromosoma.size();
+	}
+
 }

@@ -11,16 +11,17 @@ public class poblacion {
 	private int tam=0;
 	private funcion fun;
 	private double best;
-	
+	private double precision;
 	public poblacion(int tam, double prec, funcion fun) {
 		poblacion=new ArrayList<individuo>();
 		this.tam=tam;
 		this.fun=fun;
-		iniciarPoblacion(prec);
+		precision=prec;
+		iniciarPoblacion();
 		best=poblacion.get(0).getFitness();
 	}
 	
-	public void iniciarPoblacion(double precision) {
+	public void iniciarPoblacion() {
 		
 		for(int i=0; i < tam; i++) {
 			individuo cromosoma=new individuo(fun, precision);
@@ -65,5 +66,13 @@ public class poblacion {
 			total+=poblacion.get(i).getFitness();
 		}
 		return total/poblacion.size();
+	}
+	
+	public double getPrecision() {
+		return precision;
+	}
+
+	public funcion getFuncion() {
+		return fun;
 	}
 }
