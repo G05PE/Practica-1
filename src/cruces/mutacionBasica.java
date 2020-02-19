@@ -21,7 +21,8 @@ public class mutacionBasica extends mutacion{
       if(rand < probMutcion){
         mutado.getIndividuo[i].getCromosoma() = !recibido.getIndividuo[i].getCromosoma();
       }
-    }  
-    
-    return mutado;
+    }
+      return mutado;
+  }
+  
 }
