@@ -2,25 +2,29 @@ package cruces;
 
 import poblacion.poblacion;
 
-public class uniforme extends algoritmoCruce{//Tema 2 pag 52
+public class uniforme extends algoritmoCruce{ //Tema 3 pagina 12
 
 	@Override
 	public poblacion iniciarPoblacion(poblacion pb, float porcnt) {
-		poblacion a = new poblacion();
-		int tamCromosoma = pb.getIndividuo(0).getLongitud();
+		poblacion ret = new poblacion();
 		boolean existeGen;
 
 		for(int i = 0; i < pb.getSize() - 1; i+=2) {
-			for(int p = 0; p < tamCromosoma - 1; p +=2){
-				if(Math.random() < porcnt) {//no es menos es ==
-					existeGen = a.getIndividuo(i).getCromosoma().get(p) != null;//Accediendo a elemento no existente
-					a.getIndividuo(i).getCromosoma().set(p, a.getIndividuo(i+1).getCromosoma().get(p));//Mal planteado, gen es x1 o x2 no alelos
-					a.getIndividuo(i+1).getCromosoma().set(p, existeGen);
+			for(int p = 0; p < pb.getIndividuo(i).getLongitud() - 1; p++){
+				if(Math.random() <= porcnt) { //Genera cruce
+          					
+					gen aux, aux2;
+					aux = pb.getIndividuo(i).getCromosoma().getGen(p);
+         				aux2 = pb.getIndividuo(i+1).getCromosoma().getGen(p);
+            
+					pb.getIndividuo(i).getCromosoma().setGen(p, aux);
+					pb.getIndividuo(i+1).getCromosoma().getGen(p, aux2);
+          
 				}
 			}
 		}
 		
-		return a;
+		return ret;
 	}
 
 	
