@@ -21,6 +21,7 @@ public class manager {
 	private funcion funcion;
 	private int idFun;
 	private algoritmoSeleccion algSel;
+	private int generation=0;
 	
 	public manager() {
 		observers=new ArrayList<observer>();
@@ -35,6 +36,15 @@ public class manager {
 	public void iniciarPoblacion(int tam, double precision) {
 		poblacion=new poblacion(tam, precision, funcion);
 		//AVISAR observers
+		
+	}
+	
+	public void nextGen() {
+		for(int i=0; i < 100; i++) {
+			generation++;
+			observers.get(0).onNextGeneration(generation, poblacion.getBest()+1, 
+					poblacion.getBestGen()-i, poblacion.getAverage()+i);
+		}
 	}
 	public void establecerFuncion(int f, int tam ) {
 		idFun=f;
@@ -67,10 +77,10 @@ public class manager {
 			algSel=new algoritmoRuleta(poblacion);
 			break;
 		case 1:
-			algSel=new algoritmoTorneoDeter(poblacion, k, idFun);
+			algSel=new algoritmoTorneoDeter(poblacion, k, funcion);
 			break;
 		case 2:
-			algSel=new algoritmoTorneoProb(poblacion, k, idFun);
+			algSel=new algoritmoTorneoProb(poblacion, k, funcion);
 			break;
 		case 3:
 			algSel=new algoritmoEstocasticoUniv(poblacion);

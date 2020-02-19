@@ -1,33 +1,47 @@
 package view;
 
-import control.controller;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import view.graphPanel;
+import control.controller;
 
-public class mainWindow {
-	private static JFrame gui;
-	private static JPanel setings;
-	private static JPanel graphic;
-
+public class mainWindow extends JFrame{
+	private controller ctrl;
+	private graphPanel graphPanel;
 	
-	public mainWindow(controller ctlr) { 
-		
-		//Window configuration
-		gui = new JFrame("Practica 1");
-		setings = new SetingsPanel(ctlr);
-		gui.setAlwaysOnTop(true);
-		gui.setVisible(true);
-		gui.setBounds(150, 150, 720, 480);
-        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        //Add configuration panel
-        gui.setLayout(new BorderLayout());
-        gui.add(setings, BorderLayout.WEST);
-       
-        //TODO add graphic
+	public mainWindow(controller c)
+	{
+		super("Genetic algorithm");
+		ctrl=c;
+		initGUI();
 	}
-
-	 
+	
+	private void initGUI() {
+		JPanel mainPanel=new JPanel(new BorderLayout());
+		setContentPane(mainPanel);
+		
+		graphPanel=new graphPanel(ctrl);
+		this.add(graphPanel, BorderLayout.EAST);
+		
+		this.setPreferredSize(new Dimension(900,700));
+		this.setMinimumSize(new Dimension(900,700));
+		this.setMaximumSize(new Dimension(900,700));
+		this.setResizable(false);
+		this.pack();
+		this.setVisible(true);
+	}
+	
+	public void exit()
+	{
+		int option=JOptionPane.showOptionDialog(new JFrame(), "Are you sure you want to exit?",
+				"Exit", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, null, JOptionPane.YES_OPTION);
+		if(option==0)
+		{
+			System.exit(0);
+		}
+	}
 }

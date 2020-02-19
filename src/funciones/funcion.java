@@ -64,5 +64,9 @@ public abstract class funcion {
 	public void setSize(int size) {
 		this.size = size;
 	}
+
+	public abstract boolean best(double fitness, double best);
+
+	public abstract boolean worst(double fitness, double fitness2);
 	
 }
