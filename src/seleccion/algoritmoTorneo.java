@@ -4,18 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import funciones.funcion;
 import poblacion.individuo;
 import poblacion.poblacion;
 
 public abstract class algoritmoTorneo extends algoritmoSeleccion{
 	private int k;
 	private List<individuo> ring;
-	private int funcion;
+	private funcion fun;
 	
-	public algoritmoTorneo(poblacion p, int k, int funcion) {
+	public algoritmoTorneo(poblacion p, int k, funcion funcion) {
 		super(p);
 		this.k=k;
-		this.funcion=funcion;
+		this.fun=funcion;
 		ring=new ArrayList<individuo>();
 	}
 	
@@ -32,35 +33,14 @@ public abstract class algoritmoTorneo extends algoritmoSeleccion{
 	}
 	public void luchar() {
 		int ganador=0;
-		if(getFuncion() == 1) {
-			ganador=lucharPorMayor();
-		}
-		else
-		{
-			ganador=lucharPorMenor();
+		for(int i=1; i < getK(); i++) {
+			if(fun.best(getFromRing(i).getFitness(), getFromRing(ganador).getFitness())){
+				ganador=i;
+			}
 		}
 		addSeleccionado(getFromRing(ganador));		
 		ganador=0;
 		clearRing();
-	}
-	public int lucharPorMenor() {
-		int ganador=0;
-		for(int i=0; i < getK(); i++) {
-			if(getFromRing(i).getFitness() < getFromRing(ganador).getFitness()) {
-				ganador=i;
-			}
-		}
-		return ganador;
-	}
-	
-	public int lucharPorMayor() {
-		int ganador=0;
-		for(int i=0; i < getK(); i++) {
-			if(getFromRing(i).getFitness() > getFromRing(ganador).getFitness()) {
-				ganador=i;
-			}
-		}
-		return ganador;
 	}
 	public int getK() {
 		return k;
@@ -72,9 +52,6 @@ public abstract class algoritmoTorneo extends algoritmoSeleccion{
 	
 	public individuo getFromRing(int i) {
 		return ring.get(i);
-	}
-	public int getFuncion() {
-		return funcion;
 	}
 	
 	public void clearRing() {

@@ -52,9 +52,10 @@ public class main
                l4.add(3.0);
                funcion f[]= {new funcion1(),
             		   new funcion2(), new funcion3(2), new funcion4(3)};
-              /*TEST ALGORITMOS SELECCION:  c.establecerFuncion(1, 0);
+              //TEST ALGORITMOS SELECCION:  
+               c.establecerFuncion(1, 0);
                c.iniciarPoblacion(10, 0.1);
-               c.establecerMetodoSeleccion(3, 3);*/
+               c.establecerMetodoSeleccion(3, 3);
                
                
               /* TEST FUNCIONES : individuo i=new individuo(f[0], 0.001);
@@ -67,6 +68,7 @@ public class main
    				SwingUtilities.invokeAndWait(new Runnable() {
    					public void run() {
    						view.mainWindow window = new view.mainWindow(c);
+   						c.nextGen();
    						window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
    						window.addWindowListener(new WindowAdapter() {
    							 public void windowClosing(WindowEvent e) {

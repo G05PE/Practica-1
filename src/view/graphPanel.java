@@ -25,8 +25,15 @@ import model.observer;
 
 public class graphPanel extends JPanel implements observer {
 	private controller ctrl;
+	private double best[][];
+	private double bestGeneration[][];
+	private double average[][];
+	private JFreeChart chart;
 	
 	public graphPanel(controller c) {
+		best=new double[100][100];
+		bestGeneration=new double[100][100];
+		average=new double[100][100];
 		ctrl=c;
 		ctrl.addObserver(this);
 		initGUI();
@@ -35,14 +42,9 @@ public class graphPanel extends JPanel implements observer {
 	private void initGUI() {
 
 		DefaultXYDataset ds = new DefaultXYDataset();
-		ds.addSeries("Absolute best", new double[][] {{ 2007, 2008, 2009, 2010, 2011, 2012, 
-			2013, 2014, 2015, 2016, 2017 }, { 25, 29.1, 32.1, 32.9, 31.9, 25.5, 20.1, 
-				18.4, 15.3, 11.4, 9.5 }});
-        ds.addSeries("Best of generation", new double[][] {{ 2007, 2008, 2009, 2010, 2011, 2012, 2013, 
-        	2014, 2015, 2016, 2017 }, { 67.7, 63.1, 60.2, 50.6, 41.1, 31.8, 27.6, 20.4, 
-        		17.3, 12.3, 8.1 }});
-        ds.addSeries("Generation average", new double[][] {{ 2009, 2010, 2011, 2012, 2013, 2014, 
-        	2015, 2016, 2017 }, { 0.2, 6.4, 14.6, 25.3, 30.1, 34.3, 43.2, 47.3, 58.4 }});
+		ds.addSeries("Absolute best", best);
+        ds.addSeries("Best of generation", bestGeneration);
+        ds.addSeries("Generation average", average);
 
 		XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
         renderer.setSeriesPaint(0, Color.BLUE);
@@ -52,9 +54,8 @@ public class graphPanel extends JPanel implements observer {
         renderer.setSeriesStroke(1, new BasicStroke(2));
         renderer.setSeriesStroke(2, new BasicStroke(2));
 
-        JFreeChart chart = ChartFactory.createXYLineChart("Genetic Algorithm", "Evaluation", 
+        chart = ChartFactory.createXYLineChart("Genetic Algorithm", "Evaluation", 
 				"Generation", ds);
-
         //chart.getXYPlot().getRangeAxis().setRange(0, 100);
         //((NumberAxis) chart.getXYPlot().getRangeAxis()).setNumberFormatOverride(new DecimalFormat("#'%'"));
         chart.getXYPlot().setRenderer(renderer);
@@ -62,6 +63,16 @@ public class graphPanel extends JPanel implements observer {
 		ChartPanel panel = new ChartPanel( chart );
 		this.add(panel);
 		this.setVisible(true);
+	}
+	
+	@Override
+	public void onNextGeneration(int generation, double mejor, double bestGen, double media) {
+		best[0][generation]= generation;
+		best[1][generation]=mejor;
+		bestGeneration[0][generation]=generation;
+		bestGeneration[1][generation]=bestGen;
+		average[0][generation]=generation;
+		average[1][generation]=media;
 	}
 	
 	@Override
