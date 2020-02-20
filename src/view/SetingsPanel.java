@@ -163,7 +163,7 @@ public class SetingsPanel extends JPanel implements observer{
 	}
 	
 	private void start() {
-		ctlr.nextGen();
+		ctlr.start(100, 0.01);
 	}
 
 
@@ -231,7 +231,7 @@ public class SetingsPanel extends JPanel implements observer{
 
 
 	@Override
-	public void onNextGeneration(int generation, double best, double bestGen, double average) {
+	public void onNextGeneration(double[][] best, double[][] bestGen, double[][] average) {
 		// TODO Auto-generated method stub
 		
 	}

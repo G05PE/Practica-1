@@ -9,12 +9,9 @@ public class algoritmoTorneoProb extends algoritmoTorneo{
 	private double p;
 	private funcion fun;
 	
-	public algoritmoTorneoProb(poblacion pob, int k, funcion funcion) {
-		super(pob, k, funcion);
+	public algoritmoTorneoProb(int k, funcion funcion) {
+		super(k, funcion);
 		fun=funcion;
-		p=Math.random()%1 + 0.5;
-		if(p > 1) p-=0.5;
-		seleccionar();
 	}
 	
 	@Override
@@ -35,5 +32,15 @@ public class algoritmoTorneoProb extends algoritmoTorneo{
 			ganador=0;
 			clearRing();
 		}
+	}
+
+	@Override
+	public poblacion ini(poblacion pob) {
+		p=Math.random()%1 + 0.5;
+		if(p > 1) p-=0.5;
+		iniSeleccionados(pob.getSize(), pob.getPrecision(), pob.getFuncion());
+		seleccionar(pob);
+		getSeleccionados().iniBest();
+		return getSeleccionados();
 	}
 }

@@ -13,24 +13,22 @@ public abstract class algoritmoTorneo extends algoritmoSeleccion{
 	private List<individuo> ring;
 	private funcion fun;
 	
-	public algoritmoTorneo(poblacion p, int k, funcion funcion) {
-		super(p);
+	public algoritmoTorneo( int k, funcion funcion) {
 		this.k=k;
 		this.fun=funcion;
 		ring=new ArrayList<individuo>();
 	}
-	
-	public poblacion seleccionar() {
+	public abstract poblacion ini(poblacion p);
+	public void seleccionar(poblacion p) {
 		Random r=new Random();
 		int luchador;
-		for(int i=0; i < getSizePoblacion(); i++) {
+		for(int i=0; i < p.getSize(); i++) {
 			for(int j=0; j < getK(); j++) {
-				luchador=r.nextInt(getSizePoblacion());
-				addToRing(getIndividuo(luchador));
+				luchador=r.nextInt(p.getSize());
+				addToRing(p.getIndividuo(luchador));
 			}
 			luchar();
 		}
-		return getPoblacion();
 	}
 	public void luchar() {
 		int ganador=0;

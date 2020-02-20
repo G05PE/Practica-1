@@ -38,14 +38,11 @@ public class manager {
 	
 	public manager() {
 		observers=new ArrayList<observer>();
-		best=new double[2][poblacion.getSize()];
-		bestGen=new double[2][poblacion.getSize()];
-		average=new double[2][poblacion.getSize()];
 		iniciarDatos();
 	}
 	public void iniciarDatos() {
-		tamPob=100;
-		maxIter=100;
+		tamPob=10;
+		maxIter=10;
 		pCruc=0.6;
 		pMut=0.02;
 		posMejor=0;
@@ -59,18 +56,25 @@ public class manager {
 	
 	public void iniciarPoblacion(int tam, double precision) {
 		poblacion=new poblacion(tam, precision, funcion);
-		//AVISAR observers
+		poblacion.iniciarPoblacion();
+		best=new double[2][poblacion.getSize()];
+		bestGen=new double[2][poblacion.getSize()];
+		average=new double[2][poblacion.getSize()];
 		
 	}
 	public void start(int tam, double precision) {
 		
 		iniciarPoblacion(tam, precision);
 		evaluarPoblacion();
+		generation++;
 		while(generation < maxIter) {
-			generation++;
-			poblacion=algSel.seleccionar();
+			poblacion=algSel.ini(poblacion);
 			reproduccion();
 			evaluarPoblacion();
+			generation++;
+		}
+		for(int i=0; i < observers.size(); i++) {
+			observers.get(i).onNextGeneration( best, bestGen, average);
 		}
 	}
 	private void evaluarPoblacion() {
@@ -78,26 +82,26 @@ public class manager {
 		evaluarMejorGen();
 		evaluarMedia();
 	}
+	private void evaluarMedia() {
+		average[0][generation]=generation;
+		average[1][generation]=poblacion.getAverage();
+	}
+	private void evaluarMejorGen() {
+		bestGen[0][generation]=generation;
+		bestGen[1][generation]=poblacion.getBestGen();
+	}
 	private void evaluarMejorAbs() {
 		best[0][generation]=generation;
-		if(posMejor==0) {
+		if(generation==0 || funcion.best(poblacion.getBest(), best[1][generation-1])) {
 			best[1][generation]=poblacion.getBest();
 		}
 		else
 		{
-			if(funcion.best(poblacion.getBest(), best[1][generation-1])) {
-				best[1][generation]=poblacion.getBest();
-			}
-			else{
-				
-			}
+			best[1][generation]=best[1][generation-1];
 		}
 	}
 	private void reproduccion() {
-		algCruce.cruzar();
-	}
-	public void nextGen() {
-		generation++;
+		//algCruce.cruzar();
 	}
 	public void establecerFuncion(int f, int tam ) {
 		idFun=f;
@@ -130,7 +134,7 @@ public class manager {
 			algCruce=new monopunto(probCruce, poblacion);
 			break;
 		case 1://Uniforme
-			algCruce=new uniforme(probCruce, poblacion);
+			algCruce=new uniforme();
 			break;
 		}
 	}
@@ -138,16 +142,16 @@ public class manager {
 		switch(metodo)
 		{
 		case 0://ruleta
-			algSel=new algoritmoRuleta(poblacion);
+			algSel=new algoritmoRuleta();
 			break;
 		case 1:
-			algSel=new algoritmoTorneoDeter(poblacion, k, funcion);
+			algSel=new algoritmoTorneoDeter(k, funcion);
 			break;
 		case 2:
-			algSel=new algoritmoTorneoProb(poblacion, k, funcion);
+			algSel=new algoritmoTorneoProb(k, funcion);
 			break;
 		case 3:
-			algSel=new algoritmoEstocasticoUniv(poblacion);
+			algSel=new algoritmoEstocasticoUniv();
 			break;
 		}
 	}

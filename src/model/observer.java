@@ -14,5 +14,5 @@ public interface observer {
 	public void onChangedCruce();
 	public void onChangedPrecition();
 	public void onChangedElitism();
-	public void onNextGeneration(int generation, double best, double bestGen, double average);
+	public void onNextGeneration(double[][] best, double[][] bestGen, double[][] average);
 }

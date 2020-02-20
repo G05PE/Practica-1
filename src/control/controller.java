@@ -26,9 +26,6 @@ public class controller {
 	public void iniciarPoblacion(int tam, double precision) {
 		manager.iniciarPoblacion(tam, precision);
 	}
-	public void nextGen() {
-		manager.nextGen();
-	}
 	public double[][] getBest() {
 		return manager.getBest();
 	}
@@ -37,5 +34,8 @@ public class controller {
 	}
 	public double[][] getAverage() {
 		return manager.getAverage();
+	}
+	public void start(int tam, double precision) {
+		manager.start(tam, precision);
 	}
 }

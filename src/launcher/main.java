@@ -54,21 +54,18 @@ public class main
             		   new funcion2(), new funcion3(2), new funcion4(3)};
               //TEST ALGORITMOS SELECCION:  
                c.establecerFuncion(1, 0);
-               c.iniciarPoblacion(10, 0.1);
                c.establecerMetodoSeleccion(3, 3);
-               
                
               /* TEST FUNCIONES : individuo i=new individuo(f[0], 0.001);
             	   f[0].test(l1);
             	   f[1].test(l2);
             	   f[2].test(l3);
             	   f[3].test(l4);*/
-               
+               double[][] test=new double[][] {{ 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017 }, { 25, 29.1, 32.1, 32.9, 31.9, 25.5, 20.1, 18.4, 15.3, 11.4, 9.5 }};
                try {
    				SwingUtilities.invokeAndWait(new Runnable() {
    					public void run() {
    						view.mainWindow window = new view.mainWindow(c);
-   						c.nextGen();
    						window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
    						window.addWindowListener(new WindowAdapter() {
    							 public void windowClosing(WindowEvent e) {

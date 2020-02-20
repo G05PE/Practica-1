@@ -25,7 +25,7 @@ public class mainWindow extends JFrame{
 		JPanel mainPanel=new JPanel(new BorderLayout());
 		setContentPane(mainPanel);
 		
-		graphPanel=new graphPanel(ctrl, ctrl.getBest(), ctrl.getBestGen(), ctrl.getAverage());
+		graphPanel=new graphPanel(ctrl);
 		this.add(graphPanel, BorderLayout.EAST);
 		controlPanel=new SetingsPanel(ctrl);
 		this.add(controlPanel, BorderLayout.WEST);

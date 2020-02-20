@@ -10,42 +10,44 @@ public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
 	private List<Double> probSeleccion;
 	private double distancia;
 	
-	public algoritmoEstocasticoUniv(poblacion p) {
-		super(p);
+	public algoritmoEstocasticoUniv() {
 		probSeleccion=new ArrayList<Double>();
-		asignarProbabilidades();
-		distancia=(double)1/getSizePoblacion();
-		seleccionar();
 	}
-
+	public poblacion ini(poblacion p) {
+		iniSeleccionados(p.getSize(), p.getPrecision(), p.getFuncion());
+		asignarProbabilidades(p);
+		distancia=(double)1/p.getSize();
+		seleccionar(p);
+		getSeleccionados().iniBest();
+		return getSeleccionados();
+	}
 	@Override
-	public poblacion seleccionar() {
+	public void seleccionar(poblacion p) {
 		int j=0;
 		Random rand=new Random();
 		double r;
-		for(int k=0; k < getSizePoblacion();) {
+		for(int k=0; k < p.getSize();) {
 			r=rand.nextDouble()%distancia;
 			j=0;
-			while(j < getSizePoblacion()) {
-				while(j < getSizePoblacion() && r > probSeleccion.get(j)) {
+			while(j < p.getSize()) {
+				while(j < p.getSize() && r > probSeleccion.get(j)) {
 					j++;
 				}
-				if(j < getSizePoblacion()) {
+				if(j < p.getSize()) {
 					if(j > 0 &&  probSeleccion.get(j-1) > r) j--;
-					addSeleccionado(getIndividuo(j));
+					addSeleccionado(p.getIndividuo(j));
 					r+=distancia;
 					k++;
 				}
 			}
 		}
-		return getPoblacion();
 	}
 
-	public void asignarProbabilidades() {
-		calcularTotalFitness();
-		for(int i=0; i < getSizePoblacion(); i++) {
+	public void asignarProbabilidades(poblacion p) {
+		calcularTotalFitness(p);
+		for(int i=0; i < p.getSize(); i++) {
 			double prob=0;
-			prob=getIndividuo(i).getFitness()/totalFitness;
+			prob=p.getIndividuo(i).getFitness()/totalFitness;
 			if(i > 0) {
 				prob +=probSeleccion.get(i-1);
 			}
@@ -53,10 +55,10 @@ public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
 		}
 	}
 
-	private void calcularTotalFitness() {
+	private void calcularTotalFitness(poblacion p) {
 		totalFitness=0;
-		for(int i=0; i < getSizePoblacion(); i++) {
-			totalFitness += getIndividuo(i).getFitness();
+		for(int i=0; i < p.getSize(); i++) {
+			totalFitness += p.getIndividuo(i).getFitness();
 		}
 	}
 }
