@@ -20,7 +20,7 @@ public abstract class algoritmoTorneo extends algoritmoSeleccion{
 		ring=new ArrayList<individuo>();
 	}
 	
-	public void seleccionar() {
+	public poblacion seleccionar() {
 		Random r=new Random();
 		int luchador;
 		for(int i=0; i < getSizePoblacion(); i++) {
@@ -30,6 +30,7 @@ public abstract class algoritmoTorneo extends algoritmoSeleccion{
 			}
 			luchar();
 		}
+		return getPoblacion();
 	}
 	public void luchar() {
 		int ganador=0;

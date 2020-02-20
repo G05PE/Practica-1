@@ -29,4 +29,13 @@ public class controller {
 	public void nextGen() {
 		manager.nextGen();
 	}
+	public double[][] getBest() {
+		return manager.getBest();
+	}
+	public double[][] getBestGen() {
+		return manager.getBestGen();
+	}
+	public double[][] getAverage() {
+		return manager.getAverage();
+	}
 }

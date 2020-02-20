@@ -16,7 +16,7 @@ public class algoritmoRuleta extends algoritmoSeleccion{
 		seleccionar();
 	}
 
-	public void seleccionar() {
+	public poblacion seleccionar() {
 		Random r=new Random();
 		for(int j=0; j < getSizePoblacion(); j++) {
 			double valor=r.nextDouble() % 1;
@@ -27,6 +27,7 @@ public class algoritmoRuleta extends algoritmoSeleccion{
 			if(i > 0 && probSeleccion.get(i-1) > valor) i--;
 			addSeleccionado(getIndividuo(i));
 		}
+		return getPoblacion();
 	}
 
 	public void asignarProbabilidades() {

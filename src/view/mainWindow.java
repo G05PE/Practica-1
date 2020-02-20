@@ -12,6 +12,7 @@ import control.controller;
 public class mainWindow extends JFrame{
 	private controller ctrl;
 	private graphPanel graphPanel;
+	private SetingsPanel controlPanel;
 	
 	public mainWindow(controller c)
 	{
@@ -24,8 +25,10 @@ public class mainWindow extends JFrame{
 		JPanel mainPanel=new JPanel(new BorderLayout());
 		setContentPane(mainPanel);
 		
-		graphPanel=new graphPanel(ctrl);
+		graphPanel=new graphPanel(ctrl, ctrl.getBest(), ctrl.getBestGen(), ctrl.getAverage());
 		this.add(graphPanel, BorderLayout.EAST);
+		controlPanel=new SetingsPanel(ctrl);
+		this.add(controlPanel, BorderLayout.WEST);
 		
 		this.setPreferredSize(new Dimension(900,700));
 		this.setMinimumSize(new Dimension(900,700));

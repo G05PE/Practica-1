@@ -1,9 +1,16 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -11,15 +18,18 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
 import javax.swing.SpinnerNumberModel;
 
 import control.controller;
+import funciones.funcion;
+import model.observer;
 
-public class SetingsPanel extends JPanel{
+public class SetingsPanel extends JPanel implements observer{
 
-	JPanel panel;
-	controller ctlr;
-	
+	private JPanel panel;
+	private controller ctlr;
+	private JButton start;
 	//Constructor
 	public SetingsPanel(controller ctlr) {
 		this.ctlr = ctlr;
@@ -31,9 +41,28 @@ public class SetingsPanel extends JPanel{
 	
 	private void initFileds() {
 		
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setLayout(new GridLayout(1,1));
+		JToolBar bar=new JToolBar();
+		bar.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY,2));
+		JSeparator sep0=new JSeparator();
+		bar.add(sep0);
 		
-		JPanel function = new JPanel();
+		start=new JButton();
+		start.setIcon(new ImageIcon("icons/start.png"));
+		start.setToolTipText("Start");
+		start.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				start();
+			}
+		});
+		bar.add(start);
+		JSeparator sep1=new JSeparator();
+		bar.add(sep1);
+		
+		bar.setVisible(true);
+		this.add(bar);
+		this.setVisible(true);
+		/*JPanel function = new JPanel();
 
 		//---------------------------------------------------------------------------
 		//Header
@@ -109,7 +138,7 @@ public class SetingsPanel extends JPanel{
 
 		JPanel mut = new JPanel();
 		mut.setLayout(new BoxLayout(generations, BoxLayout.X_AXIS));
-		mut.add(new JLabel("Numero de generaciones: "));
+		//mut.add(new JLabel("Numero de generaciones: "));
 		JSpinner sp5 =new JSpinner(new SpinnerNumberModel(100, 1, 15000, 10));
 		parameters.add(sp5);
 		this.add(mut);
@@ -117,7 +146,7 @@ public class SetingsPanel extends JPanel{
 
 		JPanel precision = new JPanel();
 		precision.setLayout(new BoxLayout(cruce, BoxLayout.X_AXIS));
-		precision.add(new JLabel("Tamaño de población: "), BorderLayout.WEST);
+		//precision.add(new JLabel("Tamaño de población: "), BorderLayout.WEST);
 		JSpinner sp6 =new JSpinner(new SpinnerNumberModel(10, 1, 100, 1));
 		parameters.add(sp6);
 		this.add(precision);
@@ -130,6 +159,80 @@ public class SetingsPanel extends JPanel{
 		etilistmo.add(new JCheckBox("Elitismo", true));
 		JSpinner sp7 = new JSpinner(new SpinnerNumberModel(2, 1, 100, 1));
 		parameters.add(sp7);
-		this.add(etilistmo);
+		this.add(etilistmo);*/
+	}
+	
+	private void start() {
+		ctlr.nextGen();
+	}
+
+
+	@Override
+	public void onChangedFunction(funcion f, int tam) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onChangedFunctionParameters() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onChangedPoblationSize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onChangedGeneration() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onChangedSelection() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onChangedMutation() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onChangedCruce() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onChangedPrecition() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onChangedElitism() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onNextGeneration(int generation, double best, double bestGen, double average) {
+		// TODO Auto-generated method stub
+		
 	}
 }

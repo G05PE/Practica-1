@@ -2,21 +2,14 @@ package view;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.text.DecimalFormat;
-
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.DefaultXYDataset;
 
 import control.controller;
@@ -25,15 +18,15 @@ import model.observer;
 
 public class graphPanel extends JPanel implements observer {
 	private controller ctrl;
-	private double best[][];
-	private double bestGeneration[][];
-	private double average[][];
 	private JFreeChart chart;
+	private double best[][];
+	private double bestGen[][];
+	private double average[][];
 	
-	public graphPanel(controller c) {
-		best=new double[100][100];
-		bestGeneration=new double[100][100];
-		average=new double[100][100];
+	public graphPanel(controller c, double [][] best, double[][] bestGen, double [][] average) {
+		this.best=best;
+		this.bestGen=bestGen;
+		this.average=average;
 		ctrl=c;
 		ctrl.addObserver(this);
 		initGUI();
@@ -43,7 +36,7 @@ public class graphPanel extends JPanel implements observer {
 
 		DefaultXYDataset ds = new DefaultXYDataset();
 		ds.addSeries("Absolute best", best);
-        ds.addSeries("Best of generation", bestGeneration);
+        ds.addSeries("Best of generation", bestGen);
         ds.addSeries("Generation average", average);
 
 		XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
@@ -54,10 +47,11 @@ public class graphPanel extends JPanel implements observer {
         renderer.setSeriesStroke(1, new BasicStroke(2));
         renderer.setSeriesStroke(2, new BasicStroke(2));
 
-        chart = ChartFactory.createXYLineChart("Genetic Algorithm", "Evaluation", 
+        JFreeChart chart = ChartFactory.createXYLineChart("Genetic Algorithm", "Evaluation", 
 				"Generation", ds);
-        //chart.getXYPlot().getRangeAxis().setRange(0, 100);
-        //((NumberAxis) chart.getXYPlot().getRangeAxis()).setNumberFormatOverride(new DecimalFormat("#'%'"));
+
+        chart.getXYPlot().getRangeAxis().setRange(0, 100);
+        ((NumberAxis) chart.getXYPlot().getRangeAxis()).setNumberFormatOverride(new DecimalFormat("#'%'"));
         chart.getXYPlot().setRenderer(renderer);
 
 		ChartPanel panel = new ChartPanel( chart );
@@ -67,12 +61,7 @@ public class graphPanel extends JPanel implements observer {
 	
 	@Override
 	public void onNextGeneration(int generation, double mejor, double bestGen, double media) {
-		best[0][generation]= generation;
-		best[1][generation]=mejor;
-		bestGeneration[0][generation]=generation;
-		bestGeneration[1][generation]=bestGen;
-		average[0][generation]=generation;
-		average[1][generation]=media;
+		
 	}
 	
 	@Override

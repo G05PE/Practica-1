@@ -15,7 +15,7 @@ public abstract class algoritmoSeleccion {
 		seleccionados=new ArrayList<individuo>();
 	}
 	
-	public abstract void seleccionar();
+	public abstract poblacion seleccionar();
 	public int getSizePoblacion() {
 		return poblacion.getSize();
 	}
@@ -26,5 +26,9 @@ public abstract class algoritmoSeleccion {
 	
 	public void addSeleccionado(individuo i) {
 		seleccionados.add(i);
+	}
+	
+	public poblacion getPoblacion() {
+		return poblacion;
 	}
 }

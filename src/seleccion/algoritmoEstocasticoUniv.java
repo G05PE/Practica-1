@@ -3,14 +3,14 @@ package seleccion;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+import poblacion.poblacion;
 public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
 
 	private double totalFitness;
 	private List<Double> probSeleccion;
 	private double distancia;
 	
-	public algoritmoEstocasticoUniv(poblacion.poblacion p) {
+	public algoritmoEstocasticoUniv(poblacion p) {
 		super(p);
 		probSeleccion=new ArrayList<Double>();
 		asignarProbabilidades();
@@ -19,7 +19,7 @@ public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
 	}
 
 	@Override
-	public void seleccionar() {
+	public poblacion seleccionar() {
 		int j=0;
 		Random rand=new Random();
 		double r;
@@ -38,6 +38,7 @@ public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
 				}
 			}
 		}
+		return getPoblacion();
 	}
 
 	public void asignarProbabilidades() {
