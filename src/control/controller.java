@@ -16,15 +16,15 @@ public class controller {
 		manager.addObserver(o);
 	}
 	
-	public void establecerFuncion(int funcion, int tam) {
-		manager.establecerFuncion(funcion, tam);
+	public void establecerFuncion(int funcion, int k) {
+		manager.establecerFuncion(funcion, k);
 	}
 	
-	public void establecerMetodoSeleccion(int metodo, int k) {
-		manager.establerMetodoSeleccion(metodo, k);
+	public void establecerMetodoSeleccion(int metodo) {
+		manager.establerMetodoSeleccion(metodo);
 	}
-	public void iniciarPoblacion(int tam, double precision) {
-		manager.iniciarPoblacion(tam, precision);
+	public void iniciarPoblacion() {
+		manager.iniciarPoblacion();
 	}
 	public double[][] getBest() {
 		return manager.getBest();
@@ -35,7 +35,34 @@ public class controller {
 	public double[][] getAverage() {
 		return manager.getAverage();
 	}
-	public void start(int tam, double precision) {
-		manager.start(tam, precision);
+	public void start() {
+		manager.start();
+	}
+	public void setPopulationSize(int popSize) {
+		manager.setPopulationSize(popSize);
+	}
+	public void setGenerationNumber(int genNum) {
+		manager.setGenerationNumber(genNum);
+	}
+	public void setCrossoverPercent(double p) {
+		manager.setProbCruce(p*0.01);
+	}
+	public void setCrossFunct(int i) {
+		manager.setCrossFunct(i);
+	}
+	public void setMutationFunct(int i) {
+		manager.setMutationFunct(i);
+	}
+	public void setMutationPercent(double mutPer) {
+		manager.setMutationPercent(mutPer*0.01);
+	}
+	public void setElitePercent(double elitePer) {
+		manager.setElitePercent(elitePer*0.01);
+	}
+	public void setTolerancePercent(double tolPer) {
+		manager.setTolerancia(tolPer);
+	}
+	public void reset() {
+		manager.reset();
 	}
 }

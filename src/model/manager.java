@@ -5,6 +5,8 @@ import java.util.List;
 
 import cruces.algoritmoCruce;
 import cruces.monopunto;
+import cruces.mutacion;
+import cruces.mutacionBasica;
 import cruces.uniforme;
 import funciones.funcion;
 import funciones.funcion1;
@@ -21,31 +23,34 @@ import seleccion.algoritmoTorneoProb;
 public class manager {
 	
 	private List<observer> observers;
-	private double best [][];
+	private algoritmoSeleccion algSel;
+	private algoritmoCruce algCruce;
+	private poblacion poblacion;
 	private double bestGen [][];
 	private double average [][];
-	private algoritmoCruce algCruce;
-	private algoritmoSeleccion algSel;
-	private poblacion poblacion;
+	private double best [][];
+	private mutacion algMut;
 	private funcion funcion;
-	private int generation=0;
-	private int idFun;
+	private double probToler;
+	private double probElite;
+	private double probCruc;
+	private double probMut;	
+	private int generation;
 	private int maxIter;
 	private int tamPob;
-	private double pCruc;
-	private double pMut;
-	private int posMejor;
+	private int idFun;
 	
 	public manager() {
 		observers=new ArrayList<observer>();
 		iniciarDatos();
 	}
 	public void iniciarDatos() {
-		tamPob=10;
-		maxIter=10;
-		pCruc=0.6;
-		pMut=0.02;
-		posMejor=0;
+		probElite=0.05;
+		generation=0;
+		probCruc=0.6;
+		probMut=0.02;
+		maxIter=100;
+		tamPob=100;
 	}
 	public void addObserver(observer o) {
 		if(!observers.contains(o)) {
@@ -54,17 +59,17 @@ public class manager {
 		}
 	}
 	
-	public void iniciarPoblacion(int tam, double precision) {
-		poblacion=new poblacion(tam, precision, funcion);
+	public void iniciarPoblacion() {
+		poblacion=new poblacion(tamPob, probToler, funcion);
 		poblacion.iniciarPoblacion();
 		best=new double[2][poblacion.getSize()];
 		bestGen=new double[2][poblacion.getSize()];
 		average=new double[2][poblacion.getSize()];
 		
 	}
-	public void start(int tam, double precision) {
+	public void start() {
 		
-		iniciarPoblacion(tam, precision);
+		iniciarPoblacion();
 		evaluarPoblacion();
 		generation++;
 		while(generation < maxIter) {
@@ -138,17 +143,17 @@ public class manager {
 			break;
 		}
 	}
-	public void establerMetodoSeleccion(int metodo, int k) {
+	public void establerMetodoSeleccion(int metodo) {
 		switch(metodo)
 		{
 		case 0://ruleta
 			algSel=new algoritmoRuleta();
 			break;
 		case 1:
-			algSel=new algoritmoTorneoDeter(k, funcion);
+			algSel=new algoritmoTorneoDeter(funcion);
 			break;
 		case 2:
-			algSel=new algoritmoTorneoProb(k, funcion);
+			algSel=new algoritmoTorneoProb(funcion);
 			break;
 		case 3:
 			algSel=new algoritmoEstocasticoUniv();
@@ -163,6 +168,51 @@ public class manager {
 	}
 	public double[][] getAverage() {
 		return average;
+	}
+	public void setPopulationSize(int popSize) {
+		tamPob=popSize;
+	}
+	public void setGenerationNumber(int genNum) {
+		maxIter=genNum;
+	}
+	public void setProbCruce(double d) {
+		probCruc=d;
+	}
+	public void setCrossFunct(int i) {
+		switch(i) {
+		case 0:
+			algCruce=new monopunto();
+			break;
+		case 1:
+			algCruce=new uniforme();
+			break;
+			default:
+				break;
+		}
+	}
+	public void setMutationFunct(int i) {
+		switch(i) {
+		case 0:
+			algMut=new mutacionBasica();
+			break;
+		case 1:
+			//algMut=new mutacionUniforme();
+			break;
+			default:
+				break;
+		}
+	}
+	public void setMutationPercent(double mutPer) {
+		probMut=mutPer;
+	}
+	public void setElitePercent(double d) {
+		probElite=d;
+	}
+	public void setTolerancia(double tolPer) {
+		probToler=tolPer;
+	}
+	public void reset() {
+		iniciarDatos();
 	}
 
 }

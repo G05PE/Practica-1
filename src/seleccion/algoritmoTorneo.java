@@ -13,8 +13,8 @@ public abstract class algoritmoTorneo extends algoritmoSeleccion{
 	private List<individuo> ring;
 	private funcion fun;
 	
-	public algoritmoTorneo( int k, funcion funcion) {
-		this.k=k;
+	public algoritmoTorneo(funcion funcion) {
+		this.k=3;
 		this.fun=funcion;
 		ring=new ArrayList<individuo>();
 	}

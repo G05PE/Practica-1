@@ -9,8 +9,8 @@ public class algoritmoTorneoProb extends algoritmoTorneo{
 	private double p;
 	private funcion fun;
 	
-	public algoritmoTorneoProb(int k, funcion funcion) {
-		super(k, funcion);
+	public algoritmoTorneoProb(funcion funcion) {
+		super(funcion);
 		fun=funcion;
 	}
 	

@@ -52,10 +52,7 @@ public class main
                l4.add(3.0);
                funcion f[]= {new funcion1(),
             		   new funcion2(), new funcion3(2), new funcion4(3)};
-              //TEST ALGORITMOS SELECCION:  
-               c.establecerFuncion(1, 0);
-               c.establecerMetodoSeleccion(3, 3);
-               
+            
               /* TEST FUNCIONES : individuo i=new individuo(f[0], 0.001);
             	   f[0].test(l1);
             	   f[1].test(l2);
