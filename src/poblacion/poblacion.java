@@ -75,4 +75,15 @@ public class poblacion {
 	public funcion getFuncion() {
 		return fun;
 	}
+	
+	
+	//No se si esto peta, debería borrar el último
+	public void borraUltimo() {
+		poblacion.remove(poblacion.size());
+		tam--;
+	}
+	
+	public void addIndividuo(individuo ind) {
+		poblacion.add(ind);
+	}
 }

@@ -57,4 +57,8 @@ public class gen {
 	public void setFenotipo(double d) {
 		fenotipo=d;
 	}
+
+	public void setBit(int i, boolean b) {
+		this.genotipo.set(i, b);
+	}
 }

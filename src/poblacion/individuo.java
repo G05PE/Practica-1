@@ -64,12 +64,28 @@ public class individuo {
 		return cromosoma;
 	}
 	
+	public gen getCromosomaAt(int i){
+		return cromosoma.get(i);
+	}
+	
 	public List<Double> getFenotipos(){
 		return fenotipos;
 	}
 	
 	public int getLongitud(){
 		return cromosoma.size();
+	}
+
+	public void setBit(int j, int i, boolean b) {
+		this.cromosoma.get(i).setBit(j, b);
+	}
+
+	public boolean getBit(int j, int i, Boolean boolean1) {
+		return this.cromosoma.get(i).getGenotipo().get(j);
+	}
+
+	public void setGen(int i, gen gen) {
+		this.cromosoma.set(i, gen);
 	}
 
 }

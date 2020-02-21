@@ -1,15 +1,16 @@
 package cruces;
 
+import poblacion.poblacion;
+
 public abstract class mutacion {
 
   private double probMutacion;
-  private individuo recibido;
-  private individuo mutado;
+  private poblacion recibido;
+  private poblacion mutado;
  
-  public mutacion(double probMutacion, individuo recibido){
-    this.probMutcion = probMutcion;
-    this.genotipo = recibido;
-    this.cromosoma = new individuo();
+  public mutacion(double probMutacion, poblacion recibido){
+    this.probMutacion = probMutacion;
+    this.recibido = recibido;
   }
 
   public abstract poblacion mutar();
@@ -17,14 +18,15 @@ public abstract class mutacion {
   public double getProbCruceMut() {
     return probMutacion;
   }
+  
   public void setProbMut(double probMutacion) {
     this.probMutacion = probMutacion;
   }
   
-  public individuo getMutado() {
+  public poblacion getMutado() {
     return mutado;
   }
-  public individuo getEntrada() {
+  public poblacion getEntrada() {
     return recibido;
   }
 

@@ -50,6 +50,7 @@ public class main
                l4.add(1.0);
                l4.add(2.0);
                l4.add(3.0);
+               
                funcion f[]= {new funcion1(),
             		   new funcion2(), new funcion3(2), new funcion4(3)};
               //TEST ALGORITMOS SELECCION:  
@@ -57,12 +58,8 @@ public class main
                c.iniciarPoblacion(10, 0.1);
                c.establecerMetodoSeleccion(3, 3);
                
+               //TEST MUTACION
                
-              /* TEST FUNCIONES : individuo i=new individuo(f[0], 0.001);
-            	   f[0].test(l1);
-            	   f[1].test(l2);
-            	   f[2].test(l3);
-            	   f[3].test(l4);*/
                
                try {
    				SwingUtilities.invokeAndWait(new Runnable() {

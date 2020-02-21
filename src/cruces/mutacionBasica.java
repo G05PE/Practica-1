@@ -1,28 +1,42 @@
 package cruces;
 
+import poblacion.individuo;
+import poblacion.poblacion;
+
 public class mutacionBasica extends mutacion{
 
   double probMutacion;
-  individuo recibido;
+  poblacion poblacion;
   
   //Constructor
- public mutacionBasica(double probMutcion, individuo recibido){
-    super(probMutcion, individuo);
+ public mutacionBasica(double probMutacion, poblacion poblacion){
+    super(probMutacion, poblacion);
     this.probMutacion = probMutacion;
-    this.recibido = recibido;
+    this.poblacion = poblacion;
  }
   
   @Override
-  public individuo mutar(individuo recibido){
-    individuo mutado = recibido;
-    
-    for(int i = 0; i < log2(recibido); i++){
-      double rand = Math.random()%1;
-      if(rand < probMutcion){
-        mutado.getIndividuo[i].getCromosoma() = !recibido.getIndividuo[i].getCromosoma();
-      }
-    }
-      return mutado;
+  public poblacion mutar(){
+	  
+	  for(int i = 0; i < poblacion.getSize(); i++) {
+		  mutarIndividuo(poblacion.getIndividuo(i));
+	  }
+	  return poblacion;
   }
   
+  public individuo mutarIndividuo(individuo ind) {
+	  individuo mutado = ind;
+	    
+	  for(int i = 0; i < ind.getCromosoma().size(); i++){
+		  for(int j = 0; j < ind.getCromosoma().get(i).getTam(); j++) {
+			  double rand = Math.random()%1;
+			  if(rand < probMutacion){
+				  mutado.setBit(j, i, !ind.getBit(j, i, ind.getCromosoma().get(i).getGenotipo().get(j)));
+			  }
+		  }
+	  }	  
+	  return mutado;
+  }
+
 }
+ 

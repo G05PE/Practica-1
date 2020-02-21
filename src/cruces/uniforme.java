@@ -1,11 +1,27 @@
-package cruces;
+	package cruces;
 
 import poblacion.poblacion;
 
 public class uniforme extends algoritmoCruce{ //Tema 3 pagina 12
 
+	
+	
+	
+	public uniforme(double probCruce, poblacion seleccionados) {
+		super(probCruce, seleccionados);
+		// TODO Auto-generated constructor stub
+	}
+
+	
 	@Override
-	public poblacion iniciarPoblacion(poblacion pb, float porcnt) {
+	public poblacion cruzar() {
+		seleccionaReproductores();
+		creaDescendientes();
+		return descendientes;
+	}
+
+
+/*	public poblacion iniciarPoblacion(poblacion pb, float porcnt) {
 		poblacion ret = new poblacion();
 		boolean existeGen;
 
@@ -25,7 +41,6 @@ public class uniforme extends algoritmoCruce{ //Tema 3 pagina 12
 		}
 		
 		return ret;
-	}
-
+	}*/
 	
 }

@@ -1,5 +1,6 @@
 package cruces;
 
+import poblacion.individuo;
 import poblacion.poblacion;
 
 public abstract class algoritmoCruce {
@@ -10,11 +11,9 @@ public abstract class algoritmoCruce {
 	
 	public algoritmoCruce(double probCruce, poblacion seleccionados) {
 		this.setProbCruce(probCruce);
-		this.seleccionados=seleccionados;
-		reproductores=new poblacion(seleccionados.getSize(), seleccionados.getPrecision(), 
-				seleccionados.getFuncion());
-		descendientes=new poblacion(seleccionados.getSize(), seleccionados.getPrecision(), 
-				seleccionados.getFuncion());
+		this.seleccionados = seleccionados;	
+		reproductores = new poblacion(seleccionados.getSize(), seleccionados.getPrecision(), seleccionados.getFuncion());
+		descendientes = new poblacion(seleccionados.getSize(), seleccionados.getPrecision(), seleccionados.getFuncion());
 	}
 	
 	public abstract poblacion cruzar();
@@ -22,12 +21,31 @@ public abstract class algoritmoCruce {
 	public double getProbCruce() {
 		return probCruce;
 	}
+	
 	public void setProbCruce(double probCruce) {
 		this.probCruce = probCruce;
 	}
+	
 	public poblacion getSeleccionados() {
 		return seleccionados;
 	}
+	
+	public void addReprpoductor(individuo i) {
+		reproductores.addIndividuo(i);
+	}
+	
+	public void borraUltimoReproductor() {
+		reproductores.borraUltimo();
+	}
+	
+	public int sizeReproductor() {
+		return reproductores.getSize();
+	}
+	
+	public individuo getSeleccionadoConcreto(int i) {
+		return seleccionados.getIndividuo(i);
+	}
+	
 	public poblacion getDescendientes() {
 		return descendientes;
 	}
