@@ -26,7 +26,7 @@ public class mainWindow extends JFrame{
 		setContentPane(mainPanel);
 		
 		graphPanel=new graphPanel(ctrl);
-		this.add(graphPanel, BorderLayout.EAST);
+		this.add(graphPanel, BorderLayout.CENTER);
 		controlPanel=new SetingsPanel(ctrl);
 		this.add(controlPanel, BorderLayout.WEST);
 		
