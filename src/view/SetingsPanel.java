@@ -31,6 +31,7 @@ public class SetingsPanel extends JPanel implements observer{
 	private Dimension dim2;
 	private JButton start;
 	private JButton reset;
+	private boolean startOn;
 	private double crossPer;
 	private double elitePer;
 	private double tolPer;
@@ -140,6 +141,7 @@ public class SetingsPanel extends JPanel implements observer{
 				"Probabilistic Tournament", "Universal Stochastic"};
 		 JComboBox<String> seleccion = new JComboBox<String>(selec);
 		 seleccion.setEditable(false);
+		 seleccionar(selec[0]);
 		 seleccion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					seleccionar((String)seleccion.getSelectedItem());
@@ -164,6 +166,7 @@ public class SetingsPanel extends JPanel implements observer{
 		 String[] selec2 = { "Single point", "Uniform"};
 		 JComboBox<String> seleccion2 = new JComboBox<String>(selec2);
 		 seleccion2.setEditable(false);
+		 seleccionarCruce(selec2[0]);
 		 seleccion2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					seleccionarCruce((String)seleccion2.getSelectedItem());
@@ -215,6 +218,7 @@ public class SetingsPanel extends JPanel implements observer{
 		 String[] selec3 = { "Basic", "Uniform"};
 		 JComboBox<String> seleccion3 = new JComboBox<String>(selec3);
 		 seleccion3.setEditable(false);
+		 seleccionarMutacion(selec3[0]);
 		 seleccion3.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					seleccionarMutacion((String)seleccion3.getSelectedItem());
@@ -283,10 +287,10 @@ public class SetingsPanel extends JPanel implements observer{
 		 setDimLabel(lFun, dim1);
 		 this.add(lFun);
 		 this.add(Box.createHorizontalGlue());
-		
 		 String[] selec4 = { "Function 1", "Function 2", "Function 3", "Function 4"};
 		 JComboBox<String> seleccion4 = new JComboBox<String>(selec4);
 		 seleccion4.setEditable(false);
+		 seleccionarFun(selec4[0]);
 		 seleccion4.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					seleccionarFun((String)seleccion4.getSelectedItem());
@@ -304,6 +308,7 @@ public class SetingsPanel extends JPanel implements observer{
 		 start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrl.start();
+				start.setEnabled(false);
 			} 
 		 });
 		 this.add(start);
@@ -316,6 +321,7 @@ public class SetingsPanel extends JPanel implements observer{
 		 reset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrl.reset();
+				start.setEnabled(true);
 				initFields();
 			} 
 		 });
@@ -334,10 +340,10 @@ public class SetingsPanel extends JPanel implements observer{
 	}
 	private void seleccionarCruce(String cruce) {
 		switch(cruce) {
-		case "Monopunto":
+		case "Single point":
 			ctrl.setCrossFunct(0);
 			break;
-		case "Uniforme":
+		case "Uniform":
 			ctrl.setCrossFunct(1);
 			break;
 			default:
@@ -347,16 +353,16 @@ public class SetingsPanel extends JPanel implements observer{
 	
 	private void seleccionar(String selectedItem) {
 		switch(selectedItem) {
-		case "Ruleta":
+		case "Roulette":
 			ctrl.establecerMetodoSeleccion(0);
 			break;
-		case "Torneo Determinista":
+		case "Determinist Tournament":
 			ctrl.establecerMetodoSeleccion(1);
 			break;
-		case "Torneo Probabilistico":
+		case "Probabilistic Tournament":
 			ctrl.establecerMetodoSeleccion(2);
 			break;
-		case "Estocastico":
+		case "Universal Stochastic":
 			ctrl.establecerMetodoSeleccion(2);
 			break;
 			default:
@@ -366,10 +372,10 @@ public class SetingsPanel extends JPanel implements observer{
 	
 	private void seleccionarMutacion(String mutacion) {
 		switch(mutacion){
-		case "Básica":
+		case "Basic":
 			ctrl.setMutationFunct(0);
 			break;
-		case "Uniforme":
+		case "Uniform":
 			ctrl.setMutationFunct(1);
 			break;
 			default:
@@ -379,13 +385,13 @@ public class SetingsPanel extends JPanel implements observer{
 	
 	private void seleccionarFun(String fun) {
 		switch(fun) {
-		case "Funcion 1":
+		case "Function 1":
 			ctrl.establecerFuncion(0,0);
 			break;
-		case "Funcion 2":
+		case "Function 2":
 			ctrl.establecerFuncion(1,0);
 			break;
-		case "Funcion 3":
+		case "Function 3":
 			JFrame frame = new JFrame("");
 			String [] n = {"1", "2"};
 			String intro = (String) JOptionPane.showInputDialog(
@@ -405,7 +411,7 @@ public class SetingsPanel extends JPanel implements observer{
 						"The value is not a number","Error",JOptionPane.WARNING_MESSAGE);
 			}
 			break;
-		case "Funcion 4":
+		case "Function 4":
 			JFrame frame2 = new JFrame("");
 			frame2.setPreferredSize(new Dimension(190, 120));
 			frame2.setMaximumSize(new Dimension(190, 120));
@@ -441,6 +447,7 @@ public class SetingsPanel extends JPanel implements observer{
 			 ok.setAlignmentY(BOTTOM_ALIGNMENT);
 			 ok.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						ctrl.establecerFuncion(3, Integer.parseInt(f.getText()));
 						frame2.setVisible(false);
 					} 
 				 });
@@ -482,8 +489,9 @@ public class SetingsPanel extends JPanel implements observer{
 		c.setAlignmentX(CENTER_ALIGNMENT);
 	}
 	
-
-
+	public void onFinished() {
+		start.setEnabled(true);
+	}
 	@Override
 	public void onChangedFunction(funcion f, int tam) {
 		// TODO Auto-generated method stub

@@ -45,6 +45,7 @@ public class manager {
 		iniciarDatos();
 	}
 	public void iniciarDatos() {
+		probToler=0.001;
 		probElite=0.05;
 		generation=0;
 		probCruc=0.6;
@@ -80,6 +81,7 @@ public class manager {
 		}
 		for(int i=0; i < observers.size(); i++) {
 			observers.get(i).onNextGeneration( best, bestGen, average);
+			observers.get(i).onFinished();
 		}
 	}
 	private void evaluarPoblacion() {
@@ -109,18 +111,18 @@ public class manager {
 		//algCruce.cruzar();
 	}
 	public void establecerFuncion(int f, int tam ) {
-		idFun=f;
+		idFun=f+1;
 		switch(f) {
-		case 1:
+		case 0:
 			funcion=new funcion1();
 			break;
-		case 2:
+		case 1:
 			funcion=new funcion2();
 			break;
-		case 3:
+		case 2:
 			funcion=new funcion3(tam);
 			break;
-		case 4:
+		case 3:
 			funcion=new funcion4(tam);
 			break;
 			default:
@@ -181,10 +183,10 @@ public class manager {
 	public void setCrossFunct(int i) {
 		switch(i) {
 		case 0:
-			algCruce=new monopunto();
+			//algCruce=new monopunto();
 			break;
 		case 1:
-			algCruce=new uniforme();
+			//algCruce=new uniforme();
 			break;
 			default:
 				break;
@@ -193,7 +195,7 @@ public class manager {
 	public void setMutationFunct(int i) {
 		switch(i) {
 		case 0:
-			algMut=new mutacionBasica();
+			//algMut=new mutacionBasica();
 			break;
 		case 1:
 			//algMut=new mutacionUniforme();

@@ -52,6 +52,10 @@ public class graphPanel extends JPanel implements observer {
 	}
 	
 	@Override
+	public void onFinished() {
+	}
+	
+	@Override
 	public void onChangedFunction(funcion f, int tam) {
 		// TODO Auto-generated method stub
 		

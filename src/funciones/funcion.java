@@ -6,55 +6,52 @@ import java.util.List;
 import genetica.gen;
 
 public abstract class funcion {
-	private List<Double> x;
-	private double res;
+	//private List<Double> x;
+	//private double res;
 	private List<Double> minX;
 	private List<Double> maxX;
-	private int size=0;
+	private int size;
 	public funcion(int var) {
 		setSize(var);
+		//x=new ArrayList<Double>();
 		establecerMinimosMaximos();
+		//iniVars();
 	}
 	
-	/*public boolean rangoCorrecto(){
-		this.x=x;
-		int i=0;
-		while(i < x.size()) {
-			if(x.get(i) < minX.get(i) || x.get(i) > maxX.get(i))
-			{
-				return false;
-			}
-			i++;
-		}
-		return true;
-	}*/
-	public abstract double calcularFuncion(List<Double> x);
+	public abstract boolean worst(double fitness, double fitness2);
+	public abstract boolean best(double fitness, double best);
+	public abstract double calcularFuncion(List<Double> fenotipos);
 	public abstract void establecerMinimosMaximos();
-	public void test(List<Double> x) {
-		calcularFuncion(x);
-		System.out.println("El resultado es "+ res);
-	}
+	
+	/*public void iniVars() {
+		for(int i=0; i < getSize(); i++) {
+			double var=Math.random()%getMaxX(i) + getMinX(i);
+			if(var > getMaxX(i))
+				var-=getMinX(i);	
+			x.add(var);
+		}
+	}*/
 	public double getMinX(int i) {
 		return minX.get(i);
 	}
 	public double getMaxX(int i) {
 		return maxX.get(i);
 	}
-	public double getRes() {
+	public int getSize() {
+		return size;
+	}
+	/*public double getRes() {
 		return res;
 	}
 	protected void setRes(double res) {
 		this.res=res;
-	}
-	public int getSize() {
-		return size;
 	}
 	public double getX(int i) {
 		return x.get(i);
 	}
 	public void setX(List<Double> x) {
 		this.x=new ArrayList<Double>(x);
-	}
+	}*/
 	protected void setMinX(List<Double> min) {
 		minX=min;
 	}
@@ -64,9 +61,5 @@ public abstract class funcion {
 	public void setSize(int size) {
 		this.size = size;
 	}
-
-	public abstract boolean best(double fitness, double best);
-
-	public abstract boolean worst(double fitness, double fitness2);
 	
 }
