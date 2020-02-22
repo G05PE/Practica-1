@@ -15,7 +15,7 @@ public abstract class algoritmoCruce {
 		reproductores = new poblacion(seleccionados.getSize(), seleccionados.getPrecision(), seleccionados.getFuncion());
 		descendientes = new poblacion(seleccionados.getSize(), seleccionados.getPrecision(), seleccionados.getFuncion());
 	}
-	
+
 	public abstract poblacion cruzar();
 	
 	public double getProbCruce() {

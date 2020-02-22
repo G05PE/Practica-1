@@ -23,14 +23,12 @@ public class funcion4 extends funcion{
 		super.setMaxX(maximos);
 	}
 
-	public double calcularFuncion(List<Double> x) {//No probada
-		setX(x);
+	public double calcularFuncion(List<Double> fitness) {
 		double resultado=0;
 		for(int i=0; i < getSize(); i++) {
-			resultado+=Math.sin(getX(i)*Math.pow(
-					Math.sin((i+1)*Math.pow(getX(i), 2)/Math.PI), 20));
+			resultado+=Math.sin(fitness.get(i)*Math.pow(
+					Math.sin((i+1)*Math.pow(fitness.get(i), 2)/Math.PI), 20));
 		}
-		setRes(-resultado);
 		return -resultado;
 	}
 

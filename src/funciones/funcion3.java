@@ -22,18 +22,16 @@ public class funcion3 extends funcion{
 		super.setMaxX(maximos);
 	}	
 	
-	public double calcularFuncion(List<Double> x) {//Sin probar
-		setX(x);
+	public double calcularFuncion(List<Double> fitness) {
 		double res=1;
 		double aux=0;
 		for(int i=0; i < getSize(); i++) {
 			for(int j=1; j <= 5; j++) {
-				aux=aux + j*Math.cos((j+1)*getX(i)+j);
+				aux=aux + j*Math.cos((j+1)*fitness.get(i)+j);
 			}
 			res=res*aux;
 			aux=0;
 		}
-		setRes(res);
 		return res;
 	}
 
