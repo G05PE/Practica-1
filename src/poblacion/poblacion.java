@@ -17,8 +17,6 @@ public class poblacion {
 		this.tam=tam;
 		this.fun=fun;
 		precision=prec;
-		iniciarPoblacion();
-		best=poblacion.get(0).getFitness();
 	}
 	
 	public void iniciarPoblacion() {
@@ -27,6 +25,7 @@ public class poblacion {
 			individuo cromosoma=new individuo(fun, precision);
 			poblacion.add(cromosoma);
 		}
+		iniBest();
 	}
 	
 	public individuo getIndividuo(int i) {
@@ -54,7 +53,7 @@ public class poblacion {
 		double bestGen=poblacion.get(0).getFitness();
 		for(int i=1; i < poblacion.size(); i++) {
 			if(fun.best(poblacion.get(i).getFitness(), bestGen)){
-				best=poblacion.get(i).getFitness();
+				bestGen=poblacion.get(i).getFitness();
 			}
 		}
 		return bestGen;
@@ -74,5 +73,11 @@ public class poblacion {
 
 	public funcion getFuncion() {
 		return fun;
+	}
+	public void iniBest() {
+		best=poblacion.get(0).getFitness();
+	}
+	public void addIndividuo(individuo i) {
+		poblacion.add(i);
 	}
 }
