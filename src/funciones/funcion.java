@@ -1,9 +1,6 @@
 package funciones;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import genetica.gen;
 
 public abstract class funcion {
 	//private List<Double> x;

@@ -1,17 +1,16 @@
 package control;
-import java.util.List;
 
 import model.manager;
 import model.observer;
-import poblacion.poblacion;
+
 public class controller {
 
     private manager manager;
 	
-	public controller(manager m)
-	{
+	public controller(manager m){
 		manager=m;
 	}
+	
 	public void addObserver(observer o) {
 		manager.addObserver(o);
 	}

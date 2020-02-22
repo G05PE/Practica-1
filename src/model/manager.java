@@ -141,7 +141,7 @@ public class manager {
 			algCruce=new monopunto(probCruce, poblacion);
 			break;
 		case 1://Uniforme
-			algCruce=new uniforme();
+			algCruce=new uniforme(probCruce, poblacion);
 			break;
 		}
 	}

@@ -1,11 +1,10 @@
-	package cruces;
+package cruces;
 
+import poblacion.individuo;
 import poblacion.poblacion;
 
 public class uniforme extends algoritmoCruce{ //Tema 3 pagina 12
 
-	
-	
 	
 	public uniforme(double probCruce, poblacion seleccionados) {
 		super(probCruce, seleccionados);
@@ -21,26 +20,19 @@ public class uniforme extends algoritmoCruce{ //Tema 3 pagina 12
 	}
 
 
-/*	public poblacion iniciarPoblacion(poblacion pb, float porcnt) {
-		poblacion ret = new poblacion();
-		boolean existeGen;
-
-		for(int i = 0; i < pb.getSize() - 1; i+=2) {
-			for(int p = 0; p < pb.getIndividuo(i).getLongitud() - 1; p++){
-				if(Math.random() <= porcnt) { //Genera cruce
-          					
-					gen aux, aux2;
-					aux = pb.getIndividuo(i).getCromosoma().getGen(p);
-         				aux2 = pb.getIndividuo(i+1).getCromosoma().getGen(p);
-            
-					pb.getIndividuo(i).getCromosoma().setGen(p, aux);
-					pb.getIndividuo(i+1).getCromosoma().getGen(p, aux2);
-          
-				}
-			}
-		}
+	private void seleccionaReproductores() {
 		
-		return ret;
-	}*/
+		for(int i = 0; i < getSeleccionados().getSize(); i += 2) {
+			individuo ind1 = getSeleccionadoConcreto(i);
+			individuo ind2 = getSeleccionadoConcreto(i + 1);
+			
+			if(Math.random() < getProbCruce()) addReprpoductor(ind1);
+			else addReprpoductor(ind2);
+		}
+	}
 	
+	private void creaDescendientes() {
+		
+	}
+
 }

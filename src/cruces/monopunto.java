@@ -6,13 +6,10 @@ import poblacion.poblacion;
 public class monopunto extends algoritmoCruce{
 	private int punto;
 	private int num_sele_cruce = 0;
-	private poblacion seleccionados;
-	private poblacion reproductores;
-	private poblacion descendientes;
+	
 	
 	public monopunto(double probCruce, poblacion seleccionados) {
 		super(probCruce, seleccionados);
-		this.seleccionados = seleccionados;
 	}
 
 	
@@ -21,35 +18,40 @@ public class monopunto extends algoritmoCruce{
 	public poblacion cruzar() {
 		seleccionaReproductores();
 		creaDescendientes();
-		return descendientes;
+		return getDescendientes();
 	}
 	
 
 	private void seleccionaReproductores() {
 		for(int i = 0; i < getSeleccionados().getSize(); i++) {
 			if(Math.random()%1 < getProbCruce()) {
-				reproductores.addIndividuo(getSeleccionadoConcreto(i));
+				addReprpoductor(getSeleccionadoConcreto(i));
 				num_sele_cruce++;
 			}		
 		}
 
 		if(this.sizeReproductor() % 2 != 0) {
-			this.borraUltimoReproductor();
+			borraUltimoReproductor();
 			num_sele_cruce--;
 		}		
 	}
 	
 	
 	private void creaDescendientes() { //Tema 3 pg 51
-		punto = (int) (Math.random()%seleccionados.getIndividuo(0).getCromosoma().get(0).getGenotipo().size());
+		
+		//Punto es un numero entre 0 y la logitud del cromosoma
+		punto = (int) (Math.random()%getSeleccionadoConcreto(0).getCromosoma().get(0).getGenotipo().size());
+		
 		for(int i = 0; i < num_sele_cruce; i += 2) {
-			individuo hijo1 = seleccionados.getIndividuo(i), hijo2 = seleccionados.getIndividuo(i + 1);
-			mezcla(hijo1, hijo2, seleccionados.getIndividuo(i), seleccionados.getIndividuo(i + 1));
-			descendientes.addIndividuo(hijo1);
-			descendientes.addIndividuo(hijo2);
+			individuo padre1 = getReproductor(i), padre2 = getReproductor(i + 1);
+			individuo hijo1 = padre1, hijo2 = padre2;
+			
+			mezcla(hijo1, hijo2, padre1, padre2);
+			
+			this.addDescendiente(hijo1);
+			this.addDescendiente(hijo2);
 		}
 	}
-	
 
 	private void mezcla(individuo hijo1, individuo hijo2, individuo padre1, individuo padre2) {
 		
@@ -59,13 +61,11 @@ public class monopunto extends algoritmoCruce{
 			hijo2.setGen(i, padre2.getCromosomaAt(i));
 		}
 		
-		//Suponemos que ambos padres tienen la misma longitud!?
 		for(int i = punto; i < padre1.getLongitud(); i++) {
-				hijo1.setGen(i, padre2.getCromosomaAt(i));
-				hijo2.setGen(i, padre1.getCromosomaAt(i));
+			hijo1.setGen(i, padre2.getCromosomaAt(i));
+			hijo2.setGen(i, padre1.getCromosomaAt(i));
 		}
 	
-		//TODO Se evaluan
-		
+		//TODO Se evaluan	
 	}	
 }

@@ -26,27 +26,44 @@ public abstract class algoritmoCruce {
 		this.probCruce = probCruce;
 	}
 	
-	public poblacion getSeleccionados() {
-		return seleccionados;
-	}
-	
-	public void addReprpoductor(individuo i) {
-		reproductores.addIndividuo(i);
-	}
-	
-	public void borraUltimoReproductor() {
-		reproductores.borraUltimo();
-	}
-	
 	public int sizeReproductor() {
 		return reproductores.getSize();
 	}
+
 	
-	public individuo getSeleccionadoConcreto(int i) {
+	
+	//Setters
+	protected void borraUltimoReproductor() {
+		reproductores.borraUltimo();
+	}
+	
+	
+	protected void addReprpoductor(individuo i) {
+		reproductores.addIndividuo(i);
+	}
+	
+
+	protected void addDescendiente(individuo i) {
+		descendientes.addIndividuo(i);
+	}
+	
+	
+	
+	//Getters
+	protected individuo getReproductor(int i) {
+		return reproductores.getIndividuo(i);
+	}
+	
+	protected individuo getSeleccionadoConcreto(int i) {
 		return seleccionados.getIndividuo(i);
 	}
 	
-	public poblacion getDescendientes() {
+	protected poblacion getDescendientes() {
 		return descendientes;
 	}
+	
+	protected poblacion getSeleccionados() {
+		return seleccionados;
+	}
+	
 }

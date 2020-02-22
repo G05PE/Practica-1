@@ -83,11 +83,10 @@ public class poblacion {
 	
 	public void addIndividuo(individuo ind) {
 		poblacion.add(ind);
+	}
 
 	public void iniBest() {
 		best=poblacion.get(0).getFitness();
 	}
-	public void addIndividuo(individuo i) {
-		poblacion.add(i);
-	}
+
 }
