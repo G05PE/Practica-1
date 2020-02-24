@@ -5,11 +5,12 @@ import poblacion.poblacion;
 
 public class monopunto extends algoritmoCruce{
 	private int punto;
-	private int num_sele_cruce = 0;
+	private int num_sele_cruce;
 	
 	
 	public monopunto(double probCruce, poblacion seleccionados) {
 		super(probCruce, seleccionados);
+		num_sele_cruce = 0;
 	}
 
 	
