@@ -14,11 +14,11 @@ import funciones.funcion2;
 import funciones.funcion3;
 import funciones.funcion4;
 import poblacion.poblacion;
-import seleccion.algoritmoEstocasticoUniv;
-import seleccion.algoritmoRuleta;
-import seleccion.algoritmoSeleccion;
-import seleccion.algoritmoTorneoDeter;
-import seleccion.algoritmoTorneoProb;
+import selectSelect.algoritmoEstocasticoUniv;
+import selectSelect.algoritmoRuleta;
+import selectSelect.algoritmoSeleccion;
+import selectSelect.algoritmoTorneoDeter;
+import selectSelect.algoritmoTorneoProb;
 
 public class manager {
 	
@@ -69,18 +69,23 @@ public class manager {
 		
 	}
 	public void start() {
-		
+		generation=0;
 		iniciarPoblacion();
 		evaluarPoblacion();
 		generation++;
+		for(int i=0; i < observers.size(); i++) {
+			observers.get(i).onNextGeneration( best, bestGen, average);
+		}
 		while(generation < maxIter) {
 			poblacion=algSel.ini(poblacion);
 			reproduccion();
 			evaluarPoblacion();
 			generation++;
+			for(int i=0; i < observers.size(); i++) {
+				observers.get(i).onNextGeneration( best, bestGen, average);
+			}
 		}
 		for(int i=0; i < observers.size(); i++) {
-			observers.get(i).onNextGeneration( best, bestGen, average);
 			observers.get(i).onFinished();
 		}
 	}

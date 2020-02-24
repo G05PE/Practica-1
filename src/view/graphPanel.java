@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.math.plot.Plot2DPanel;
 
@@ -24,14 +25,11 @@ public class graphPanel extends JPanel implements observer {
 	private void initGUI() {
 		this.validate();
 		this.repaint();
-		// create your PlotPanel (you can use it as a JPanel)
 		plot = new Plot2DPanel();
-		// define the legend position
 		plot.addLegend("SOUTH");
 		plot.setPreferredSize(new Dimension(700,600));
 		plot.setMinimumSize(new Dimension(700,600));
 		plot.setMaximumSize(new Dimension(700,600));
-		
 		this.setPreferredSize(new Dimension(700,600));
 		this.setMinimumSize(new Dimension(700,600));
 		this.setMaximumSize(new Dimension(700,600));
@@ -42,15 +40,12 @@ public class graphPanel extends JPanel implements observer {
 	
 	@Override
 	public void onNextGeneration( double[][] best, double[][] bestGen, double[][] average) {
-		// add a line plot to the PlotPanel
 		plot.removeAllPlots();
 		plot.addLinePlot("Mejor absoluto", best[0], best[1]);
 		plot.addLinePlot("Mejor generación", bestGen[0], bestGen[1]);
 		plot.addLinePlot("Media generación", average[0], average[1]);
-		this.repaint();
-				
+		repaint();
 	}
-	
 	@Override
 	public void onFinished() {
 	}
