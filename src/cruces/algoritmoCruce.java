@@ -66,4 +66,8 @@ public abstract class algoritmoCruce {
 		return seleccionados;
 	}
 	
+	
+	protected individuo getDescendienteAt(int i) {
+		return descendientes.getIndividuo(i);
+	}
 }

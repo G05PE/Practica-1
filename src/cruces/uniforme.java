@@ -1,9 +1,6 @@
 package cruces;
 
-import java.util.List;
-
 import genetica.gen;
-import poblacion.individuo;
 import poblacion.poblacion;
 
 public class uniforme extends algoritmoCruce{ //Tema 3 pagina 12
@@ -14,45 +11,25 @@ public class uniforme extends algoritmoCruce{ //Tema 3 pagina 12
 	}
 
 	
-	//Por cada alelo se pregunta por la probabilidad de cruce, si la supera se cambia
-	//sino se queda igual
-	
+	//Por cada alelo del padre se pregunta por la probabilidad de cruce, si la supera se cambia	
 	@Override
 	public poblacion cruzar() {
-		for(int i = 0; i < getSeleccionados().getSize(); i++) {
-			individuo indActual = getSeleccionadoConcreto(i);
-			addDescendiente(indActual);
-			
-			for(int j = 0; j < indActual.getCromosoma().size(); j++) {
-				gen genAct = indActual.getCromosomaAt(i);			
-				for(int k = 0; k < genAct.getGenotipo().size(); k++) {
+		for(int i = 0; i < getSeleccionados().getSize() - 1; i += 2) {
+			addDescendiente(getSeleccionadoConcreto(i));
+			addDescendiente(getSeleccionadoConcreto(i + 1));
 					
-					boolean alelo = genAct.getGenotipo().get(k);
-					
-					if(Math.random() < getProbCruce()) {
-						getDescendiente
-					}
+			for(int j = 0; j < getDescendienteAt(i).getLongitud(); j++) {
+				if(Math.random() < getProbCruce()) {
+					gen aux = getDescendienteAt(i).getCromosomaAt(j);
+					getDescendienteAt(i).setGen(j, getDescendienteAt(i+1).getCromosomaAt(j));
+					getDescendienteAt(i+1).setGen(j, aux);
 				}
 			}
 		}
-		creaDescendientes();
-		return descendientes;
-	}
-
-
-	private void seleccionaReproductores() {
 		
-		for(int i = 0; i < getSeleccionados().getSize(); i += 2) {
-			individuo ind1 = getSeleccionadoConcreto(i);
-			individuo ind2 = getSeleccionadoConcreto(i + 1);
-			
-			if(Math.random() < getProbCruce()) addReprpoductor(ind1);
-			else addReprpoductor(ind2);
-		}
+		return getDescendientes();	
 	}
 	
-	private void creaDescendientes() {
-		
-	}
-
+	
+	
 }

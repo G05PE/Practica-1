@@ -40,7 +40,7 @@ public class monopunto extends algoritmoCruce{
 	private void creaDescendientes() { //Tema 3 pg 51
 		
 		//Punto es un numero entre 0 y la logitud del cromosoma
-		punto = (int) (Math.random()%getSeleccionadoConcreto(0).getCromosoma().get(0).getGenotipo().size());
+		punto = (int) (Math.random()%getSeleccionadoConcreto(0).getCromosoma().size());
 		
 		for(int i = 0; i < num_sele_cruce; i += 2) {
 			individuo padre1 = getReproductor(i), padre2 = getReproductor(i + 1);
@@ -66,6 +66,6 @@ public class monopunto extends algoritmoCruce{
 			hijo2.setGen(i, padre1.getCromosomaAt(i));
 		}
 	
-		//TODO Se evaluan	
+		//TODO Se evalua lo del fitness ?????
 	}	
 }
