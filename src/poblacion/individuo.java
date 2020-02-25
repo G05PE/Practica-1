@@ -88,4 +88,5 @@ public class individuo {
 		this.cromosoma.set(i, gen);
 	}
 
+
 }

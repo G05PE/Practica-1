@@ -30,6 +30,5 @@ public class uniforme extends algoritmoCruce{ //Tema 3 pagina 12
 		return getDescendientes();	
 	}
 	
-	
-	
 }
+

@@ -6,7 +6,7 @@ import java.util.List;
 import funciones.funcion;
 
 public class poblacion {
-	
+
 	private List<individuo> poblacion;
 	private int tam=0;
 	private funcion fun;
@@ -18,24 +18,24 @@ public class poblacion {
 		this.fun=fun;
 		precision=prec;
 	}
-	
+
 	public void iniciarPoblacion() {
-		
+
 		for(int i=0; i < tam; i++) {
 			individuo cromosoma=new individuo(fun, precision);
 			poblacion.add(cromosoma);
 		}
 		iniBest();
 	}
-	
+
 	public individuo getIndividuo(int i) {
 		return new individuo(poblacion.get(i));
 	}
-	
+
 	public void setIndividuos(List<individuo> nuevos) {
 		poblacion=nuevos;
 	}
-	
+
 	public int getSize() {
 		return tam;
 	}
@@ -66,27 +66,24 @@ public class poblacion {
 		}
 		return total/poblacion.size();
 	}
-	
+
 	public double getPrecision() {
 		return precision;
 	}
 
 	public funcion getFuncion() {
 		return fun;
-	}	
+	}
+	public void iniBest() {
+		best=poblacion.get(0).getFitness();
+	}
+	public void addIndividuo(individuo i) {
+		poblacion.add(i);
+	}
 	
-	//No se si esto peta, debería borrar el último
 	public void borraUltimo() {
 		poblacion.remove(poblacion.size());
 		tam--;
-	}
-	
-	public void addIndividuo(individuo ind) {
-		poblacion.add(ind);
-	}
-
-	public void iniBest() {
-		best=poblacion.get(0).getFitness();
 	}
 
 }
