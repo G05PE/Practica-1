@@ -25,7 +25,6 @@ import poblacion.individuo;
  
 public class main
 {
- 
         public static void main(String[] args)
         {              
             manager m=new manager();

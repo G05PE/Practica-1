@@ -29,7 +29,7 @@ public class poblacion {
 	}
 	
 	public individuo getIndividuo(int i) {
-		return new individuo(poblacion.get(i));
+		return poblacion.get(i);
 	}
 	
 	public void setIndividuos(List<individuo> nuevos) {
