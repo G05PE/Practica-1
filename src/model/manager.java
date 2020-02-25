@@ -4,21 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cruces.algoritmoCruce;
-import cruces.monopunto;
-import cruces.mutacion;
-import cruces.mutacionBasica;
-import cruces.uniforme;
-import funciones.funcion;
-import funciones.funcion1;
-import funciones.funcion2;
-import funciones.funcion3;
-import funciones.funcion4;
+import cruces.*;
+import funciones.*;
 import poblacion.poblacion;
-import selectSelect.algoritmoEstocasticoUniv;
-import selectSelect.algoritmoRuleta;
-import selectSelect.algoritmoSeleccion;
-import selectSelect.algoritmoTorneoDeter;
-import selectSelect.algoritmoTorneoProb;
+import selectSelect.*;
 
 public class manager {
 	
@@ -79,6 +68,7 @@ public class manager {
 		while(generation < maxIter) {
 			poblacion=algSel.ini(poblacion);
 			reproduccion();
+			algMut.mutar(poblacion, probMut);
 			evaluarPoblacion();
 			generation++;
 			for(int i=0; i < observers.size(); i++) {
@@ -88,6 +78,9 @@ public class manager {
 		for(int i=0; i < observers.size(); i++) {
 			observers.get(i).onFinished();
 		}
+	}
+	private void mutacion() {
+		algMut.mutar(poblacion, probMut);
 	}
 	private void evaluarPoblacion() {
 		evaluarMejorAbs();
@@ -113,7 +106,7 @@ public class manager {
 		}
 	}
 	private void reproduccion() {
-		//algCruce.cruzar();
+		algCruce.cruzar();
 	}
 	public void establecerFuncion(int f, int tam ) {
 		idFun=f+1;
@@ -137,17 +130,6 @@ public class manager {
 		}
 		for(int i=0; i < observers.size(); i++) {
 			observers.get(i).onChangedFunction(funcion, tam);
-		}
-	}
-	
-	public void establecerMetodoCruce(int metodo, double probCruce) {
-		switch(metodo) {
-		case 0://Monopunto
-			algCruce=new monopunto(probCruce, poblacion);
-			break;
-		case 1://Uniforme
-			algCruce=new uniforme();
-			break;
 		}
 	}
 	public void establerMetodoSeleccion(int metodo) {
@@ -188,7 +170,7 @@ public class manager {
 	public void setCrossFunct(int i) {
 		switch(i) {
 		case 0:
-			//algCruce=new monopunto();
+			//algCruce=new monopunto(probCruc, poblacion);
 			break;
 		case 1:
 			//algCruce=new uniforme();
@@ -200,13 +182,8 @@ public class manager {
 	public void setMutationFunct(int i) {
 		switch(i) {
 		case 0:
-			//algMut=new mutacionBasica();
+			algMut=new mutacionBasica();
 			break;
-		case 1:
-			//algMut=new mutacionUniforme();
-			break;
-			default:
-				break;
 		}
 	}
 	public void setMutationPercent(double mutPer) {

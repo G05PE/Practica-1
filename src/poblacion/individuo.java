@@ -9,11 +9,13 @@ public class individuo {
 	private List<gen> cromosoma;
 	private double fitness;
 	private List<Double> fenotipos;
+	private funcion f;
 	
 	public individuo(funcion f, double precision) {
+		this.f=f;
 		cromosoma=new ArrayList<gen>();
 		crearGenes(f, precision);
-		setFitness(f.calcularFuncion(fenotipos));        
+		calcularFitness();        
 	}
 	
 	public individuo(individuo ind) {
@@ -57,13 +59,15 @@ public class individuo {
 		return fitness;
 	}
 
-	public void setFitness(double fitness) {
-		this.fitness = fitness;
+	public void calcularFitness() {
+		this.fitness=f.calcularFuncion(fenotipos);
 	}
 	public List<gen> getCromosoma(){
 		return cromosoma;
 	}
-	
+	public gen getCromosoma(int i) {
+		return cromosoma.get(i);
+	}
 	public List<Double> getFenotipos(){
 		return fenotipos;
 	}
