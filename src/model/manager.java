@@ -61,21 +61,15 @@ public class manager {
 		iniciarPoblacion();
 		evaluarPoblacion();
 		generation++;
-		for(int i=0; i < observers.size(); i++) {
-			observers.get(i).onNextGeneration( best, bestGen, average);
-		}
 		while(generation < maxIter) {
 			poblacion=algSel.ini(poblacion);
 			reproduccion();
 			mutacion();
 			evaluarPoblacion();
 			generation++;
-			for(int i=0; i < observers.size(); i++) {
-				observers.get(i).onNextGeneration( best, bestGen, average);
-			}
 		}
 		for(int i=0; i < observers.size(); i++) {
-			observers.get(i).onFinished();
+			observers.get(i).onFinished( best, bestGen, average);
 		}
 	}
 	private void mutacion() {
@@ -126,9 +120,6 @@ public class manager {
 				funcion=new funcion1();
 				break;
 		
-		}
-		for(int i=0; i < observers.size(); i++) {
-			observers.get(i).onChangedFunction(funcion, tam);
 		}
 	}
 	public void establerMetodoSeleccion(int metodo) {

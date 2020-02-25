@@ -2,26 +2,10 @@ package launcher;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.general.DefaultPieDataset;
-
 import control.controller;
-import funciones.funcion;
-import funciones.funcion1;
-import funciones.funcion2;
-import funciones.funcion3;
-import funciones.funcion4;
 import model.manager;
-import poblacion.individuo;
  
 public class main
 {
@@ -46,8 +30,5 @@ public class main
    			System.out.println("Error al iniciar el GUI");
    			e.printStackTrace();
    		}
-            	   
- 
-        }
- 
+    }
 }

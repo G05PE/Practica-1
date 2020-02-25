@@ -37,7 +37,7 @@ public abstract class algoritmoTorneo extends algoritmoSeleccion{
 				ganador=i;
 			}
 		}
-		addSeleccionado(getFromRing(ganador));		
+		addSeleccionado(new individuo(getFromRing(ganador)));		
 		ganador=0;
 		clearRing();
 	}

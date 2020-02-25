@@ -504,75 +504,17 @@ public class SetingsPanel extends JPanel implements observer{
 		c.setMinimumSize(d);
 		c.setAlignmentX(CENTER_ALIGNMENT);
 	}
-	
-	public void onFinished() {
-		start.setEnabled(true);
-	}
+
+
 	@Override
-	public void onChangedFunction(funcion f, int tam) {
+	public void onFinished(double[][] best, double[][] bestGen, double[][] average) {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public void onChangedFunctionParameters() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedPoblationSize() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedGeneration() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedSelection() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedMutation() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedCruce() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedPrecition() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedElitism() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onNextGeneration(double[][] best, double[][] bestGen, double[][] average) {
+	public void onNextGeneration() {
 		// TODO Auto-generated method stub
 		
 	}

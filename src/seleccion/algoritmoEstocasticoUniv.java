@@ -3,6 +3,8 @@ package seleccion;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import poblacion.individuo;
 import poblacion.poblacion;
 public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
 
@@ -35,7 +37,7 @@ public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
 				}
 				if(j < p.getSize()) {
 					if(j > 0 &&  probSeleccion.get(j-1) > r) j--;
-					addSeleccionado(p.getIndividuo(j));
+					addSeleccionado(new individuo(p.getIndividuo(j)));
 					r+=distancia;
 					k++;
 				}
