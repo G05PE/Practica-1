@@ -80,13 +80,15 @@ public class individuo {
 	public funcion getFuncion() {
 		return f;
 	}
-	public gen getCromosoma(int i) {
+	public gen getCromosomaAt(int i) {
 		return cromosoma.get(i);
 	}
 	public List<Double> getFenotipos(){
 		return fenotipos;
 	}
-	
+	public void setGen(int i, gen gen) {
+		this.cromosoma.set(i, gen);
+	}
 	public int getLongitud(){
 		return cromosoma.size();
 	}

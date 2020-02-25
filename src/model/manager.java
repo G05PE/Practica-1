@@ -51,9 +51,9 @@ public class manager {
 	public void iniciarPoblacion() {
 		poblacion=new poblacion(tamPob, probToler, funcion);
 		poblacion.iniciarPoblacion();
-		best=new double[2][poblacion.getSize()];
-		bestGen=new double[2][poblacion.getSize()];
-		average=new double[2][poblacion.getSize()];
+		best=new double[2][maxIter];
+		bestGen=new double[2][maxIter];
+		average=new double[2][maxIter];
 		
 	}
 	public void start() {
@@ -76,22 +76,20 @@ public class manager {
 		algMut.mutar(poblacion, probMut);
 	}
 	private void evaluarPoblacion() {
-		evaluarMejorAbs();
-		evaluarMejorGen();
+		evaluarMejor();
 		evaluarMedia();
 	}
 	private void evaluarMedia() {
 		average[0][generation]=generation;
 		average[1][generation]=poblacion.getAverage();
 	}
-	private void evaluarMejorGen() {
-		bestGen[0][generation]=generation;
-		bestGen[1][generation]=poblacion.getBestGen();
-	}
-	private void evaluarMejorAbs() {
+	
+	private void evaluarMejor() {
 		best[0][generation]=generation;
-		if(generation==0 || funcion.best(poblacion.getBest(), best[1][generation-1])) {
-			best[1][generation]=poblacion.getBest();
+		bestGen[0][generation]=generation;
+		bestGen[1][generation]=poblacion.getBest();
+		if(generation==0 || funcion.best(bestGen[1][generation], best[1][generation-1])) {
+			best[1][generation]=bestGen[1][generation];
 		}
 		else
 		{

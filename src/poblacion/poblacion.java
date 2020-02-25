@@ -41,6 +41,7 @@ public class poblacion {
 	}
 
 	public double getBest() {
+		iniBest();
 		for(int i=0; i < poblacion.size(); i++) {
 			if(fun.best(poblacion.get(i).getFitness(), best)){
 				best=poblacion.get(i).getFitness();
@@ -49,22 +50,17 @@ public class poblacion {
 		return best;
 	}
 
-	public double getBestGen() {
-		double bestGen=poblacion.get(0).getFitness();
-		for(int i=1; i < poblacion.size(); i++) {
-			if(fun.best(poblacion.get(i).getFitness(), bestGen)){
-				bestGen=poblacion.get(i).getFitness();
-			}
-		}
-		return bestGen;
-	}
-
 	public double getAverage() {
 		double total=0;
 		for(int i=0; i < poblacion.size(); i++) {
 			total+=poblacion.get(i).getFitness();
 		}
 		return total/poblacion.size();
+	}
+	
+	public void borraUltimo() {
+		poblacion.remove(poblacion.size()-1);
+		tam--;
 	}
 	
 	public double getPrecision() {
