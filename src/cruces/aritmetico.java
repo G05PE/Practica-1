@@ -10,13 +10,12 @@ public class aritmetico extends algoritmoCruce {
 	private double alpha;
 
 
-	public aritmetico(double probCruce, poblacion seleccionados) {
-		super(probCruce, seleccionados);
+	public aritmetico() {
 		num_sele_cruce = 0;
 	}
 
 	@Override
-	public poblacion cruzar() {
+	public poblacion cruzar(poblacion seleccionados, double prob) {
 		seleccionaReproductores();
 		alpha = Math.random()%1;
 
