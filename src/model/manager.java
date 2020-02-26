@@ -25,12 +25,14 @@ public class manager {
 	private double probCruc;
 	private double probMut;	
 	private int generation;
+	private elite elite;
 	private int maxIter;
 	private int tamPob;
 	private int idFun;
 	
 	public manager() {
 		observers=new ArrayList<observer>();
+		elite=new elite();
 		iniciarDatos();
 	}
 	public void iniciarDatos() {
@@ -62,15 +64,20 @@ public class manager {
 		evaluarPoblacion();
 		generation++;
 		while(generation < maxIter) {
-			poblacion=algSel.ini(poblacion);
+			elite.escogerElites(poblacion, probElite);
+			seleccion();
 			reproduccion();
 			mutacion();
+			elite.incluirElites(poblacion);
 			evaluarPoblacion();
 			generation++;
 		}
 		for(int i=0; i < observers.size(); i++) {
 			observers.get(i).onFinished( best, bestGen, average);
 		}
+	}
+	private void seleccion() {
+		poblacion=algSel.ini(poblacion);
 	}
 	private void mutacion() {
 		algMut.mutar(poblacion, probMut);

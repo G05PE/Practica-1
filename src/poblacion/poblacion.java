@@ -12,6 +12,7 @@ public class poblacion {
 	private funcion fun;
 	private double best;
 	private double precision;
+	
 	public poblacion(int tam, double prec, funcion fun) {
 		poblacion=new ArrayList<individuo>();
 		this.tam=tam;
@@ -75,5 +76,9 @@ public class poblacion {
 	}
 	public void addIndividuo(individuo i) {
 		poblacion.add(i);
+	}
+
+	public void setIndividuoAt(int i, individuo individuo) {
+		poblacion.set(i, new individuo(individuo));
 	}
 }
