@@ -8,18 +8,14 @@ public class monopunto extends algoritmoCruce{
 	private int num_sele_cruce;
 	
 	
-
 	public monopunto() {
-
 		num_sele_cruce = 0;
 	}
 
 	
 	//Seleccionar individuos a cruzarse y almacenarlos en el array reproductores
 	@Override
-
 	public poblacion cruzar(poblacion seleccionados, double prob) {
-
 		seleccionaReproductores();
 		creaDescendientes();
 		return getDescendientes();
@@ -41,9 +37,7 @@ public class monopunto extends algoritmoCruce{
 	}
 	
 	
-
 	private void creaDescendientes() {
-
 		
 		//Punto es un numero entre 0 y la logitud del cromosoma
 		punto = (int) (Math.random()%getSeleccionadoConcreto(0).getCromosoma().size());
