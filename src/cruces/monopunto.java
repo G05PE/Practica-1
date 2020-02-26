@@ -1,54 +1,72 @@
 package cruces;
 
+import poblacion.individuo;
 import poblacion.poblacion;
 
 public class monopunto extends algoritmoCruce{
 	private int punto;
+	private int num_sele_cruce;
 	
-	public monopunto(double probCruce, poblacion pob) {
-		super(probCruce, pob);
+	
+	public monopunto(double probCruce, poblacion seleccionados) {
+		super(probCruce, seleccionados);
+		num_sele_cruce = 0;
 	}
 
+	
+	//Seleccionar individuos a cruzarse y almacenarlos en el array reproductores
 	@Override
-	public poblacion cruzar() {//Tema 3 pag 49
-		double alea;
-		for(int i=0; i < getSeleccionados().getSize(); i++) {
-			alea=Math.random()%1;
-			if(alea > getProbCruce()) {
-				//seleccionar individuos a cruzarse y almacenarlos en el array reproductores
-			}
-		}
-		//Cruzar individuos y almacenarlos en el array descendientes
+	public poblacion cruzar() {
+		seleccionaReproductores();
+		creaDescendientes();
 		return getDescendientes();
 	}
 	
-	/*@Override
-	public poblacion iniciarPoblacion(poblacion pb, float porcnt) {
-		//Y el punto de corte? 
-		poblacion a = new poblacion(0, porcnt, null), b = new poblacion();//por que 2?
-		boolean existeGen;
-		int tamCromosoma = pb.getIndividuo(0).getLongitud();
-		int aux;
+
+	private void seleccionaReproductores() {
+		for(int i = 0; i < getSeleccionados().getSize(); i++) {
+			if(Math.random()%1 < getProbCruce()) {
+				addReprpoductor(getSeleccionadoConcreto(i));
+				num_sele_cruce++;
+			}		
+		}
+
+		if(this.sizeReproductor() % 2 != 0) {
+			borraUltimoReproductor();
+			num_sele_cruce--;
+		}		
+	}
+	
+	
+	private void creaDescendientes() { //Tema 3 pg 51
 		
-		for(int i = 0; i < pb.getSize(); i++) {
-			if(Math.random() < porcnt) {//Tiene que ser %1
-				a.add(pb.getIndividuo(i).getCromosoma()); //Añadimos un nuevo cromosoma a la población
-			}
-			else  b.getIndividuo(i).getCromosoma();//Para que guardar los que no seran seleccionados?
+		//Punto es un numero entre 0 y la logitud del cromosoma
+		punto = (int) (Math.random()%getSeleccionadoConcreto(0).getCromosoma().size());
+		
+		for(int i = 0; i < num_sele_cruce; i += 2) {
+			individuo padre1 = getReproductor(i), padre2 = getReproductor(i + 1);
+			individuo hijo1 = padre1, hijo2 = padre2;
+			
+			mezcla(hijo1, hijo2, padre1, padre2);
+			
+			this.addDescendiente(hijo1);
+			this.addDescendiente(hijo2);
+		}
+	}
+
+	private void mezcla(individuo hijo1, individuo hijo2, individuo padre1, individuo padre2) {
+		
+		//Incluimos por mitades
+		for(int i = 0; i < punto; i++) {
+			hijo1.setGen(i, padre1.getCromosomaAt(i));
+			hijo2.setGen(i, padre2.getCromosomaAt(i));
 		}
 		
-		for(int i = 0; i < a.getSize() - 1; i+=2) {
-			aux = (int) ((Math.random() * tamCromosoma - 2) + 1); //Cuidado con el  -2
-			for(int p = 0; p < aux; p++) {
-				existeGen = a.getIndividuo(i).getCromosoma().get(p) != null;
-				a.getIndividuo(i).getCromosoma().set(p, a.getIndividuo(i + 1).getCromosoma().get(p)); //Metemos el gen p del siguiente elemento
-			}//Se mezclan los genes no los cromosomas=individuos
+		for(int i = punto; i < padre1.getLongitud(); i++) {
+			hijo1.setGen(i, padre2.getCromosomaAt(i));
+			hijo2.setGen(i, padre1.getCromosomaAt(i));
 		}
-		
-		for(int i = 0; i < b.getSize(); i++) {
-			a.add(b.getIndividuo(i).getCromosoma());
-		}
-		
-		return a;
-	}*/
+	
+		//TODO Se evalua lo del fitness ?????
+	}	
 }
