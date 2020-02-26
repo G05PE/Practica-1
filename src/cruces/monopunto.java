@@ -33,11 +33,12 @@ public class monopunto extends algoritmoCruce{
 				num_sele_cruce++;
 			}		
 		}
-
-		if(this.sizeReproductor() % 2 != 0) {
+		
+		if(num_sele_cruce % 2 != 0) {
 			borraUltimoReproductor();
 			num_sele_cruce--;
-		}		
+		}
+		setSizeReproductor(num_sele_cruce);
 	}
 	
 	

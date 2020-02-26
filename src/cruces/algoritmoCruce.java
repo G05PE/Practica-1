@@ -30,6 +30,10 @@ public abstract class algoritmoCruce {
 		return reproductores.getSize();
 	}
 
+	protected void setSizeReproductor(int num_sele_cruce) {
+		reproductores.setSize(num_sele_cruce);
+	}
+	
 	//Setters
 	protected void borraUltimoReproductor() {
 		reproductores.borraUltimo();

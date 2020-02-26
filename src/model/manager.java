@@ -163,7 +163,7 @@ public class manager {
 		probCruc=d;
 	}
 	public void setCrossFunct(int i) {
-		/*switch(i) {
+		switch(i) {
 		case 0:
 			algCruce=new monopunto();
 			break;
@@ -175,10 +175,9 @@ public class manager {
 			break;
 		default:
 			break;
-		}*/
-		
-		algCruce = new aritmetico();
+		}
 	}
+	
 	public void setMutationFunct(int i) {
 		switch(i) {
 		case 0:

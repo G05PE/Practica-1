@@ -45,7 +45,7 @@ public class individuo {
 		double tam=cromosoma.get(i).getTam();
 		double fenotipo=f.getMinX(i) + bin2dec(cromosoma.get(i).getGenotipo())*
 				(f.getMaxX(i)-f.getMinX(i))/(Math.pow(2, tam)-1);
-		cromosoma.get(i).setFenotipo(fenotipo);
+		cromosoma.get(i).setvalorReal(fenotipo);
 		return fenotipo;
 	}
 	/**
@@ -87,9 +87,15 @@ public class individuo {
 	public List<Double> getFenotipos(){
 		return fenotipos;
 	}
+	
 	public void setGen(int i, gen gen) {
 		this.cromosoma.set(i, gen);
 	}
+	
+	public void setFenotiposAt(int i, double valor) {
+		this.fenotipos.set(i, valor);
+	}
+	
 	public int getLongitud(){
 		return cromosoma.size();
 	}
