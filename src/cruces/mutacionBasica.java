@@ -6,41 +6,52 @@ import poblacion.poblacion;
 
 public class mutacionBasica extends mutacion{
 
-	@Override
-	public poblacion mutar(poblacion poblacion, double probMutacion){
+	double probMutacion;
+	poblacion poblacion;
 
-		for(int i = 0; i < poblacion.getSize(); i++) {//Recorro los individuos
+	//Constructor
+	public mutacionBasica(double probMutacion, poblacion poblacion){
+		super(probMutacion, poblacion);
+		this.probMutacion = probMutacion;
+		this.poblacion = poblacion;
+	}
+
+	@Override
+	
+	
+	//Esto me parece que no tiene mucho sentido per oes lo que pone en la Pag 55 Tema 2
+	public poblacion mutar(){
+
+		for(int i = 0; i < poblacion.getSize(); i++) {
 			Boolean mutado = false;
-			mutado=mutarIndividuo(poblacion.getIndividuo(i), probMutacion);
-			if(mutado) {
-				poblacion.getIndividuo(i).calcularFitness();
-			}
+			mutarIndividuo(poblacion.getIndividuo(i), mutado);
+			//if(mutado) poblacion.getIndividuo(i).setFitness(poblacion.getIndividuo(i).evalua());
 		}
 		return poblacion;
 	}
 
-	public boolean mutarIndividuo(individuo ind, double probMutacion) {
-		boolean mutado=false;
-		for(int i = 0; i < ind.getCromosoma().size(); i++){//Recorro los genes
-				if(invierte(ind.getCromosomaAt(i), probMutacion)) {
-					mutado=true;
-					ind.recalcularFenotipo(i);
-				}
-			}
-		return mutado;
-	}
-
-	private boolean invierte(gen entrada, double probMutacion) {
-		boolean mutado=false;
-		for(int i = 0; i < entrada.getTam(); i++) {//Recorre los bits
+	public individuo mutarIndividuo(individuo ind, Boolean mutado) {
+		individuo ret = ind;
+		
+		for(int i = 0; i < ind.getCromosoma().size(); i++){
 			double rand = Math.random()%1;
 			if(rand < probMutacion){
-				entrada.setBit(i, !entrada.getGenotipo().get(i));
-				mutado=true;
+				ret.setGen(i, invierte(ind.getCromosomaAt(i)));
+				mutado = true;
 			}
-		}	
-		return mutado;
+		}
+		
+		return ret;
 	}
+
+	private gen invierte(gen entrada) {
+		gen salida = entrada;
+		for(int i = 0; i < entrada.getTam(); i++) {
+			salida.setBit(i, !entrada.getGenotipo().get(i));
+		}
+		return salida;
+	}
+
+
+
 }
-
-
