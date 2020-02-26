@@ -12,6 +12,7 @@ public class poblacion {
 	private funcion fun;
 	private double best;
 	private double precision;
+	
 	public poblacion(int tam, double prec, funcion fun) {
 		poblacion=new ArrayList<individuo>();
 		this.tam=tam;
@@ -29,7 +30,7 @@ public class poblacion {
 	}
 	
 	public individuo getIndividuo(int i) {
-		return new individuo(poblacion.get(i));
+		return poblacion.get(i);
 	}
 	
 	public void setIndividuos(List<individuo> nuevos) {
@@ -41,6 +42,7 @@ public class poblacion {
 	}
 
 	public double getBest() {
+		iniBest();
 		for(int i=0; i < poblacion.size(); i++) {
 			if(fun.best(poblacion.get(i).getFitness(), best)){
 				best=poblacion.get(i).getFitness();
@@ -49,22 +51,17 @@ public class poblacion {
 		return best;
 	}
 
-	public double getBestGen() {
-		double bestGen=poblacion.get(0).getFitness();
-		for(int i=1; i < poblacion.size(); i++) {
-			if(fun.best(poblacion.get(i).getFitness(), bestGen)){
-				bestGen=poblacion.get(i).getFitness();
-			}
-		}
-		return bestGen;
-	}
-
 	public double getAverage() {
 		double total=0;
 		for(int i=0; i < poblacion.size(); i++) {
 			total+=poblacion.get(i).getFitness();
 		}
 		return total/poblacion.size();
+	}
+	
+	public void borraUltimo() {
+		poblacion.remove(poblacion.size()-1);
+		tam--;
 	}
 	
 	public double getPrecision() {
@@ -79,5 +76,9 @@ public class poblacion {
 	}
 	public void addIndividuo(individuo i) {
 		poblacion.add(i);
+	}
+
+	public void setIndividuoAt(int i, individuo individuo) {
+		poblacion.set(i, new individuo(individuo));
 	}
 }

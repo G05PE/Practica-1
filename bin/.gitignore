@@ -1,7 +1,9 @@
-/view/
 /control/
-/model/
-/seleccion/
-/launcher/
+/cruces/
 /funciones/
+/genetica/
+/launcher/
+/model/
 /poblacion/
+/seleccion/
+/view/

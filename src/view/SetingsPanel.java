@@ -22,6 +22,10 @@ import model.observer;
 
 public class SetingsPanel extends JPanel implements observer{
 	private controller ctrl;
+	private JComboBox<String> selectSelect;
+	private JComboBox<String> selectCross;
+	private JComboBox<String> selectMut;
+	private JComboBox<String> selectFunc;
 	private JTextField tNgenerat;
 	private JTextField tCross;
 	private JTextField tElite;
@@ -139,16 +143,16 @@ public class SetingsPanel extends JPanel implements observer{
 		 this.add(Box.createHorizontalGlue());
 		 String[] selec = { "Roulette", "Determinist Tournament",
 				"Probabilistic Tournament", "Universal Stochastic"};
-		 JComboBox<String> seleccion = new JComboBox<String>(selec);
-		 seleccion.setEditable(false);
+		 selectSelect = new JComboBox<String>(selec);
+		 selectSelect.setEditable(false);
 		 seleccionar(selec[0]);
-		 seleccion.addActionListener(new ActionListener() {
+		 selectSelect.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					seleccionar((String)seleccion.getSelectedItem());
+					seleccionar((String)selectSelect.getSelectedItem());
 				}
 		 });
-		 setDimCombobox(seleccion, dim1);
-		 this.add(seleccion);
+		 setDimCombobox(selectSelect, dim1);
+		 this.add(selectSelect);
 		 
 		 //CrossOver----------------------------------------------------
 		 JPanel crossOverPanel=new JPanel(new FlowLayout());
@@ -164,16 +168,16 @@ public class SetingsPanel extends JPanel implements observer{
 		 cross1.add(lCruce);
 		 
 		 String[] selec2 = { "Single point", "Uniform"};
-		 JComboBox<String> seleccion2 = new JComboBox<String>(selec2);
-		 seleccion2.setEditable(false);
+		 selectCross = new JComboBox<String>(selec2);
+		 selectCross.setEditable(false);
 		 seleccionarCruce(selec2[0]);
-		 seleccion2.addActionListener(new ActionListener() {
+		 selectCross.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					seleccionarCruce((String)seleccion2.getSelectedItem());
+					seleccionarCruce((String)selectCross.getSelectedItem());
 				}
 		 });
-		 setDimCombobox(seleccion2, dim2);
-		 cross1.add(seleccion2);
+		 setDimCombobox(selectCross, dim2);
+		 cross1.add(selectCross);
 		 crossOverPanel.add(cross1);
 	 
 		 JPanel cross2=new JPanel();
@@ -216,16 +220,16 @@ public class SetingsPanel extends JPanel implements observer{
 		 mut1.add(lMut);
 		 
 		 String[] selec3 = { "Basic", "Uniform"};
-		 JComboBox<String> seleccion3 = new JComboBox<String>(selec3);
-		 seleccion3.setEditable(false);
+		 selectMut = new JComboBox<String>(selec3);
+		 selectMut.setEditable(false);
 		 seleccionarMutacion(selec3[0]);
-		 seleccion3.addActionListener(new ActionListener() {
+		 selectMut.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					seleccionarMutacion((String)seleccion3.getSelectedItem());
+					seleccionarMutacion((String)selectMut.getSelectedItem());
 				}
 		 });
-		 setDimCombobox(seleccion3, dim2);
-		 mut1.add(seleccion3);
+		 setDimCombobox(selectMut, dim2);
+		 mut1.add(selectMut);
 		 mutationPanel.add(mut1);
 		 
 		 JPanel mut2=new JPanel();
@@ -288,16 +292,16 @@ public class SetingsPanel extends JPanel implements observer{
 		 this.add(lFun);
 		 this.add(Box.createHorizontalGlue());
 		 String[] selec4 = { "Function 1", "Function 2", "Function 3", "Function 4"};
-		 JComboBox<String> seleccion4 = new JComboBox<String>(selec4);
-		 seleccion4.setEditable(false);
+		 selectFunc = new JComboBox<String>(selec4);
+		 selectFunc.setEditable(false);
 		 seleccionarFun(selec4[0]);
-		 seleccion4.addActionListener(new ActionListener() {
+		 selectFunc.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					seleccionarFun((String)seleccion4.getSelectedItem());
+					seleccionarFun((String)selectFunc.getSelectedItem());
 				}
 		 });
-		 setDimCombobox(seleccion4, dim1);
-		 this.add(seleccion4);
+		 setDimCombobox(selectFunc, dim1);
+		 this.add(selectFunc);
 		 
 		 //Botones-------------------------------------------------
 		 this.add(Box.createRigidArea(new Dimension(190, 40)));
@@ -308,7 +312,6 @@ public class SetingsPanel extends JPanel implements observer{
 		 start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrl.start();
-				start.setEnabled(false);
 			} 
 		 });
 		 this.add(start);
@@ -321,8 +324,8 @@ public class SetingsPanel extends JPanel implements observer{
 		 reset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrl.reset();
-				start.setEnabled(true);
 				initFields();
+				refreshText();
 			} 
 		 });
 		 this.add(reset);
@@ -337,6 +340,19 @@ public class SetingsPanel extends JPanel implements observer{
 		mutPer=2;
 		popSize=100;
 		genNum=100;
+	}
+	
+	public void refreshText() {
+		selectSelect.setSelectedIndex(0);
+		selectCross.setSelectedIndex(0);
+		selectMut.setSelectedIndex(0);
+		selectFunc.setSelectedIndex(0);
+		tNgenerat.setText(genNum+"");
+		tCross.setText(crossPer+"");
+		tElite.setText(elitePer+"");
+		tPopul.setText(popSize+"");
+		tMut.setText(mutPer+"");
+		this.repaint();
 	}
 	private void seleccionarCruce(String cruce) {
 		switch(cruce) {
@@ -488,75 +504,17 @@ public class SetingsPanel extends JPanel implements observer{
 		c.setMinimumSize(d);
 		c.setAlignmentX(CENTER_ALIGNMENT);
 	}
-	
-	public void onFinished() {
-		start.setEnabled(true);
-	}
+
+
 	@Override
-	public void onChangedFunction(funcion f, int tam) {
+	public void onFinished(double[][] best, double[][] bestGen, double[][] average) {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public void onChangedFunctionParameters() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedPoblationSize() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedGeneration() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedSelection() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedMutation() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedCruce() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedPrecition() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onChangedElitism() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onNextGeneration(double[][] best, double[][] bestGen, double[][] average) {
+	public void onNextGeneration() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -51,6 +51,10 @@ public class gen {
 	public double getFenotipo() {
 		return fenotipo;
 	}
+	public void setBit(int i, Boolean bit) {
+		Boolean newBit=new Boolean(bit.booleanValue());
+		genotipo.set(i, newBit);
+	}
 	public List<Boolean> getGenotipo() {
 		return genotipo;
 	}

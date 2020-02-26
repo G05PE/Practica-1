@@ -4,21 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cruces.algoritmoCruce;
-import cruces.monopunto;
-import cruces.mutacion;
-import cruces.mutacionBasica;
-import cruces.uniforme;
-import funciones.funcion;
-import funciones.funcion1;
-import funciones.funcion2;
-import funciones.funcion3;
-import funciones.funcion4;
+import cruces.*;
+import funciones.*;
 import poblacion.poblacion;
-import seleccion.algoritmoEstocasticoUniv;
-import seleccion.algoritmoRuleta;
-import seleccion.algoritmoSeleccion;
-import seleccion.algoritmoTorneoDeter;
-import seleccion.algoritmoTorneoProb;
+import seleccion.*;
 
 public class manager {
 	
@@ -36,12 +25,14 @@ public class manager {
 	private double probCruc;
 	private double probMut;	
 	private int generation;
+	private elite elite;
 	private int maxIter;
 	private int tamPob;
 	private int idFun;
 	
 	public manager() {
 		observers=new ArrayList<observer>();
+		elite=new elite();
 		iniciarDatos();
 	}
 	public void iniciarDatos() {
@@ -56,51 +47,56 @@ public class manager {
 	public void addObserver(observer o) {
 		if(!observers.contains(o)) {
 			observers.add(o);
-			//o.onRegistre(workers, tasks);
 		}
 	}
 	
 	public void iniciarPoblacion() {
 		poblacion=new poblacion(tamPob, probToler, funcion);
 		poblacion.iniciarPoblacion();
-		best=new double[2][poblacion.getSize()];
-		bestGen=new double[2][poblacion.getSize()];
-		average=new double[2][poblacion.getSize()];
+		best=new double[2][maxIter];
+		bestGen=new double[2][maxIter];
+		average=new double[2][maxIter];
 		
 	}
 	public void start() {
-		
+		generation=0;
 		iniciarPoblacion();
 		evaluarPoblacion();
 		generation++;
 		while(generation < maxIter) {
-			poblacion=algSel.ini(poblacion);
+			elite.escogerElites(poblacion, probElite);
+			seleccion();
 			reproduccion();
+			mutacion();
+			elite.incluirElites(poblacion);
 			evaluarPoblacion();
 			generation++;
 		}
 		for(int i=0; i < observers.size(); i++) {
-			observers.get(i).onNextGeneration( best, bestGen, average);
-			observers.get(i).onFinished();
+			observers.get(i).onFinished( best, bestGen, average);
 		}
 	}
+	private void seleccion() {
+		poblacion=algSel.ini(poblacion);
+	}
+	private void mutacion() {
+		algMut.mutar(poblacion, probMut);
+	}
 	private void evaluarPoblacion() {
-		evaluarMejorAbs();
-		evaluarMejorGen();
+		evaluarMejor();
 		evaluarMedia();
 	}
 	private void evaluarMedia() {
 		average[0][generation]=generation;
 		average[1][generation]=poblacion.getAverage();
 	}
-	private void evaluarMejorGen() {
-		bestGen[0][generation]=generation;
-		bestGen[1][generation]=poblacion.getBestGen();
-	}
-	private void evaluarMejorAbs() {
+	
+	private void evaluarMejor() {
 		best[0][generation]=generation;
-		if(generation==0 || funcion.best(poblacion.getBest(), best[1][generation-1])) {
-			best[1][generation]=poblacion.getBest();
+		bestGen[0][generation]=generation;
+		bestGen[1][generation]=poblacion.getBest();
+		if(generation==0 || funcion.best(bestGen[1][generation], best[1][generation-1])) {
+			best[1][generation]=bestGen[1][generation];
 		}
 		else
 		{
@@ -129,20 +125,6 @@ public class manager {
 				funcion=new funcion1();
 				break;
 		
-		}
-		for(int i=0; i < observers.size(); i++) {
-			observers.get(i).onChangedFunction(funcion, tam);
-		}
-	}
-	
-	public void establecerMetodoCruce(int metodo, double probCruce) {
-		switch(metodo) {
-		case 0://Monopunto
-			algCruce=new monopunto(probCruce, poblacion);
-			break;
-		case 1://Uniforme
-			algCruce=new uniforme();
-			break;
 		}
 	}
 	public void establerMetodoSeleccion(int metodo) {
@@ -183,7 +165,7 @@ public class manager {
 	public void setCrossFunct(int i) {
 		switch(i) {
 		case 0:
-			//algCruce=new monopunto();
+			//algCruce=new monopunto(probCruc, poblacion);
 			break;
 		case 1:
 			//algCruce=new uniforme();
@@ -195,13 +177,8 @@ public class manager {
 	public void setMutationFunct(int i) {
 		switch(i) {
 		case 0:
-			//algMut=new mutacionBasica();
+			algMut=new mutacionBasica();
 			break;
-		case 1:
-			//algMut=new mutacionUniforme();
-			break;
-			default:
-				break;
 		}
 	}
 	public void setMutationPercent(double mutPer) {
@@ -218,3 +195,4 @@ public class manager {
 	}
 
 }
+
