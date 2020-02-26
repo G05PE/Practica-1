@@ -42,7 +42,7 @@ public class SetingsPanel extends JPanel implements observer{
 	private double mutPer;
 	private int popSize;
 	private int genNum;
-
+	
 	public SetingsPanel(controller ctlr) {
 		this.ctrl = ctlr;
 		this.setPreferredSize(new Dimension(180,700));
@@ -54,21 +54,21 @@ public class SetingsPanel extends JPanel implements observer{
 		initFields();
 		initGUI();
 	}
-
-
+	
+	
 	private void initGUI() {
-
+		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		//Population----------------------------------------------------
 		JLabel lPopSize = new JLabel("Population size");
 		setDimLabel(lPopSize, dim1);
-		this.add(lPopSize);
-		this.add(Box.createHorizontalGlue());
-
-		tPopul=new JTextField(popSize+"");
-		setDimText(tPopul, dim1);
-		tPopul.addActionListener(new ActionListener() {
+		 this.add(lPopSize);
+		 this.add(Box.createHorizontalGlue());
+		 
+		 tPopul=new JTextField(popSize+"");
+		 setDimText(tPopul, dim1);
+		 tPopul.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					popSize=Integer.parseInt(tPopul.getText());
@@ -80,19 +80,19 @@ public class SetingsPanel extends JPanel implements observer{
 							"Population size is not a number","Error",JOptionPane.WARNING_MESSAGE);
 				}
 			} 
-		});
-
-		this.add(tPopul);
-
+		 });
+		 
+		 this.add(tPopul);
+		 
 		//Generation number---------------------------------------------------
-		JLabel lnGen = new JLabel("Generation number");
-		setDimLabel(lnGen, dim1);
-		this.add(lnGen);
-		this.add(Box.createHorizontalGlue());
-
+		 JLabel lnGen = new JLabel("Generation number");
+		 setDimLabel(lnGen, dim1);
+		 this.add(lnGen);
+		 this.add(Box.createHorizontalGlue());
+			 
 		tNgenerat=new JTextField(genNum+"");
-		setDimText(tNgenerat, dim1);
-		tNgenerat.addActionListener(new ActionListener() {
+		 setDimText(tNgenerat, dim1);
+		 tNgenerat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					genNum=Integer.parseInt(tNgenerat.getText());
@@ -104,23 +104,23 @@ public class SetingsPanel extends JPanel implements observer{
 							"Generation number is not a number","Error",JOptionPane.WARNING_MESSAGE);
 				}
 			} 
-		});
-
-		this.add(tNgenerat);
-
-		//Tolerancia----------------------------------------------------
-		JPanel tolPanel=new JPanel();
-		tolPanel.setPreferredSize(new Dimension(190,30));
-		tolPanel.setMaximumSize(new Dimension(190,30));
-		tolPanel.setMinimumSize(new Dimension(190,30));
-		BoxLayout box7=new BoxLayout(tolPanel, BoxLayout.X_AXIS);
-		JLabel lTol = new JLabel("Tolerance ");
-		setDimLabel(lTol, dim2);
-		tolPanel.add(lTol);
-
-		JTextField tTol=new JTextField(tolPer+"");
-		setDimText(tTol, dim2);
-		tTol.addActionListener(new ActionListener() {
+		 });
+		 
+		 this.add(tNgenerat);
+		 
+		 //Tolerancia----------------------------------------------------
+		 JPanel tolPanel=new JPanel();
+		 tolPanel.setPreferredSize(new Dimension(190,30));
+		 tolPanel.setMaximumSize(new Dimension(190,30));
+		 tolPanel.setMinimumSize(new Dimension(190,30));
+		 BoxLayout box7=new BoxLayout(tolPanel, BoxLayout.X_AXIS);
+		 JLabel lTol = new JLabel("Tolerance ");
+		 setDimLabel(lTol, dim2);
+		 tolPanel.add(lTol);
+		 
+		 JTextField tTol=new JTextField(tolPer+"");
+		 setDimText(tTol, dim2);
+		 tTol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					tolPer=Double.parseDouble(tTol.getText());
@@ -132,63 +132,63 @@ public class SetingsPanel extends JPanel implements observer{
 							"Tolerance % is not a number","Error",JOptionPane.WARNING_MESSAGE);
 				}
 			} 
-		});
-		tolPanel.add(tTol);
-		this.add(tolPanel);
-
-		//Algoritmo de selección----------------------------------------------
-		JLabel lnAlgSel = new JLabel("Selection algorithm");
-		setDimLabel(lnAlgSel, dim1);
-		this.add(lnAlgSel);
-		this.add(Box.createHorizontalGlue());
-		String[] selec = { "Roulette", "Determinist Tournament",
+		 });
+		 tolPanel.add(tTol);
+		 this.add(tolPanel);
+		 
+		 //Algoritmo de selección----------------------------------------------
+		 JLabel lnAlgSel = new JLabel("Selection algorithm");
+		 setDimLabel(lnAlgSel, dim1);
+		 this.add(lnAlgSel);
+		 this.add(Box.createHorizontalGlue());
+		 String[] selec = { "Roulette", "Determinist Tournament",
 				"Probabilistic Tournament", "Universal Stochastic"};
-		selectSelect = new JComboBox<String>(selec);
-		selectSelect.setEditable(false);
-		seleccionar(selec[0]);
-		selectSelect.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				seleccionar((String)selectSelect.getSelectedItem());
-			}
-		});
-		setDimCombobox(selectSelect, dim1);
-		this.add(selectSelect);
-
-		//CrossOver----------------------------------------------------
-		JPanel crossOverPanel=new JPanel(new FlowLayout());
-		crossOverPanel.setPreferredSize(new Dimension(180, 100));
-		crossOverPanel.setMinimumSize(new Dimension(180, 100));
-		crossOverPanel.setMaximumSize(new Dimension(180, 100));
-		JPanel cross1=new JPanel();
-		BoxLayout box=new BoxLayout(cross1, BoxLayout.X_AXIS);
-		crossOverPanel.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createSoftBevelBorder(PROPERTIES), "CrossOver"));
-		JLabel lCruce = new JLabel("CrossoverB");
-		setDimLabel(lCruce, dim2);
-		cross1.add(lCruce);
-
-		String[] selec2 = { "Single point", "Uniform"};
-		selectCross = new JComboBox<String>(selec2);
-		selectCross.setEditable(false);
-		seleccionarCruce(selec2[0]);
-		selectCross.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				seleccionarCruce((String)selectCross.getSelectedItem());
-			}
-		});
-		setDimCombobox(selectCross, dim2);
-		cross1.add(selectCross);
-		crossOverPanel.add(cross1);
-
-		JPanel cross2=new JPanel();
-		BoxLayout box2=new BoxLayout(cross1, BoxLayout.X_AXIS);
-		JLabel lCruce2 = new JLabel("Crossover %");
-		setDimLabel(lCruce2, dim2);
-		cross2.add(lCruce2);
-
-		tCross=new JTextField(crossPer+"");
-		setDimText(tCross, dim2);
-		tCross.addActionListener(new ActionListener() {
+		 selectSelect = new JComboBox<String>(selec);
+		 selectSelect.setEditable(false);
+		 seleccionar(selec[0]);
+		 selectSelect.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					seleccionar((String)selectSelect.getSelectedItem());
+				}
+		 });
+		 setDimCombobox(selectSelect, dim1);
+		 this.add(selectSelect);
+		 
+		 //CrossOver----------------------------------------------------
+		 JPanel crossOverPanel=new JPanel(new FlowLayout());
+		 crossOverPanel.setPreferredSize(new Dimension(180, 100));
+		 crossOverPanel.setMinimumSize(new Dimension(180, 100));
+		 crossOverPanel.setMaximumSize(new Dimension(180, 100));
+		 JPanel cross1=new JPanel();
+		 BoxLayout box=new BoxLayout(cross1, BoxLayout.X_AXIS);
+		 crossOverPanel.setBorder(BorderFactory.createTitledBorder(
+				 BorderFactory.createSoftBevelBorder(PROPERTIES), "CrossOver"));
+		 JLabel lCruce = new JLabel("CrossoverB");
+		 setDimLabel(lCruce, dim2);
+		 cross1.add(lCruce);
+		 
+		 String[] selec2 = { "Single point", "Uniform", "Aritmetic"};
+		 selectCross = new JComboBox<String>(selec2);
+		 selectCross.setEditable(false);
+		 seleccionarCruce(selec2[0]);
+		 selectCross.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					seleccionarCruce((String)selectCross.getSelectedItem());
+				}
+		 });
+		 setDimCombobox(selectCross, dim2);
+		 cross1.add(selectCross);
+		 crossOverPanel.add(cross1);
+	 
+		 JPanel cross2=new JPanel();
+		 BoxLayout box2=new BoxLayout(cross1, BoxLayout.X_AXIS);
+		 JLabel lCruce2 = new JLabel("Crossover %");
+		 setDimLabel(lCruce2, dim2);
+		 cross2.add(lCruce2);
+		 
+		 tCross=new JTextField(crossPer+"");
+		 setDimText(tCross, dim2);
+		 tCross.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					crossPer=Double.parseDouble(tCross.getText());
@@ -200,47 +200,47 @@ public class SetingsPanel extends JPanel implements observer{
 							"Crossover % is not a number","Error",JOptionPane.WARNING_MESSAGE);
 				}
 			} 
-		});
-		cross2.add(tCross);
-
-		crossOverPanel.add(cross2);
-		this.add(crossOverPanel);
-
-		//Mutation----------------------------------------------------
-		JPanel mutationPanel=new JPanel(new FlowLayout());
-		mutationPanel.setPreferredSize(new Dimension(180, 100));
-		mutationPanel.setMinimumSize(new Dimension(180, 100));
-		mutationPanel.setMaximumSize(new Dimension(180, 100));
-		JPanel mut1=new JPanel();
-		BoxLayout box3=new BoxLayout(mut1, BoxLayout.X_AXIS);
-		mutationPanel.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createSoftBevelBorder(PROPERTIES), "Mutation"));
-		JLabel lMut = new JLabel("MutationB");
-		setDimLabel(lMut, dim2);
-		mut1.add(lMut);
-
-		String[] selec3 = { "Basic", "Uniform"};
-		selectMut = new JComboBox<String>(selec3);
-		selectMut.setEditable(false);
-		seleccionarMutacion(selec3[0]);
-		selectMut.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				seleccionarMutacion((String)selectMut.getSelectedItem());
-			}
-		});
-		setDimCombobox(selectMut, dim2);
-		mut1.add(selectMut);
-		mutationPanel.add(mut1);
-
-		JPanel mut2=new JPanel();
-		BoxLayout box4=new BoxLayout(mut2, BoxLayout.X_AXIS);
-		JLabel lMut2 = new JLabel("Mutation %");
-		setDimLabel(lMut2, dim2);
-		mut2.add(lMut2);
-
-		tMut=new JTextField("2");
-		setDimText(tMut, dim2);
-		tMut.addActionListener(new ActionListener() {
+		 });
+		 cross2.add(tCross);
+		 
+		 crossOverPanel.add(cross2);
+		 this.add(crossOverPanel);
+	 
+		 //Mutation----------------------------------------------------
+		 JPanel mutationPanel=new JPanel(new FlowLayout());
+		 mutationPanel.setPreferredSize(new Dimension(180, 100));
+		 mutationPanel.setMinimumSize(new Dimension(180, 100));
+		 mutationPanel.setMaximumSize(new Dimension(180, 100));
+		 JPanel mut1=new JPanel();
+		 BoxLayout box3=new BoxLayout(mut1, BoxLayout.X_AXIS);
+		 mutationPanel.setBorder(BorderFactory.createTitledBorder(
+				 BorderFactory.createSoftBevelBorder(PROPERTIES), "Mutation"));
+		 JLabel lMut = new JLabel("MutationB");
+		 setDimLabel(lMut, dim2);
+		 mut1.add(lMut);
+		 
+		 String[] selec3 = { "Basic", "Uniform"};
+		 selectMut = new JComboBox<String>(selec3);
+		 selectMut.setEditable(false);
+		 seleccionarMutacion(selec3[0]);
+		 selectMut.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					seleccionarMutacion((String)selectMut.getSelectedItem());
+				}
+		 });
+		 setDimCombobox(selectMut, dim2);
+		 mut1.add(selectMut);
+		 mutationPanel.add(mut1);
+		 
+		 JPanel mut2=new JPanel();
+		 BoxLayout box4=new BoxLayout(mut2, BoxLayout.X_AXIS);
+		 JLabel lMut2 = new JLabel("Mutation %");
+		 setDimLabel(lMut2, dim2);
+		 mut2.add(lMut2);
+		 
+		 tMut=new JTextField("2");
+		 setDimText(tMut, dim2);
+		 tMut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					mutPer=Double.parseDouble(tMut.getText());
@@ -252,26 +252,26 @@ public class SetingsPanel extends JPanel implements observer{
 							"Mutation % is not a number","Error",JOptionPane.WARNING_MESSAGE);
 				}
 			} 
-		});
-		mut2.add(tMut);
-		mutationPanel.add(mut2);
-		this.add(mutationPanel);
-
+		 });
+		 mut2.add(tMut);
+		 mutationPanel.add(mut2);
+		 this.add(mutationPanel);
+			 
 		//Elite-----------------------------------------------------
-		JPanel elitePanel=new JPanel();
-		elitePanel.setPreferredSize(new Dimension(180, 60));
-		elitePanel.setMinimumSize(new Dimension(180, 60));
-		elitePanel.setMaximumSize(new Dimension(180, 60));
-		elitePanel.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createSoftBevelBorder(PROPERTIES), "Elite"));
-		BoxLayout box5=new BoxLayout(elitePanel, BoxLayout.X_AXIS);
-		JLabel lElite = new JLabel("Elite %");
-		setDimLabel(lElite, dim2);
-		elitePanel.add(lElite);
-
-		tElite=new JTextField("5");
-		setDimText(tElite, dim2);
-		tElite.addActionListener(new ActionListener() {
+		 JPanel elitePanel=new JPanel();
+		 elitePanel.setPreferredSize(new Dimension(180, 60));
+		 elitePanel.setMinimumSize(new Dimension(180, 60));
+		 elitePanel.setMaximumSize(new Dimension(180, 60));
+		 elitePanel.setBorder(BorderFactory.createTitledBorder(
+				 BorderFactory.createSoftBevelBorder(PROPERTIES), "Elite"));
+		 BoxLayout box5=new BoxLayout(elitePanel, BoxLayout.X_AXIS);
+		 JLabel lElite = new JLabel("Elite %");
+		 setDimLabel(lElite, dim2);
+		 elitePanel.add(lElite);
+		 
+		 tElite=new JTextField("5");
+		 setDimText(tElite, dim2);
+		 tElite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					elitePer=Double.parseDouble(tElite.getText());
@@ -283,56 +283,56 @@ public class SetingsPanel extends JPanel implements observer{
 							"Elite % is not a number","Error",JOptionPane.WARNING_MESSAGE);
 				}
 			} 
-		});
-		elitePanel.add(tElite);
-		this.add(elitePanel);
+		 });
+		 elitePanel.add(tElite);
+		 this.add(elitePanel);
 		//Funciones-----------------------------------------------------------
-		JLabel lFun = new JLabel("Function");
-		setDimLabel(lFun, dim1);
-		this.add(lFun);
-		this.add(Box.createHorizontalGlue());
-		String[] selec4 = { "Function 1", "Function 2", "Function 3", "Function 4"};
-		selectFunc = new JComboBox<String>(selec4);
-		selectFunc.setEditable(false);
-		seleccionarFun(selec4[0]);
-		selectFunc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				seleccionarFun((String)selectFunc.getSelectedItem());
-			}
-		});
-		setDimCombobox(selectFunc, dim1);
-		this.add(selectFunc);
-
-		//Botones-------------------------------------------------
-		this.add(Box.createRigidArea(new Dimension(190, 40)));
-		start = new JButton();
-		start.setIcon(new ImageIcon("icons/start.png"));
-		start.setToolTipText("Start");
-		start.setAlignmentX(JButton.CENTER_ALIGNMENT);
-		start.addActionListener(new ActionListener() {
+		 JLabel lFun = new JLabel("Function");
+		 setDimLabel(lFun, dim1);
+		 this.add(lFun);
+		 this.add(Box.createHorizontalGlue());
+		 String[] selec4 = { "Function 1", "Function 2", "Function 3", "Function 4"};
+		 selectFunc = new JComboBox<String>(selec4);
+		 selectFunc.setEditable(false);
+		 seleccionarFun(selec4[0]);
+		 selectFunc.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					seleccionarFun((String)selectFunc.getSelectedItem());
+				}
+		 });
+		 setDimCombobox(selectFunc, dim1);
+		 this.add(selectFunc);
+		 
+		 //Botones-------------------------------------------------
+		 this.add(Box.createRigidArea(new Dimension(190, 40)));
+		 start = new JButton();
+		 start.setIcon(new ImageIcon("icons/start.png"));
+		 start.setToolTipText("Start");
+		 start.setAlignmentX(JButton.CENTER_ALIGNMENT);
+		 start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrl.start();
 			} 
-		});
-		this.add(start);
-
-		this.add(Box.createRigidArea(new Dimension(190, 20)));
-		reset = new JButton();
-		reset.setIcon(new ImageIcon("icons/reset.png"));
-		reset.setToolTipText("Reset");
-		reset.setAlignmentX(JButton.CENTER_ALIGNMENT);
-		reset.addActionListener(new ActionListener() {
+		 });
+		 this.add(start);
+		 
+		 this.add(Box.createRigidArea(new Dimension(190, 20)));
+		 reset = new JButton();
+		 reset.setIcon(new ImageIcon("icons/reset.png"));
+		 reset.setToolTipText("Reset");
+		 reset.setAlignmentX(JButton.CENTER_ALIGNMENT);
+		 reset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrl.reset();
 				initFields();
 				refreshText();
 			} 
-		});
-		this.add(reset);
-
+		 });
+		 this.add(reset);
+		 
 		this.setVisible(true);
 	}
-
+	
 	private void initFields() {
 		crossPer=60;
 		elitePer=5;
@@ -341,7 +341,7 @@ public class SetingsPanel extends JPanel implements observer{
 		popSize=100;
 		genNum=100;
 	}
-
+	
 	public void refreshText() {
 		selectSelect.setSelectedIndex(0);
 		selectCross.setSelectedIndex(0);
@@ -362,11 +362,14 @@ public class SetingsPanel extends JPanel implements observer{
 		case "Uniform":
 			ctrl.setCrossFunct(1);
 			break;
+		case "Aritmetic":
+			ctrl.setCrossFunct(2);
+			break;
 		default:
 			break;
 		}
 	}
-
+	
 	private void seleccionar(String selectedItem) {
 		switch(selectedItem) {
 		case "Roulette":
@@ -381,11 +384,11 @@ public class SetingsPanel extends JPanel implements observer{
 		case "Universal Stochastic":
 			ctrl.establecerMetodoSeleccion(2);
 			break;
-		default:
-			break;
+			default:
+				break;
 		}
 	}
-
+	
 	private void seleccionarMutacion(String mutacion) {
 		switch(mutacion){
 		case "Basic":
@@ -394,11 +397,11 @@ public class SetingsPanel extends JPanel implements observer{
 		case "Uniform":
 			ctrl.setMutationFunct(1);
 			break;
-		default:
-			break;
+			default:
+				break;
 		}
 	}
-
+	
 	private void seleccionarFun(String fun) {
 		switch(fun) {
 		case "Function 1":
@@ -411,13 +414,13 @@ public class SetingsPanel extends JPanel implements observer{
 			JFrame frame = new JFrame("");
 			String [] n = {"1", "2"};
 			String intro = (String) JOptionPane.showInputDialog(
-					frame, // contenedor padre
-					"Select number of variables", // mensaje en la ventana
-					"Select", // etiqueta de la ventana
-					JOptionPane.QUESTION_MESSAGE, // icono seleccionado
-					null, // icono seleccionado por el usuario (Icon)
-					n, // opciones para seleccionar
-					n[0]);
+			frame, // contenedor padre
+			"Select number of variables", // mensaje en la ventana
+			"Select", // etiqueta de la ventana
+			JOptionPane.QUESTION_MESSAGE, // icono seleccionado
+			null, // icono seleccionado por el usuario (Icon)
+			n, // opciones para seleccionar
+			n[0]);
 			try {
 				ctrl.establecerFuncion(2, Integer.parseInt(intro));
 			}
@@ -442,10 +445,10 @@ public class SetingsPanel extends JPanel implements observer{
 			p.add(l);
 			JTextField f=new JTextField();
 			setDimText(f, dim1);
-			f.addActionListener(new ActionListener() {
+			 f.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-
+	
 						ctrl.establecerFuncion(3, Integer.parseInt(f.getText()));
 						frame2.setVisible(false);
 					}
@@ -455,26 +458,26 @@ public class SetingsPanel extends JPanel implements observer{
 								"The value is not a number","Error",JOptionPane.WARNING_MESSAGE);
 					}
 				} 
-			});
-			p.add(f);
-			p.add(Box.createRigidArea(new Dimension(190, 10)));
-			JButton ok=new JButton("Ok");
-			setDimButton(ok, dim2);
-			ok.setAlignmentY(BOTTOM_ALIGNMENT);
-			ok.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					ctrl.establecerFuncion(3, Integer.parseInt(f.getText()));
-					frame2.setVisible(false);
-				} 
-			});
-			p.add(ok);
-
-			frame2.setContentPane(p);
-			frame2.pack();
-			frame2.setVisible(true);
+			 });
+			 p.add(f);
+			 p.add(Box.createRigidArea(new Dimension(190, 10)));
+			 JButton ok=new JButton("Ok");
+			 setDimButton(ok, dim2);
+			 ok.setAlignmentY(BOTTOM_ALIGNMENT);
+			 ok.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						ctrl.establecerFuncion(3, Integer.parseInt(f.getText()));
+						frame2.setVisible(false);
+					} 
+				 });
+			 p.add(ok);
+			 
+			 frame2.setContentPane(p);
+			 frame2.pack();
+			 frame2.setVisible(true);
 			break;
-		default:
-			break;
+			default:
+				break;
 		}
 	}
 
@@ -505,75 +508,17 @@ public class SetingsPanel extends JPanel implements observer{
 		c.setAlignmentX(CENTER_ALIGNMENT);
 	}
 
-	public void onFinished() {
-		start.setEnabled(true);
-	}
-	@Override
-	public void onChangedFunction(funcion f, int tam) {
-		// TODO Auto-generated method stub
 
+	@Override
+	public void onFinished(double[][] best, double[][] bestGen, double[][] average) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
 	@Override
-	public void onChangedFunctionParameters() {
+	public void onNextGeneration() {
 		// TODO Auto-generated method stub
-
-	}
-
-
-	@Override
-	public void onChangedPoblationSize() {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	@Override
-	public void onChangedGeneration() {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	@Override
-	public void onChangedSelection() {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	@Override
-	public void onChangedMutation() {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	@Override
-	public void onChangedCruce() {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	@Override
-	public void onChangedPrecition() {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	@Override
-	public void onChangedElitism() {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	@Override
-	public void onNextGeneration(double[][] best, double[][] bestGen, double[][] average) {
-		// TODO Auto-generated method stub
-
+		
 	}
 }

@@ -1,6 +1,9 @@
 package funciones;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import genetica.gen;
 
 public abstract class funcion {
 	//private List<Double> x;
@@ -19,15 +22,6 @@ public abstract class funcion {
 	public abstract boolean best(double fitness, double best);
 	public abstract double calcularFuncion(List<Double> fenotipos);
 	public abstract void establecerMinimosMaximos();
-	
-	/*public void iniVars() {
-		for(int i=0; i < getSize(); i++) {
-			double var=Math.random()%getMaxX(i) + getMinX(i);
-			if(var > getMaxX(i))
-				var-=getMinX(i);	
-			x.add(var);
-		}
-	}*/
 	public double getMinX(int i) {
 		return minX.get(i);
 	}

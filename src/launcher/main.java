@@ -1,29 +1,17 @@
 package launcher;
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
 import control.controller;
-import funciones.funcion;
-import funciones.funcion1;
-import funciones.funcion2;
-import funciones.funcion3;
-import funciones.funcion4;
 import model.manager;
-import poblacion.individuo;
  
 public class main
 {
-	 public static void main(String[] args)
-     {              
-         manager m=new manager();
+        public static void main(String[] args)
+        {              
+            manager m=new manager();
 	        controller c=new controller(m);
 	        try {
 			SwingUtilities.invokeAndWait(new Runnable() {
@@ -38,12 +26,9 @@ public class main
 					
 				}
 			});
-		} catch (InvocationTargetException | InterruptedException e) {
-			System.out.println("Error al iniciar el GUI");
-			e.printStackTrace();
-		}
-         	   
-
-     }
-
+   		} catch (InvocationTargetException | InterruptedException e) {
+   			System.out.println("Error al iniciar el GUI");
+   			e.printStackTrace();
+   		}
+    }
 }

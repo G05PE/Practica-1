@@ -3,6 +3,8 @@ package funciones;
 import java.util.ArrayList;
 import java.util.List;
 
+import genetica.gen;
+
 public class funcion1 extends funcion{
 	public funcion1() {
 		super(2);

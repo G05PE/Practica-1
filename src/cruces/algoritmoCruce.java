@@ -9,29 +9,27 @@ public abstract class algoritmoCruce {
 	private poblacion reproductores;
 	private poblacion descendientes;
 	
-	public algoritmoCruce(double probCruce, poblacion seleccionados) {
-		this.setProbCruce(probCruce);
-		this.seleccionados = seleccionados;	
+	public algoritmoCruce() {}
+	
+	protected void init(double prob, poblacion seleccionados) {
+		this.probCruce = prob;
+		this.seleccionados = seleccionados;
 		reproductores = new poblacion(seleccionados.getSize(), seleccionados.getPrecision(), seleccionados.getFuncion());
-		descendientes = new poblacion(seleccionados.getSize(), seleccionados.getPrecision(), seleccionados.getFuncion());
+		descendientes = seleccionados;
 	}
 
-	public abstract poblacion cruzar();
+	public abstract poblacion cruzar(poblacion seleccionados, double prob);
+	
 	
 	public double getProbCruce() {
 		return probCruce;
 	}
 	
-	public void setProbCruce(double probCruce) {
-		this.probCruce = probCruce;
-	}
 	
 	public int sizeReproductor() {
 		return reproductores.getSize();
 	}
 
-	
-	
 	//Setters
 	protected void borraUltimoReproductor() {
 		reproductores.borraUltimo();
@@ -46,8 +44,7 @@ public abstract class algoritmoCruce {
 	protected void addDescendiente(individuo i) {
 		descendientes.addIndividuo(i);
 	}
-	
-	
+		
 	
 	//Getters
 	protected individuo getReproductor(int i) {
@@ -62,6 +59,10 @@ public abstract class algoritmoCruce {
 		return descendientes;
 	}
 	
+	protected poblacion getReproductores() {
+		return reproductores;
+	}
+	
 	protected poblacion getSeleccionados() {
 		return seleccionados;
 	}
@@ -70,4 +71,10 @@ public abstract class algoritmoCruce {
 	protected individuo getDescendienteAt(int i) {
 		return descendientes.getIndividuo(i);
 	}
+	
+
+	protected void setDescendienteAt(int i, individuo hijo) {	
+		descendientes.setIndividuoAt(i, hijo);
+	}
+	
 }

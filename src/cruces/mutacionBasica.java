@@ -6,52 +6,41 @@ import poblacion.poblacion;
 
 public class mutacionBasica extends mutacion{
 
-	double probMutacion;
-	poblacion poblacion;
-
-	//Constructor
-	public mutacionBasica(double probMutacion, poblacion poblacion){
-		super(probMutacion, poblacion);
-		this.probMutacion = probMutacion;
-		this.poblacion = poblacion;
-	}
-
 	@Override
-	
-	
-	//Esto me parece que no tiene mucho sentido per oes lo que pone en la Pag 55 Tema 2
-	public poblacion mutar(){
+	public poblacion mutar(poblacion poblacion, double probMutacion){
 
-		for(int i = 0; i < poblacion.getSize(); i++) {
+		for(int i = 0; i < poblacion.getSize(); i++) {//Recorro los individuos
 			Boolean mutado = false;
-			mutarIndividuo(poblacion.getIndividuo(i), mutado);
-			//if(mutado) poblacion.getIndividuo(i).setFitness(poblacion.getIndividuo(i).evalua());
+			mutado=mutarIndividuo(poblacion.getIndividuo(i), probMutacion);
+			if(mutado) {
+				poblacion.getIndividuo(i).calcularFitness();
+			}
 		}
 		return poblacion;
 	}
 
-	public individuo mutarIndividuo(individuo ind, Boolean mutado) {
-		individuo ret = ind;
-		
-		for(int i = 0; i < ind.getCromosoma().size(); i++){
+	public boolean mutarIndividuo(individuo ind, double probMutacion) {
+		boolean mutado=false;
+		for(int i = 0; i < ind.getCromosoma().size(); i++){//Recorro los genes
+				if(invierte(ind.getCromosomaAt(i), probMutacion)) {
+					mutado=true;
+					ind.recalcularFenotipo(i);
+				}
+			}
+		return mutado;
+	}
+
+	private boolean invierte(gen entrada, double probMutacion) {
+		boolean mutado=false;
+		for(int i = 0; i < entrada.getTam(); i++) {//Recorre los bits
 			double rand = Math.random()%1;
 			if(rand < probMutacion){
-				ret.setGen(i, invierte(ind.getCromosomaAt(i)));
-				mutado = true;
+				entrada.setBit(i, !entrada.getGenotipo().get(i));
+				mutado=true;
 			}
-		}
-		
-		return ret;
+		}	
+		return mutado;
 	}
-
-	private gen invierte(gen entrada) {
-		gen salida = entrada;
-		for(int i = 0; i < entrada.getTam(); i++) {
-			salida.setBit(i, !entrada.getGenotipo().get(i));
-		}
-		return salida;
-	}
-
-
-
 }
+
+

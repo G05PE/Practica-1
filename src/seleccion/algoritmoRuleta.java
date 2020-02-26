@@ -3,6 +3,8 @@ package seleccion;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import poblacion.individuo;
 import poblacion.poblacion;
 
 public class algoritmoRuleta extends algoritmoSeleccion{
@@ -13,6 +15,7 @@ public class algoritmoRuleta extends algoritmoSeleccion{
 		probSeleccion=new ArrayList<Double>();
 	}
 	public poblacion ini(poblacion p) {
+		probSeleccion=new ArrayList<Double>();
 		iniSeleccionados(p.getSize(), p.getPrecision(), p.getFuncion());
 		asignarProbabilidades(p);
 		seleccionar(p);
@@ -28,7 +31,7 @@ public class algoritmoRuleta extends algoritmoSeleccion{
 				i++;
 			}
 			if(i > 0 && probSeleccion.get(i-1) > valor) i--;
-			addSeleccionado(p.getIndividuo(i));
+			addSeleccionado(new individuo(p.getIndividuo(i)));
 		}
 	}
 

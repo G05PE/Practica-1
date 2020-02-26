@@ -9,11 +9,13 @@ public class individuo {
 	private List<gen> cromosoma;
 	private double fitness;
 	private List<Double> fenotipos;
+	private funcion f;
 	
 	public individuo(funcion f, double precision) {
+		this.f=f;
 		cromosoma=new ArrayList<gen>();
 		crearGenes(f, precision);
-		setFitness(f.calcularFuncion(fenotipos));        
+		calcularFitness();        
 	}
 	
 	public individuo(individuo ind) {
@@ -25,6 +27,7 @@ public class individuo {
 		for(int i=0; i < ind.getFenotipos().size(); i++) {
 			fenotipos.add(new Double(ind.getFenotipos().get(i)));
 		}
+		this.f=ind.getFuncion();
 		fitness=ind.getFitness();
 	}
 	
@@ -34,11 +37,22 @@ public class individuo {
 			double tam=Math.floor(log2(1 +  
 					(f.getMaxX(i)-f.getMinX(i)) / precision )) + 1;
 			cromosoma.add(new gen(f, precision, tam));
-			double fenotipo=f.getMinX(i) + bin2dec(cromosoma.get(i).getGenotipo())*
-					(f.getMaxX(i)-f.getMinX(i))/(Math.pow(2, tam)-1);
-			cromosoma.get(i).setFenotipo(fenotipo);
-			fenotipos.add(fenotipo);
+			fenotipos.add(calcularFenotipo(i));
 		}
+	}
+	
+	public double calcularFenotipo(int i) {
+		double tam=cromosoma.get(i).getTam();
+		double fenotipo=f.getMinX(i) + bin2dec(cromosoma.get(i).getGenotipo())*
+				(f.getMaxX(i)-f.getMinX(i))/(Math.pow(2, tam)-1);
+		cromosoma.get(i).setFenotipo(fenotipo);
+		return fenotipo;
+	}
+	/**
+	 * Calcula el fenotipo de una posición
+	 *  especifica despues de haber iniciado el individuo*/
+	public void recalcularFenotipo(int i) {
+		fenotipos.set(i, calcularFenotipo(i));
 	}
 	public double bin2dec(List<Boolean> binario) {
 		int res=0;
@@ -49,6 +63,7 @@ public class individuo {
 		}
 		return res;
 	}
+	
 	public double log2(double x) {
 		return Math.log(x) / Math.log(2);
 	}
@@ -57,36 +72,55 @@ public class individuo {
 		return fitness;
 	}
 
-	public void setFitness(double fitness) {
-		this.fitness = fitness;
+	public void calcularFitness() {
+		this.fitness=f.calcularFuncion(fenotipos);
 	}
 	public List<gen> getCromosoma(){
 		return cromosoma;
 	}
-	
-	public gen getCromosomaAt(int i){
+	public funcion getFuncion() {
+		return f;
+	}
+	public gen getCromosomaAt(int i) {
 		return cromosoma.get(i);
 	}
-	
 	public List<Double> getFenotipos(){
 		return fenotipos;
 	}
-	
+	public void setGen(int i, gen gen) {
+		this.cromosoma.set(i, gen);
+	}
 	public int getLongitud(){
 		return cromosoma.size();
 	}
 
-	public void setBit(int j, int i, boolean b) {
-		this.cromosoma.get(i).setBit(j, b);
+	public double longitudCromosoma() {
+		int lg = 0;
+		for(int i = 0; i < cromosoma.size(); i++) {
+			lg += getCromosomaAt(i).getTam();
+		}
+		return lg;
 	}
 
-	public boolean getBit(int j, int i, Boolean boolean1) {
-		return this.cromosoma.get(i).getGenotipo().get(j);
+	public void cruza(double inicio, double fin, individuo padre) {
+	int contador = 0;
+	Boolean termina = false;
+	
+		//Para todos los genes
+		for(int i = 0; i < cromosoma.size() && !termina; i++) {
+			
+			//Recorremos todos los bits de cada gen
+			for(int j = 0; j < getCromosomaAt(i).getTam() && !termina; j++) {
+				contador += 1;
+				if(contador >= inicio && contador <= fin) {
+					getCromosomaAt(i).setBit(j, padre.getCromosomaAt(i).getGenotipo().get(j));
+				}
+				
+				if (contador == fin) termina = true;
+			}
+		}
+		
 	}
-
-	public void setGen(int i, gen gen) {
-		this.cromosoma.set(i, gen);
-	}
-
+	
 
 }
