@@ -104,7 +104,7 @@ public class manager {
 		}
 	}
 	private void reproduccion() {
-		//algCruce.cruzar();
+		//algCruce.cruzar(poblacion, probCruc);
 	}
 	public void establecerFuncion(int f, int tam ) {
 		idFun=f+1;
@@ -165,7 +165,7 @@ public class manager {
 	public void setCrossFunct(int i) {
 		switch(i) {
 		case 0:
-			//algCruce=new monopunto(probCruc, poblacion);
+			//algCruce=new monopunto();
 			break;
 		case 1:
 			//algCruce=new uniforme();

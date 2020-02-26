@@ -9,14 +9,13 @@ public abstract class algoritmoCruce {
 	private poblacion reproductores;
 	private poblacion descendientes;
 	
-	public algoritmoCruce(double probCruce, poblacion seleccionados) {
+	public algoritmoCruce() {
 		this.setProbCruce(probCruce);
-		this.seleccionados = seleccionados;	
 		reproductores = new poblacion(seleccionados.getSize(), seleccionados.getPrecision(), seleccionados.getFuncion());
 		descendientes = new poblacion(seleccionados.getSize(), seleccionados.getPrecision(), seleccionados.getFuncion());
 	}
 
-	public abstract poblacion cruzar();
+	public abstract poblacion cruzar(poblacion seleccionados, double prob);
 	
 	public double getProbCruce() {
 		return probCruce;
