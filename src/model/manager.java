@@ -36,7 +36,7 @@ public class manager {
 	}
 	public void iniciarDatos() {
 		probToler=0.001;
-		probElite=0.05;
+		probElite=0.005;
 		generation=0;
 		probCruc=0.6;
 		probMut=0.02;
@@ -71,7 +71,7 @@ public class manager {
 			evaluarPoblacion();
 			generation++;
 		}
-		
+
 		for(int i=0; i < observers.size(); i++) {
 			observers.get(i).onFinished( best, bestGen, average);
 		}
@@ -177,7 +177,7 @@ public class manager {
 			break;
 		}
 	}
-	
+
 	public void setMutationFunct(int i) {
 		switch(i) {
 		case 0:
