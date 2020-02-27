@@ -70,7 +70,10 @@ public class individuo {
 	public double getFitness() {
 		return fitness;
 	}
-
+	public void cruzarBit(int gen, int bit, individuo padre) {
+		cromosoma.get(gen).getGenotipo().set(bit, 
+				padre.getCromosoma().get(gen).getGenotipo().get(bit));
+	}
 	public void calcularFitness() {
 		this.fitness=f.calcularFuncion(fenotipos);
 	}

@@ -5,46 +5,23 @@ import poblacion.poblacion;
 
 public class monopunto extends algoritmoCruce{
 	private int punto;
-	private int num_sele_cruce;
-	
-	
-	public monopunto() {
-		num_sele_cruce = 0;
-	}
-
 	
 	//Seleccionar individuos a cruzarse y almacenarlos en el array reproductores
 	@Override
 	public poblacion cruzar(poblacion seleccionados, double prob) {
-		seleccionaReproductores();
+		super.seleccionaReproductores();
 		creaDescendientes();
 		return getDescendientes();
 	}
-	
-
-	private void seleccionaReproductores() {
-		for(int i = 0; i < getSeleccionados().getSize(); i++) {
-			if(Math.random()%1 < getProbCruce()) {
-				addReprpoductor(getSeleccionadoConcreto(i));
-				num_sele_cruce++;
-			}		
-		}
-
-		if(this.sizeReproductor() % 2 != 0) {
-			borraUltimoReproductor();
-			num_sele_cruce--;
-		}		
-	}
-	
 	
 	private void creaDescendientes() {
 		
 		//Punto es un numero entre 0 y la logitud del cromosoma
 		punto = (int) (Math.random()%getSeleccionadoConcreto(0).getCromosoma().size());
 		
-		for(int i = 0; i < num_sele_cruce; i += 2) {
+		for(int i = 0; i < getNumSel(); i += 2) {
 			individuo padre1 = getReproductor(i), padre2 = getReproductor(i + 1);
-			individuo hijo1 = padre1, hijo2 = padre2;
+			individuo hijo1 = new individuo(padre1), hijo2 = new individuo(padre2);
 			
 			mezcla(hijo1, hijo2, padre1, padre2);
 			

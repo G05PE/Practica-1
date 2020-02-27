@@ -104,7 +104,11 @@ public class manager {
 		}
 	}
 	private void reproduccion() {
-		//algCruce.cruzar(poblacion, probCruc);
+		if(algCruce!=null) {
+			algCruce.cruzar(poblacion, probCruc);
+		}else {
+			System.out.println("No se ha inicializado el algoritmo de cruce");
+		}
 	}
 	public void establecerFuncion(int f, int tam ) {
 		idFun=f+1;
@@ -168,7 +172,7 @@ public class manager {
 			//algCruce=new monopunto();
 			break;
 		case 1:
-			//algCruce=new uniforme();
+			algCruce=new uniforme();
 			break;
 			default:
 				break;

@@ -61,7 +61,6 @@ public class poblacion {
 	
 	public void borraUltimo() {
 		poblacion.remove(poblacion.size()-1);
-		tam--;
 	}
 	
 	public double getPrecision() {

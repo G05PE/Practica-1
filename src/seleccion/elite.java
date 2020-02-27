@@ -33,7 +33,6 @@ public class elite {
 		for(int i=0; i < tamElite; i++) {
 			elite.add(new individuo(aux.get(last-i)));
 		}
-		
 	}
 	/**
 	 * Añade la elite, previamente escogida, a la nueva población*/
@@ -44,5 +43,5 @@ public class elite {
 		}
 		elite.clear();
 	}
-
+	
 }
