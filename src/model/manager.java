@@ -3,14 +3,13 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import cruces.algoritmoCruce;
 import cruces.*;
 import funciones.*;
 import poblacion.poblacion;
 import seleccion.*;
 
 public class manager {
-	
+
 	private List<observer> observers;
 	private algoritmoSeleccion algSel;
 	private algoritmoCruce algCruce;
@@ -29,7 +28,7 @@ public class manager {
 	private int maxIter;
 	private int tamPob;
 	private int idFun;
-	
+
 	public manager() {
 		observers=new ArrayList<observer>();
 		elite=new elite();
@@ -49,7 +48,7 @@ public class manager {
 			observers.add(o);
 		}
 	}
-	
+
 	public void iniciarPoblacion() {
 		poblacion=new poblacion(tamPob, probToler, funcion);
 		poblacion.iniciarPoblacion();
@@ -72,6 +71,7 @@ public class manager {
 			evaluarPoblacion();
 			generation++;
 		}
+		
 		for(int i=0; i < observers.size(); i++) {
 			observers.get(i).onFinished( best, bestGen, average);
 		}
@@ -169,15 +169,19 @@ public class manager {
 	public void setCrossFunct(int i) {
 		switch(i) {
 		case 0:
-			//algCruce=new monopunto();
+			algCruce=new monopunto();
 			break;
 		case 1:
 			algCruce=new uniforme();
 			break;
-			default:
-				break;
+		case 2:
+			algCruce=new aritmetico();
+			break;
+		default:
+			break;
 		}
 	}
+	
 	public void setMutationFunct(int i) {
 		switch(i) {
 		case 0:

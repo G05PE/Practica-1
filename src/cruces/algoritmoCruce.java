@@ -42,9 +42,9 @@ public abstract class algoritmoCruce {
 	public void setProbCruce(double probCruce) {
 		this.probCruce = probCruce;
 	}
-	
-	public int sizeReproductor() {
-		return reproductores.getSize();
+
+	protected void setSizeReproductor(int num_sele_cruce) {
+		reproductores.setSize(num_sele_cruce);
 	}
 
 	
@@ -81,6 +81,9 @@ public abstract class algoritmoCruce {
 	}
 	protected poblacion getDescendientes() {
 		return descendientes;
+	}
+	protected void setDescendienteAt(int i, individuo hijo) {	
+		descendientes.setIndividuoAt(i, hijo);
 	}
 	
 	protected poblacion getSeleccionados() {

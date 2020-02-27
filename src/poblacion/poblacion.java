@@ -80,4 +80,8 @@ public class poblacion {
 	public void setIndividuoAt(int i, individuo individuo) {
 		poblacion.set(i, new individuo(individuo));
 	}
+
+	public void setSize(int num_sele_cruce) {
+		this.tam = num_sele_cruce;
+	}
 }

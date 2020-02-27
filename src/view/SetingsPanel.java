@@ -136,7 +136,7 @@ public class SetingsPanel extends JPanel implements observer{
 		 tolPanel.add(tTol);
 		 this.add(tolPanel);
 		 
-		 //Algoritmo de selección----------------------------------------------
+		 //Algoritmo de selecciï¿½n----------------------------------------------
 		 JLabel lnAlgSel = new JLabel("Selection algorithm");
 		 setDimLabel(lnAlgSel, dim1);
 		 this.add(lnAlgSel);
@@ -167,7 +167,7 @@ public class SetingsPanel extends JPanel implements observer{
 		 setDimLabel(lCruce, dim2);
 		 cross1.add(lCruce);
 		 
-		 String[] selec2 = { "Single point", "Uniform"};
+		 String[] selec2 = { "Single point", "Uniform", "Aritmetic"};
 		 selectCross = new JComboBox<String>(selec2);
 		 selectCross.setEditable(false);
 		 seleccionarCruce(selec2[0]);
@@ -362,8 +362,11 @@ public class SetingsPanel extends JPanel implements observer{
 		case "Uniform":
 			ctrl.setCrossFunct(1);
 			break;
-			default:
-				break;
+		case "Aritmetic":
+			ctrl.setCrossFunct(2);
+			break;
+		default:
+			break;
 		}
 	}
 	

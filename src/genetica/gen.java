@@ -7,20 +7,22 @@ import java.util.Random;
 import funciones.funcion;
 public class gen {
 	private List<Boolean> genotipo;
-	private double fenotipo;
+	private double valorReal;
 	private funcion funcion;
 	private double tam;
 	private Random rand;
+	
+	
 	public gen(funcion f, double precision, double tam) {
 		funcion=f;
 		this.tam=tam;
 		generarGen();
-		calcularFenotipo();
+		calcularvalorReal();
 	}
 	
 	public gen(gen gen) {
 		rand=new Random();
-		fenotipo=gen.getFenotipo();
+		valorReal=gen.getvalorReal();
 		funcion=gen.getFuncion();
 		tam=gen.getTam();
 		genotipo=new ArrayList<Boolean>();
@@ -45,11 +47,15 @@ public class gen {
 		}
 	}
 	
-	public void calcularFenotipo() {
+	public void calcularvalorReal() {
 		
 	}
-	public double getFenotipo() {
-		return fenotipo;
+	public double getvalorReal() {
+		return valorReal;
+	}
+	public void setBit(int i, Boolean bit) {
+		Boolean newBit=new Boolean(bit.booleanValue());
+		genotipo.set(i, newBit);
 	}
 	public void setBit(int i, Boolean bit) {
 		Boolean newBit=new Boolean(bit.booleanValue());
@@ -58,7 +64,12 @@ public class gen {
 	public List<Boolean> getGenotipo() {
 		return genotipo;
 	}
-	public void setFenotipo(double d) {
-		fenotipo=d;
+	public void setvalorReal(double d) {
+		valorReal=d;
+	}
+
+	public void rellenaGen() {
+		// TODO Auto-generated method stub
+		
 	}
 }

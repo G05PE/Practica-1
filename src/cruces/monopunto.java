@@ -1,48 +1,73 @@
 package cruces;
 
+import java.util.Random;
+
 import poblacion.individuo;
 import poblacion.poblacion;
 
 public class monopunto extends algoritmoCruce{
-	private int punto;
+
+	private Random r;
+	private double punto;
+	private int num_sele_cruce;
 	
+	
+	public monopunto() {}
+
 	//Seleccionar individuos a cruzarse y almacenarlos en el array reproductores
-	@Override
+	@Override	
 	public poblacion cruzar(poblacion seleccionados, double prob) {
-		super.seleccionaReproductores();
+		init(prob, seleccionados);
+		seleccionaReproductores();
 		creaDescendientes();
 		return getDescendientes();
 	}
 	
+
+	private void seleccionaReproductores() {
+		num_sele_cruce = 0;
+		
+		for(int i = 0; i < getSeleccionados().getSize(); i++) {
+			if(Math.random()%1 < getProbCruce()) {
+				addReprpoductor(getSeleccionadoConcreto(i));
+				num_sele_cruce++;
+			}		
+		}
+		
+		if(num_sele_cruce % 2 != 0) {
+			borraUltimoReproductor();
+			num_sele_cruce--;
+		}
+		setSizeReproductor(num_sele_cruce);
+	}
+	
+	
 	private void creaDescendientes() {
+		r=new Random();
 		
 		//Punto es un numero entre 0 y la logitud del cromosoma
-		punto = (int) (Math.random()%getSeleccionadoConcreto(0).getCromosoma().size());
+		punto = (r.nextInt()%getSeleccionadoConcreto(0).longitudCromosoma());
+		if(punto < 0) punto = -punto;
 		
-		for(int i = 0; i < getNumSel(); i += 2) {
+		for(int i = 0; i < num_sele_cruce - 1; i += 2) {
 			individuo padre1 = getReproductor(i), padre2 = getReproductor(i + 1);
 			individuo hijo1 = new individuo(padre1), hijo2 = new individuo(padre2);
 			
 			mezcla(hijo1, hijo2, padre1, padre2);
 			
-			this.addDescendiente(hijo1);
-			this.addDescendiente(hijo2);
+			setDescendienteAt(i,  hijo1);
+			setDescendienteAt(i+1, hijo2);
 		}
 	}
+
 
 	private void mezcla(individuo hijo1, individuo hijo2, individuo padre1, individuo padre2) {
 		
 		//Incluimos por mitades
-		for(int i = 0; i < punto; i++) {
-			hijo1.setGen(i, padre1.getCromosomaAt(i));
-			hijo2.setGen(i, padre2.getCromosomaAt(i));
-		}
-		
-		for(int i = punto; i < padre1.getLongitud(); i++) {
-			hijo1.setGen(i, padre2.getCromosomaAt(i));
-			hijo2.setGen(i, padre1.getCromosomaAt(i));
-		}
+		hijo1.cruza(punto, padre2.longitudCromosoma(), padre2);
+		hijo2.cruza(0, punto, padre1);
 	
-		//TODO Se evalua lo del fitness ?????
-	}	
+		//TODO Se evalua lo del fitness 
+	}
+	
 }

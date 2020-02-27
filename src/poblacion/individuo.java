@@ -45,11 +45,11 @@ public class individuo {
 		double tam=cromosoma.get(i).getTam();
 		double fenotipo=f.getMinX(i) + bin2dec(cromosoma.get(i).getGenotipo())*
 				(f.getMaxX(i)-f.getMinX(i))/(Math.pow(2, tam)-1);
-		cromosoma.get(i).setFenotipo(fenotipo);
+		cromosoma.get(i).setvalorReal(fenotipo);
 		return fenotipo;
 	}
 	/**
-	 * Calcula el fenotipo de una posición
+	 * Calcula el fenotipo de una posiciï¿½n
 	 *  especifica despues de haber iniciado el individuo*/
 	public void recalcularFenotipo(int i) {
 		fenotipos.set(i, calcularFenotipo(i));
@@ -63,6 +63,7 @@ public class individuo {
 		}
 		return res;
 	}
+	
 	public double log2(double x) {
 		return Math.log(x) / Math.log(2);
 	}
@@ -89,11 +90,46 @@ public class individuo {
 	public List<Double> getFenotipos(){
 		return fenotipos;
 	}
+	
 	public void setGen(int i, gen gen) {
 		this.cromosoma.set(i, gen);
 	}
+	
+	public void setFenotiposAt(int i, double valor) {
+		this.fenotipos.set(i, valor);
+	}
+	
 	public int getLongitud(){
 		return cromosoma.size();
 	}
+
+	public double longitudCromosoma() {
+		int lg = 0;
+		for(int i = 0; i < cromosoma.size(); i++) {
+			lg += getCromosomaAt(i).getTam();
+		}
+		return lg;
+	}
+
+	public void cruza(double inicio, double fin, individuo padre) {
+	int contador = 0;
+	Boolean termina = false;
+	
+		//Para todos los genes
+		for(int i = 0; i < cromosoma.size() && !termina; i++) {
+			
+			//Recorremos todos los bits de cada gen
+			for(int j = 0; j < getCromosomaAt(i).getTam() && !termina; j++) {
+				contador += 1;
+				if(contador >= inicio && contador <= fin) {
+					getCromosomaAt(i).setBit(j, padre.getCromosomaAt(i).getGenotipo().get(j));
+				}
+				
+				if (contador == fin) termina = true;
+			}
+		}
+		
+	}
+	
 
 }
