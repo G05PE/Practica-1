@@ -15,11 +15,11 @@ public class aritmetico extends algoritmoCruce {
 	@Override
 	public poblacion cruzar(poblacion seleccionados, double prob) {
 		
-		init(prob, seleccionados);
+		ini(prob, seleccionados);
 		seleccionaReproductores();
 		alpha = Math.random()%1;
 
-		for(int i = 0; i < getReproductores().getSize() - 1; i+=2) {
+		for(int i = 0; i < getReproductoresSize() - 1; i+=2) {
 			individuo padre1 = getReproductor(i);
 			individuo padre2 = getReproductor(i + 1);
 			cruceAritmetico(i, padre1, padre2);
@@ -52,25 +52,4 @@ public class aritmetico extends algoritmoCruce {
 		setDescendienteAt(i, hijo1);
 		setDescendienteAt(i+1, hijo2);
 	}		
-
-	
-	
-	private void seleccionaReproductores() {
-		num_sele_cruce = 0;
-		
-		for(int i = 0; i < getSeleccionados().getSize(); i++) {
-			if(Math.random()%1 < getProbCruce()) {
-				addReprpoductor(getSeleccionadoConcreto(i));
-				num_sele_cruce++;
-			}		
-		}
-		
-		if(num_sele_cruce % 2 != 0) {
-			borraUltimoReproductor();
-			num_sele_cruce--;
-		}
-		setSizeReproductor(num_sele_cruce);
-	}
-
-
 }

@@ -31,6 +31,8 @@ public class individuo {
 		fitness=ind.getFitness();
 	}
 	
+	/**Crea todos los genes establecidos por la funcion, los añade a la lista de
+	 * genes y establece sus fenotipos*/
 	public void crearGenes(funcion f, double precision) {
 		fenotipos=new ArrayList<Double>();
 		for(int i=0; i < f.getSize(); i++) {
@@ -41,6 +43,14 @@ public class individuo {
 		}
 	}
 	
+	/**Recalcula los fenotipos de todos los genes*/
+	public void recalcularFenotipos() {
+		for(int i=0; i < cromosoma.size(); i++) {
+			fenotipos.set(i, calcularFenotipo(i));
+		}
+	}
+	
+	/**Calcula el fenotipo del gen i, y establece dicho valor en el gen*/
 	public double calcularFenotipo(int i) {
 		double tam=cromosoma.get(i).getTam();
 		double fenotipo=f.getMinX(i) + bin2dec(cromosoma.get(i).getGenotipo())*
@@ -54,6 +64,8 @@ public class individuo {
 	public void recalcularFenotipo(int i) {
 		fenotipos.set(i, calcularFenotipo(i));
 	}
+	
+	/**Transforma un número en base 2 a un número en base 10*/
 	public double bin2dec(List<Boolean> binario) {
 		int res=0;
 		for(int i=binario.size()-1; i >=0 ; i--) {
@@ -71,9 +83,13 @@ public class individuo {
 	public double getFitness() {
 		return fitness;
 	}
-	public void cruzarBit(int gen, int bit, individuo padre) {
-		cromosoma.get(gen).getGenotipo().set(bit, 
-				padre.getCromosoma().get(gen).getGenotipo().get(bit));
+	
+	/**Cambia el bit nBit del gen nGen por el el bit que este en el mismo gen
+	 * del padre*/
+	
+	public void cruzarBit(int nGen, int nBit, individuo padre) {
+		cromosoma.get(nGen).getGenotipo().set(nBit, 
+				padre.getCromosoma().get(nGen).getGenotipo().get(nBit));
 	}
 	public void calcularFitness() {
 		this.fitness=f.calcularFuncion(fenotipos);

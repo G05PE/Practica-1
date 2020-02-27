@@ -17,6 +17,7 @@ public abstract class algoritmoCruce {
 		reproductores = new poblacion(seleccionados.getSize(), seleccionados.getPrecision(), seleccionados.getFuncion());
 		descendientes = seleccionados;
 	}
+	
 	protected void seleccionaReproductores() {
 		num_sele_cruce=0;
 		for(int i = 0; i < getSeleccionados().getSize(); i++) {
@@ -32,9 +33,6 @@ public abstract class algoritmoCruce {
 		}
 	}
 	
-	public void setDescendienteAt(int i, individuo ind) {
-		descendientes.setIndividuoAt(i, ind);
-	}
 	public double getProbCruce() {
 		return probCruce;
 	}

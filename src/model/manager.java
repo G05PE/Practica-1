@@ -27,7 +27,6 @@ public class manager {
 	private elite elite;
 	private int maxIter;
 	private int tamPob;
-	private int idFun;
 
 	public manager() {
 		observers=new ArrayList<observer>();
@@ -111,7 +110,6 @@ public class manager {
 		}
 	}
 	public void establecerFuncion(int f, int tam ) {
-		idFun=f+1;
 		switch(f) {
 		case 0:
 			funcion=new funcion1();
@@ -138,10 +136,10 @@ public class manager {
 			algSel=new algoritmoRuleta();
 			break;
 		case 1:
-			algSel=new algoritmoTorneoDeter(funcion);
+			algSel=new algoritmoTorneoDeter();
 			break;
 		case 2:
-			algSel=new algoritmoTorneoProb(funcion);
+			algSel=new algoritmoTorneoProb();
 			break;
 		case 3:
 			algSel=new algoritmoEstocasticoUniv();
