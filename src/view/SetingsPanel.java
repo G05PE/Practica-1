@@ -21,7 +21,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import control.controller;
-import funciones.funcion;
 import model.observer;
 
 public class SetingsPanel extends JPanel implements observer{
@@ -172,7 +171,7 @@ public class SetingsPanel extends JPanel implements observer{
 		 setDimLabel(lCruce, dim2);
 		 cross1.add(lCruce);
 		 
-		 String[] selec2 = { "Single point", "Uniform", "Aritmetic"};
+		 String[] selec2 = { "Single point", "Uniform", "Aritmetic", "Discret"};
 		 selectCross = new JComboBox<String>(selec2);
 		 selectCross.setEditable(false);
 		 seleccionarCruce(selec2[0]);
@@ -396,6 +395,9 @@ public class SetingsPanel extends JPanel implements observer{
 		case "Aritmetic":
 			ctrl.elegirCodificacion(1);
 			ctrl.setCrossFunct(2);
+			break;
+		case "Discret":
+			ctrl.setCrossFunct(3);
 			break;
 		default:
 			break;

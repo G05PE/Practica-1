@@ -63,7 +63,7 @@ public class individuo {
 		return cromosomaReal.size();
 	}
 
-	/**Crea todos los genes establecidos por la funcion, los añade a la lista de
+	/**Crea todos los genes establecidos por la funcion, los aï¿½ade a la lista de
 	 * genes y establece sus fenotipos*/
 	public void crearGenes(funcion f, double precision) {
 		if(cod==0) {
@@ -126,7 +126,7 @@ public class individuo {
 		fenotipos.set(i, calcularFenotipo(i));
 	}
 	
-	/**Transforma un número en base 2 a un número en base 10*/
+	/**Transforma un nï¿½mero en base 2 a un nï¿½mero en base 10*/
 	public double bin2dec(List<Boolean> binario) {
 		int res=0;
 		for(int i=binario.size()-1; i >=0 ; i--) {

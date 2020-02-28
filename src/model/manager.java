@@ -177,6 +177,9 @@ public class manager {
 		case 2:
 			algCruce=new aritmetico();
 			break;
+		case 3:
+			algCruce=new discretoUniforme();
+			break;
 		default:
 			break;
 		}
