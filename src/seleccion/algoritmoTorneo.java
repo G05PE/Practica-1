@@ -11,15 +11,15 @@ import poblacion.poblacion;
 public abstract class algoritmoTorneo extends algoritmoSeleccion{
 	private int k;
 	private List<individuo> ring;
-	private funcion fun;
 	
-	public algoritmoTorneo(funcion funcion) {
+	public algoritmoTorneo() {
 		this.k=3;
-		this.fun=funcion;
 		ring=new ArrayList<individuo>();
 	}
-	public abstract poblacion ini(poblacion p);
-	public void seleccionar(poblacion p) {
+	
+	public abstract poblacion ini(poblacion p, funcion fun);
+	
+	public void seleccionar(poblacion p, funcion fun) {
 		Random r=new Random();
 		int luchador;
 		for(int i=0; i < p.getSize(); i++) {
@@ -27,10 +27,11 @@ public abstract class algoritmoTorneo extends algoritmoSeleccion{
 				luchador=r.nextInt(p.getSize());
 				addToRing(p.getIndividuo(luchador));
 			}
-			luchar();
+			luchar(fun);
 		}
 	}
-	public void luchar() {
+	
+	public void luchar(funcion fun) {
 		int ganador=0;
 		for(int i=1; i < getK(); i++) {
 			if(fun.best(getFromRing(i).getFitness(), getFromRing(ganador).getFitness())){
@@ -56,4 +57,5 @@ public abstract class algoritmoTorneo extends algoritmoSeleccion{
 	public void clearRing() {
 		ring.clear();
 	}
+		
 }

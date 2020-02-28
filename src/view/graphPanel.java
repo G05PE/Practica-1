@@ -24,9 +24,7 @@ public class graphPanel extends JPanel implements observer {
 	private void initGUI() {
 		this.validate();
 		this.repaint();
-		// create your PlotPanel (you can use it as a JPanel)
 		plot = new Plot2DPanel();
-		// define the legend position
 		plot.addLegend("SOUTH");
 		plot.setPreferredSize(new Dimension(700,600));
 		plot.setMinimumSize(new Dimension(700,600));

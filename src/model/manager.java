@@ -55,9 +55,9 @@ public class manager {
 		poblacion.iniciarPoblacion(codificacion);
 		best=new double[2][maxIter];
 		bestGen=new double[2][maxIter];
-		average=new double[2][maxIter];
-		
+		average=new double[2][maxIter];		
 	}
+	
 	public void start() {
 		generation=0;
 		iniciarPoblacion();
@@ -78,7 +78,7 @@ public class manager {
 		}
 	}
 	private void seleccion() {
-		poblacion=algSel.ini(poblacion);
+		poblacion=algSel.ini(poblacion, funcion);
 	}
 	private void mutacion() {
 		algMut.mutar(poblacion, probMut);
@@ -138,10 +138,10 @@ public class manager {
 			algSel=new algoritmoRuleta();
 			break;
 		case 1:
-			//algSel=new algoritmoTorneoDeter();
+			algSel=new algoritmoTorneoDeter();
 			break;
 		case 2:
-			//algSel=new algoritmoTorneoProb();
+			algSel=new algoritmoTorneoProb();
 			break;
 		case 3:
 			algSel=new algoritmoEstocasticoUniv();
@@ -191,7 +191,7 @@ public class manager {
 			algMut=new mutacionBasica();
 			break;
 		case 1:
-			algMut=new mutacionUniforme();
+			//algMut=new mutacionUniforme();
 			break;
 		}
 	}

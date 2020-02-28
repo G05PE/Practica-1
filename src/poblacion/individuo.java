@@ -63,7 +63,7 @@ public class individuo {
 		return cromosomaReal.size();
 	}
 
-	/**Crea todos los genes establecidos por la funcion, los añade a la lista de
+	/**Crea todos los genes establecidos por la funcion, los aï¿½ade a la lista de
 	 * genes y establece sus fenotipos*/
 	public void crearGenes(funcion f, double precision) {
 		if(cod==0) {
@@ -110,11 +110,11 @@ public class individuo {
 		double fenotipo;
 		if(cod==0) {
 			double tam=cromosoma.get(i).getTam();
-			fenotipo=f.getMinX(i) + bin2dec(cromosoma.get(i).getGenotipo())*
+			fenotipo=f.getMinX(i) + bin2dec((List<Boolean>) cromosoma.get(i).getGenotipo())*
 					(f.getMaxX(i)-f.getMinX(i))/(Math.pow(2, tam)-1);
 			cromosoma.get(i).setvalorReal(fenotipo);
 		}else {
-			fenotipo=cromosomaReal.get(i).getGenotipo();
+			fenotipo=(double) ((genReal)cromosomaReal.get(i)).getGenotipo();
 			cromosomaReal.get(i).setFenotipo(fenotipo);
 		}
 		return fenotipo;
@@ -126,7 +126,7 @@ public class individuo {
 		fenotipos.set(i, calcularFenotipo(i));
 	}
 	
-	/**Transforma un número en base 2 a un número en base 10*/
+	/**Transforma un nï¿½mero en base 2 a un nï¿½mero en base 10*/
 	public double bin2dec(List<Boolean> binario) {
 		int res=0;
 		for(int i=binario.size()-1; i >=0 ; i--) {
@@ -153,8 +153,8 @@ public class individuo {
 	 * del padre*/
 	
 	public void cruzarBit(int nGen, int nBit, individuo padre) {
-		cromosoma.get(nGen).getGenotipo().set(nBit, 
-				padre.getCromosoma().get(nGen).getGenotipo().get(nBit));
+		((List<Boolean>)cromosoma.get(nGen).getGenotipo()).set(nBit, 
+				((List<Boolean>)padre.getCromosoma().get(nGen).getGenotipo()).get(nBit));
 	}
 	public void calcularFitness() {
 		if(cod==0) {
@@ -171,7 +171,6 @@ public class individuo {
 		fitnessReal=f.calcularFuncion(fen);
 	}
 	public List<gen> getCromosoma(){
-		
 			return cromosoma;
 	}
 	public funcion getFuncion() {
@@ -181,14 +180,22 @@ public class individuo {
 		return cod;
 	}
 	public gen getCromosomaAt(int i) {
+		if(cod==0) {
 		return cromosoma.get(i);
+		}else {
+			return cromosomaReal.get(i);
+		}
 	}
 	public List<Double> getFenotipos(){
 		return fenotipos;
 	}
 	
 	public void setGen(int i, gen gen) {
+		if(cod==0) {
 		this.cromosoma.set(i, gen);
+		}else {
+			cromosomaReal.set(i, (genReal) gen);
+		}
 	}
 	public int genRealSize() {
 		return cromosomaReal.size();
@@ -217,7 +224,7 @@ public class individuo {
 		return cromosomaReal.get(i);
 	}
 	
-	public void cruzarAritm(individuo padre1, individuo padre2) {
+	/*public void cruzarAritm(individuo padre1, individuo padre2) {
 		double valor;
 		for(int i=0; i < cromosomaReal.size(); i++) {
 			valor=(padre1.getGenReal(i).getGenotipo()+
@@ -227,7 +234,7 @@ public class individuo {
 				valor-=f.getMinX(i);
 			cromosomaReal.get(i).setGenotipo(valor);
 		}
-	}
+	}*/
 	
 	public double longitudCromosoma() {
 		int lg = 0;
@@ -248,7 +255,7 @@ public class individuo {
 			for(int j = 0; j < getCromosomaAt(i).getTam() && !termina; j++) {
 				contador += 1;
 				if(contador >= inicio && contador <= fin) {
-					getCromosomaAt(i).setBit(j, padre.getCromosomaAt(i).getGenotipo().get(j));
+					getCromosomaAt(i).setBit(j, ((List<Boolean>)padre.getCromosomaAt(i).getGenotipo()).get(j));
 				}
 				
 				if (contador == fin) termina = true;
@@ -258,7 +265,7 @@ public class individuo {
 	}
 
 	public double getGenotipoReal(int j) {
-		return cromosomaReal.get(j).getGenotipo();
+		return (double) cromosomaReal.get(j).getGenotipo();
 	}
 
 }

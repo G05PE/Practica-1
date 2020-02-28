@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import funciones.funcion;
 import poblacion.individuo;
 import poblacion.poblacion;
 public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
@@ -15,17 +16,18 @@ public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
 	public algoritmoEstocasticoUniv() {
 		probSeleccion=new ArrayList<Double>();
 	}
-	public poblacion ini(poblacion p) {
+	
+	public poblacion ini(poblacion p, funcion fun) {
 		probSeleccion=new ArrayList<Double>();
 		iniSeleccionados(p.getSize(), p.getPrecision(), p.getFuncion());
 		asignarProbabilidades(p);
 		distancia=(double)1/p.getSize();
-		seleccionar(p);
+		seleccionar(p, fun);
 		getSeleccionados().iniBest();
 		return getSeleccionados();
 	}
 	@Override
-	public void seleccionar(poblacion p) {
+	public void seleccionar(poblacion p, funcion fun) {
 		int j=0;
 		Random rand=new Random();
 		double r;
@@ -64,4 +66,5 @@ public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
 			totalFitness += p.getIndividuo(i).getFitness();
 		}
 	}
+
 }

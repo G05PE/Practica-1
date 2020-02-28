@@ -3,6 +3,7 @@ package cruces;
 import java.util.Random;
 
 import genetica.gen;
+import genetica.genReal;
 import poblacion.individuo;
 import poblacion.poblacion;
 
@@ -21,8 +22,8 @@ public class mutacionUniforme extends mutacion{
 
 	public boolean mutarIndividuo(individuo ind, double probMutacion) {
 		boolean mutado=false;
-		for(int i = 0; i < ind.getCromosoma().size(); i++){//Recorro los genes
-				if(muta(ind.getCromosomaAt(i), probMutacion)) {
+		for(int i = 0; i < ind.getLongitud(); i++){//Recorro los genes
+				if(muta((genReal)ind.getCromosomaAt(i), probMutacion)) {
 					mutado=true;
 					ind.recalcularFenotipo(i);
 				}
@@ -30,7 +31,7 @@ public class mutacionUniforme extends mutacion{
 		return mutado;
 	}
 
-	private boolean muta(gen entrada, double probMutacion) {
+	private boolean muta(genReal entrada, double probMutacion) {
 		boolean mutado=false;
 		
 		for(int i = 0; i < entrada.getTam(); i++) {//Recorre los bits
@@ -38,11 +39,10 @@ public class mutacionUniforme extends mutacion{
 			double rand = Math.random()%1;
 			
 			if(rand < probMutacion){
-				//Esto solo sirve para valores binarios, no para la funcion 4
-				Boolean valor = false;
-				if(r.nextInt()%1 == 1)valor = true;
-				
-				entrada.setBit(i, valor);
+				double valor=0;
+				if(r.nextInt()%1 == 1)
+					valor=entrada.getAleatorio();
+				entrada.setGenotipo(valor);
 				mutado=true;
 			}
 		}	

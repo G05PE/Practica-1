@@ -7,19 +7,12 @@ import poblacion.poblacion;
 
 public class algoritmoTorneoProb extends algoritmoTorneo{
 	private double p;
-	private funcion fun;
-	
-	public algoritmoTorneoProb(funcion funcion) {
-		super(funcion);
-		fun=funcion;
-	}
-	
 	@Override
-	public void luchar() {
+	public void luchar(funcion fun) {
 		Random r=new Random();
 		double intervalo=r.nextDouble()%1;
 		if(intervalo > p) {
-			super.luchar();//gana el mejor
+			super.luchar(fun);//gana el mejor
 		}
 		else{//gana el peor
 			int ganador=0;
@@ -35,11 +28,11 @@ public class algoritmoTorneoProb extends algoritmoTorneo{
 	}
 
 	@Override
-	public poblacion ini(poblacion pob) {
+	public poblacion ini(poblacion pob, funcion fun) {
 		p=Math.random()%1 + 0.5;
 		if(p > 1) p-=0.5;
 		iniSeleccionados(pob.getSize(), pob.getPrecision(), pob.getFuncion());
-		seleccionar(pob);
+		seleccionar(pob, fun);
 		getSeleccionados().iniBest();
 		return getSeleccionados();
 	}

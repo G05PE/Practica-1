@@ -64,4 +64,7 @@ public class controller {
 	public void reset() {
 		manager.reset();
 	}
+	public void elegirCodificacion(int i) {
+		manager.establecerCodificacion(i);
+	}
 }
