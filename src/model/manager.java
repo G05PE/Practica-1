@@ -19,6 +19,7 @@ public class manager {
 	private double best [][];
 	private mutacion algMut;
 	private funcion funcion;
+	private int codificacion;//0=binario, 1=real
 	private double probToler;
 	private double probElite;
 	private double probCruc;
@@ -36,6 +37,7 @@ public class manager {
 	public void iniciarDatos() {
 		probToler=0.001;
 		probElite=0.05;
+		codificacion=0;
 		generation=0;
 		probCruc=0.6;
 		probMut=0.02;
@@ -50,7 +52,7 @@ public class manager {
 
 	public void iniciarPoblacion() {
 		poblacion=new poblacion(tamPob, probToler, funcion);
-		poblacion.iniciarPoblacion();
+		poblacion.iniciarPoblacion(codificacion);
 		best=new double[2][maxIter];
 		bestGen=new double[2][maxIter];
 		average=new double[2][maxIter];
@@ -185,6 +187,9 @@ public class manager {
 		case 0:
 			algMut=new mutacionBasica();
 			break;
+		case 1:
+			algMut=new mutacionUniforme();
+			break;
 		}
 	}
 	public void setMutationPercent(double mutPer) {
@@ -198,6 +203,9 @@ public class manager {
 	}
 	public void reset() {
 		iniciarDatos();
+	}
+	public void establecerCodificacion(int i) {
+		codificacion=i;
 	}
 
 }

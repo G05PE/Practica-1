@@ -21,7 +21,7 @@ public class mutacionBasica extends mutacion{
 
 	public boolean mutarIndividuo(individuo ind, double probMutacion) {
 		boolean mutado=false;
-		for(int i = 0; i < ind.getCromosoma().size(); i++){//Recorro los genes
+		for(int i = 0; i < ind.getLongitud(); i++){//Recorro los genes
 				if(invierte(ind.getCromosomaAt(i), probMutacion)) {
 					mutado=true;
 					ind.recalcularFenotipo(i);

@@ -5,11 +5,15 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,6 +35,7 @@ public class SetingsPanel extends JPanel implements observer{
 	private JTextField tElite;
 	private JTextField tPopul;
 	private JTextField tMut;
+	private JCheckBox check;
 	private Dimension dim1;
 	private Dimension dim2;
 	private JButton start;
@@ -303,6 +308,32 @@ public class SetingsPanel extends JPanel implements observer{
 		 setDimCombobox(selectFunc, dim1);
 		 this.add(selectFunc);
 		 
+		 //Representacion real checkbox
+		 check=new JCheckBox("RealCode");
+		 check.setSelected(false);
+		 check.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					ctrl.elegirCodificacion(1);
+					seleccionarCruce("Aritmetic");
+					selectCross.setEnabled(false);
+					selectCross.setSelectedIndex(2);
+					selectFunc.setEnabled(false);
+					selectMut.setEnabled(false);
+					selectMut.setSelectedIndex(1);
+					seleccionarMutacion("Uniform");
+				}
+				else {
+					selectCross.setEnabled(true);
+					ctrl.elegirCodificacion(0);
+					selectFunc.setEnabled(true);
+					selectMut.setEnabled(true);
+				}
+			}
+		});
+		 check.setVisible(false);
+		 this.add(check);
 		 //Botones-------------------------------------------------
 		 this.add(Box.createRigidArea(new Dimension(190, 40)));
 		 start = new JButton();
@@ -363,6 +394,7 @@ public class SetingsPanel extends JPanel implements observer{
 			ctrl.setCrossFunct(1);
 			break;
 		case "Aritmetic":
+			ctrl.elegirCodificacion(1);
 			ctrl.setCrossFunct(2);
 			break;
 		default:
@@ -403,6 +435,8 @@ public class SetingsPanel extends JPanel implements observer{
 	}
 	
 	private void seleccionarFun(String fun) {
+		ctrl.elegirCodificacion(0);
+		if(check!=null) check.setVisible(false);
 		switch(fun) {
 		case "Function 1":
 			ctrl.establecerFuncion(0,0);
@@ -443,7 +477,7 @@ public class SetingsPanel extends JPanel implements observer{
 			JLabel l=new JLabel("Enter number of variables");
 			setDimLabel(l, dim1);
 			p.add(l);
-			JTextField f=new JTextField();
+			JTextField f=new JTextField("1");
 			setDimText(f, dim1);
 			 f.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -475,6 +509,7 @@ public class SetingsPanel extends JPanel implements observer{
 			 frame2.setContentPane(p);
 			 frame2.pack();
 			 frame2.setVisible(true);
+			 if(check!=null) check.setVisible(true);
 			break;
 			default:
 				break;
