@@ -1,5 +1,7 @@
 package cruces;
 
+import java.util.List;
+
 import genetica.gen;
 import poblacion.individuo;
 import poblacion.poblacion;
@@ -18,7 +20,7 @@ public class uniforme extends algoritmoCruce{
 			setDescendienteAt(i+1, new individuo(getReproductorAt(i+1)));
 			//Recorro los genes
 			for(int j = 0; j < getReproductorAt(i).getLongitud(); j++) {
-				int size=getReproductorAt(i).getCromosoma().get(j).getGenotipo().size();
+				int size=((List<Boolean>)getReproductorAt(i).getCromosoma().get(j).getGenotipo()).size();
 				for(int k=0; k < size; k++ ) {
 					if(Math.random()%1 < getProbCruce()) {
 						getDescendienteAt(i).cruzarBit(j, k, getReproductor(i+1));

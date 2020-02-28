@@ -1,5 +1,7 @@
 package cruces;
 
+import java.util.List;
+
 import genetica.gen;
 import poblacion.individuo;
 import poblacion.poblacion;
@@ -35,7 +37,7 @@ public class mutacionBasica extends mutacion{
 		for(int i = 0; i < entrada.getTam(); i++) {//Recorre los bits
 			double rand = Math.random()%1;
 			if(rand < probMutacion){
-				entrada.setBit(i, !entrada.getGenotipo().get(i));
+				entrada.setBit(i, !((List<Boolean>)entrada.getGenotipo()).get(i));
 				mutado=true;
 			}
 		}	

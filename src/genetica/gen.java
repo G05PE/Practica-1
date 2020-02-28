@@ -11,8 +11,9 @@ public class gen {
 	private funcion funcion;
 	private double tam;
 	private Random rand;
+	private int cod;
 	
-	
+	public gen() {}
 	public gen(funcion f, double precision, double tam) {
 		funcion=f;
 		this.tam=tam;
@@ -20,13 +21,14 @@ public class gen {
 	}
 	
 	public gen(gen gen) {
+		cod=gen.cod;
 		rand=new Random();
 		valorReal=gen.getvalorReal();
 		funcion=gen.getFuncion();
 		tam=gen.getTam();
 		genotipo=new ArrayList<Boolean>();
-		for(int i=0; i < gen.getGenotipo().size(); i++) {
-			genotipo.add(new Boolean(gen.getGenotipo().get(i)));
+		for(int i=0; i < ((List<Boolean>) gen.getGenotipo()).size(); i++) {
+			genotipo.add(new Boolean(((List<Boolean>) gen.getGenotipo()).get(i)));
 		}
 	}
 	
@@ -53,8 +55,12 @@ public class gen {
 		genotipo.set(i, newBit);
 	}
 	
-	public List<Boolean> getGenotipo() {
-		return genotipo;
+	public Object getGenotipo() {
+		if(cod==0) {
+			return genotipo;
+		}else {
+			return ((genReal)this).getGenotipoReal();
+		}
 	}
 	public void setvalorReal(double d) {
 		valorReal=d;

@@ -1,13 +1,13 @@
 package genetica;
 
-public class genReal {
+public class genReal extends gen{
 	private double genotipo;
 	private double fenotipo;
 	private double min;
 	private double max;
 	
 	public genReal(genReal gen) {
-		this.genotipo=gen.getGenotipo();
+		this.genotipo=gen.getGenotipoReal();
 		fenotipo=gen.getFenotipo();
 		min=gen.getMin();
 		max=gen.getMax();
@@ -17,7 +17,7 @@ public class genReal {
 		fenotipo=valor;
 	}
 
-	public double getGenotipo() {
+	public double getGenotipoReal() {
 		return genotipo;
 	}
 
@@ -48,6 +48,12 @@ public class genReal {
 
 	public Double getFenotipo() {
 		return fenotipo;
+	}
+	public double getAleatorio() {
+		double valor=Math.random()%max + min;
+		if(valor > max)
+			return (valor-min);
+		return valor;
 	}
 	
 }
