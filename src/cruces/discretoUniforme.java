@@ -1,6 +1,5 @@
 package cruces;
 
-import genetica.gen;
 import poblacion.poblacion;
 
 public class discretoUniforme extends algoritmoCruce{ 
@@ -14,16 +13,15 @@ public class discretoUniforme extends algoritmoCruce{
 					
 			for(int j = 0; j < getDescendienteAt(i).getLongitud(); j++) {
 				if(Math.random()%1 < getProbCruce()) {
-					gen aux = getDescendienteAt(i).getCromosomaAt(j);
-					getDescendienteAt(i).setGen(j, getDescendienteAt(i+1).getCromosomaAt(j));
-					getDescendienteAt(i+1).setGen(j, aux);
+					double aux = getDescendienteAt(i).getGenotipoReal(j);
+					double aux2 = getDescendienteAt(i+1).getGenotipoReal(j);	
+					getDescendienteAt(i).setGenReal(j, aux2);
+					getDescendienteAt(i+1).setGenReal(j, aux);	
 				}
 			}
 		}
 		
 		return getDescendientes();	
 	}
-	
-	
-	
+
 }

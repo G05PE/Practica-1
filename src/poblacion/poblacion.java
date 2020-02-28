@@ -20,10 +20,10 @@ public class poblacion {
 		precision=prec;
 	}
 	
-	public void iniciarPoblacion() {
+	public void iniciarPoblacion(int codificacion) {
 		
 		for(int i=0; i < tam; i++) {
-			individuo cromosoma=new individuo(fun, precision);
+			individuo cromosoma=new individuo(fun, precision, codificacion);
 			poblacion.add(cromosoma);
 		}
 		iniBest();
@@ -61,7 +61,6 @@ public class poblacion {
 	
 	public void borraUltimo() {
 		poblacion.remove(poblacion.size()-1);
-		tam--;
 	}
 	
 	public double getPrecision() {

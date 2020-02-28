@@ -17,7 +17,6 @@ public class gen {
 		funcion=f;
 		this.tam=tam;
 		generarGen();
-		calcularvalorReal();
 	}
 	
 	public gen(gen gen) {
@@ -46,10 +45,6 @@ public class gen {
 			genotipo.add(new Boolean(rand.nextBoolean()));
 		}
 	}
-	
-	public void calcularvalorReal() {
-		
-	}
 	public double getvalorReal() {
 		return valorReal;
 	}
@@ -57,15 +52,11 @@ public class gen {
 		Boolean newBit=new Boolean(bit.booleanValue());
 		genotipo.set(i, newBit);
 	}
+	
 	public List<Boolean> getGenotipo() {
 		return genotipo;
 	}
 	public void setvalorReal(double d) {
 		valorReal=d;
-	}
-
-	public void rellenaGen() {
-		// TODO Auto-generated method stub
-		
 	}
 }

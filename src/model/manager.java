@@ -19,6 +19,7 @@ public class manager {
 	private double best [][];
 	private mutacion algMut;
 	private funcion funcion;
+	private int codificacion;//0=binario, 1=real
 	private double probToler;
 	private double probElite;
 	private double probCruc;
@@ -27,7 +28,6 @@ public class manager {
 	private elite elite;
 	private int maxIter;
 	private int tamPob;
-	private int idFun;
 
 	public manager() {
 		observers=new ArrayList<observer>();
@@ -36,7 +36,8 @@ public class manager {
 	}
 	public void iniciarDatos() {
 		probToler=0.001;
-		probElite=0.005;
+		probElite=0.05;
+		codificacion=0;
 		generation=0;
 		probCruc=0.6;
 		probMut=0.02;
@@ -51,11 +52,11 @@ public class manager {
 
 	public void iniciarPoblacion() {
 		poblacion=new poblacion(tamPob, probToler, funcion);
-		poblacion.iniciarPoblacion();
+		poblacion.iniciarPoblacion(codificacion);
 		best=new double[2][maxIter];
 		bestGen=new double[2][maxIter];
 		average=new double[2][maxIter];
-
+		
 	}
 	public void start() {
 		generation=0;
@@ -71,7 +72,7 @@ public class manager {
 			evaluarPoblacion();
 			generation++;
 		}
-
+		
 		for(int i=0; i < observers.size(); i++) {
 			observers.get(i).onFinished( best, bestGen, average);
 		}
@@ -90,7 +91,7 @@ public class manager {
 		average[0][generation]=generation;
 		average[1][generation]=poblacion.getAverage();
 	}
-
+	
 	private void evaluarMejor() {
 		best[0][generation]=generation;
 		bestGen[0][generation]=generation;
@@ -104,10 +105,13 @@ public class manager {
 		}
 	}
 	private void reproduccion() {
-		algCruce.cruzar(poblacion, probCruc);
+		if(algCruce!=null) {
+			algCruce.cruzar(poblacion, probCruc);
+		}else {
+			System.out.println("No se ha inicializado el algoritmo de cruce");
+		}
 	}
 	public void establecerFuncion(int f, int tam ) {
-		idFun=f+1;
 		switch(f) {
 		case 0:
 			funcion=new funcion1();
@@ -121,10 +125,10 @@ public class manager {
 		case 3:
 			funcion=new funcion4(tam);
 			break;
-		default:
-			funcion=new funcion1();
-			break;
-
+			default:
+				funcion=new funcion1();
+				break;
+		
 		}
 	}
 	public void establerMetodoSeleccion(int metodo) {
@@ -134,10 +138,10 @@ public class manager {
 			algSel=new algoritmoRuleta();
 			break;
 		case 1:
-			algSel=new algoritmoTorneoDeter(funcion);
+			//algSel=new algoritmoTorneoDeter();
 			break;
 		case 2:
-			algSel=new algoritmoTorneoProb(funcion);
+			//algSel=new algoritmoTorneoProb();
 			break;
 		case 3:
 			algSel=new algoritmoEstocasticoUniv();
@@ -173,15 +177,21 @@ public class manager {
 		case 2:
 			algCruce=new aritmetico();
 			break;
+		case 3:
+			algCruce=new discretoUniforme();
+			break;
 		default:
 			break;
 		}
 	}
-
+	
 	public void setMutationFunct(int i) {
 		switch(i) {
 		case 0:
 			algMut=new mutacionBasica();
+			break;
+		case 1:
+			algMut=new mutacionUniforme();
 			break;
 		}
 	}
@@ -196,6 +206,9 @@ public class manager {
 	}
 	public void reset() {
 		iniciarDatos();
+	}
+	public void establecerCodificacion(int i) {
+		codificacion=i;
 	}
 
 }
