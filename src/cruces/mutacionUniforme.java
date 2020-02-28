@@ -33,18 +33,14 @@ public class mutacionUniforme extends mutacion{
 
 	private boolean muta(genReal entrada, double probMutacion) {
 		boolean mutado=false;
-		
-		for(int i = 0; i < entrada.getTam(); i++) {//Recorre los bits
-			Random r = new Random();
-			double rand = Math.random()%1;
-			
-			if(rand < probMutacion){
-				double valor=0;
-				if(r.nextInt()%1 == 1)
-					valor=entrada.getAleatorio();
-				entrada.setGenotipo(valor);
-				mutado=true;
-			}
+		//Random r = new Random();
+		double rand = Math.random()%1;
+		if(rand < probMutacion){
+			double valor=0;
+			//if(r.nextInt()%1 == 1)
+				valor=entrada.getAleatorio();
+			entrada.setGenotipo(valor);
+			mutado=true;
 		}	
 		return mutado;
 	}

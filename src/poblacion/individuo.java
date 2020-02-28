@@ -24,7 +24,7 @@ public class individuo {
 			calcularFitness();  
 		}else {
 			cromosomaReal=new ArrayList<genReal>();
-			crearGenesReal(f);
+			crearGenesReal(f, codificacion);
 			calcularFitnessReal();
 		}
 	}
@@ -77,13 +77,14 @@ public class individuo {
 		}
 		else
 		{
-			crearGenesReal(f);
+			crearGenesReal(f, cod);
 		}
 	}
 	
-	private void crearGenesReal(funcion f) {
+	private void crearGenesReal(funcion f, int cod) {
 		for(int i=0; i < f.getSize(); i++) {
 			genReal gen=new genReal();
+			gen.setCod(cod);
 			gen.setMax(f.getMaxX(i));
 			gen.setMin(f.getMinX(i));
 			double valor=Math.random();
@@ -123,7 +124,11 @@ public class individuo {
 	 * Calcula el fenotipo de una posici�n
 	 *  especifica despues de haber iniciado el individuo*/
 	public void recalcularFenotipo(int i) {
-		fenotipos.set(i, calcularFenotipo(i));
+		if(cod==0) {
+			fenotipos.set(i, calcularFenotipo(i));
+		}else {
+			calcularFenotipo(i);
+		}
 	}
 	
 	/**Transforma un n�mero en base 2 a un n�mero en base 10*/
@@ -266,6 +271,15 @@ public class individuo {
 
 	public double getGenotipoReal(int j) {
 		return (double) cromosomaReal.get(j).getGenotipo();
+	}
+
+	public void setCod(int codificacion) {
+		cod=codificacion;
+		if(cromosomaReal!=null) {
+			for(int i=0; i<cromosomaReal.size(); i++) {
+				cromosomaReal.get(i).setCod(codificacion);
+			}
+		}
 	}
 
 }

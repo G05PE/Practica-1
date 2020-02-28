@@ -56,7 +56,7 @@ public class controller {
 		manager.setMutationPercent(mutPer*0.01);
 	}
 	public void setElitePercent(double elitePer) {
-		manager.setElitePercent(elitePer*0.001);
+		manager.setElitePercent(elitePer*0.01);
 	}
 	public void setTolerancePercent(double tolPer) {
 		manager.setTolerancia(tolPer);

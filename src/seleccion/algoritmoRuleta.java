@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import funciones.funcion;
 import poblacion.individuo;
 import poblacion.poblacion;
 
@@ -14,15 +15,15 @@ public class algoritmoRuleta extends algoritmoSeleccion{
 	public algoritmoRuleta() {
 		probSeleccion=new ArrayList<Double>();
 	}
-	public poblacion ini(poblacion p) {
+	public poblacion ini(poblacion p, funcion f) {
 		probSeleccion=new ArrayList<Double>();
 		iniSeleccionados(p.getSize(), p.getPrecision(), p.getFuncion());
 		asignarProbabilidades(p);
-		seleccionar(p);
+		seleccionar(p, f);
 		getSeleccionados().iniBest();
 		return getSeleccionados();
 	}
-	public void seleccionar(poblacion p) {
+	public void seleccionar(poblacion p, funcion f) {
 		Random r=new Random();
 		for(int j=0; j < p.getSize(); j++) {
 			double valor=r.nextDouble() % 1;

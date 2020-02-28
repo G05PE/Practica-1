@@ -78,10 +78,10 @@ public class manager {
 		}
 	}
 	private void seleccion() {
-		poblacion=algSel.ini(poblacion);
+		poblacion=algSel.ini(poblacion, funcion);
 	}
 	private void mutacion() {
-		//algMut.mutar(poblacion, probMut);
+		algMut.mutar(poblacion, probMut);
 	}
 	private void evaluarPoblacion() {
 		evaluarMejor();
@@ -191,7 +191,7 @@ public class manager {
 			algMut=new mutacionBasica();
 			break;
 		case 1:
-			//algMut=new mutacionUniforme();
+			algMut=new mutacionUniforme();
 			break;
 		}
 	}

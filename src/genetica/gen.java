@@ -65,4 +65,13 @@ public class gen {
 	public void setvalorReal(double d) {
 		valorReal=d;
 	}
+	public void setCod(int cod2) {
+		this.cod=cod2;
+	}
+	public int getCod() {
+		return cod;
+	}
+	public void setFunct(funciones.funcion f) {
+		funcion=f;
+	}
 }

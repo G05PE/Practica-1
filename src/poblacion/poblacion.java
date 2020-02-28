@@ -84,4 +84,10 @@ public class poblacion {
 	public void setSize(int num_sele_cruce) {
 		this.tam = num_sele_cruce;
 	}
+
+	public void setCod(int codificacion) {
+		for(int i=0; i < poblacion.size(); i++) {
+			poblacion.get(i).setCod(codificacion);
+		}
+	}
 }

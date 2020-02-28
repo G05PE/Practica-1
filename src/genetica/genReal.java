@@ -7,10 +7,15 @@ public class genReal extends gen{
 	private double max;
 	
 	public genReal(genReal gen) {
+		super.setCod(gen.getCod());
+		super.setFunct(gen.getFuncion());
 		this.genotipo=gen.getGenotipoReal();
 		fenotipo=gen.getFenotipo();
 		min=gen.getMin();
 		max=gen.getMax();
+	}
+	public int getCod() {
+		return super.getCod();
 	}
 	public genReal() {}
 	public void setFenotipo(double valor) {
@@ -54,6 +59,9 @@ public class genReal extends gen{
 		if(valor > max)
 			return (valor-min);
 		return valor;
+	}
+	public void setCod(int cod) {
+		super.setCod(cod);
 	}
 	
 }

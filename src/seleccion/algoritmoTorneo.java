@@ -54,15 +54,5 @@ public abstract class algoritmoTorneo extends algoritmoSeleccion{
 	public void clearRing() {
 		ring.clear();
 	}
-	@Override
-	public void seleccionar(poblacion p) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public poblacion ini(poblacion p) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }
