@@ -240,11 +240,19 @@ public class individuo {
 	
 	public double longitudCromosoma() {
 		int lg = 0;
-		for(int i = 0; i < cromosoma.size(); i++) {
-			lg += getCromosomaAt(i).getTam();
+		if(cod == 0) {
+			for(int i = 0; i < cromosoma.size(); i++) {
+				lg += getCromosomaAt(i).getTam();
+			}
+		}
+		else {
+			for(int i = 0; i < cromosomaReal.size(); i++) {
+				lg += getCromosomaAt(i).getTam();
+			}
 		}
 		return lg;
 	}
+	
 
 	public void cruza(double inicio, double fin, individuo padre) {
 	int contador = 0;
