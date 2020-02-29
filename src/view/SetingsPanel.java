@@ -34,6 +34,10 @@ public class SetingsPanel extends JPanel implements observer{
 	private JTextField tElite;
 	private JTextField tPopul;
 	private JTextField tMut;
+	private String[] selecBin = { "Single point", "Uniform"};
+	private String[] selecReal= {"Aritmetic","Single point", "Discret"};
+	private String [] mutBin= {"Basic"};
+	private String [] mutReal= {"Uniform"};
 	private JCheckBox check;
 	private Dimension dim1;
 	private Dimension dim2;
@@ -44,8 +48,11 @@ public class SetingsPanel extends JPanel implements observer{
 	private double elitePer;
 	private double tolPer;
 	private double mutPer;
+	private JPanel cross1;
+	private JPanel mut1;
 	private int popSize;
 	private int genNum;
+	private int cod;
 	
 	public SetingsPanel(controller ctlr) {
 		this.ctrl = ctlr;
@@ -163,24 +170,14 @@ public class SetingsPanel extends JPanel implements observer{
 		 crossOverPanel.setPreferredSize(new Dimension(180, 100));
 		 crossOverPanel.setMinimumSize(new Dimension(180, 100));
 		 crossOverPanel.setMaximumSize(new Dimension(180, 100));
-		 JPanel cross1=new JPanel();
+		 cross1=new JPanel();
 		 BoxLayout box=new BoxLayout(cross1, BoxLayout.X_AXIS);
 		 crossOverPanel.setBorder(BorderFactory.createTitledBorder(
 				 BorderFactory.createSoftBevelBorder(PROPERTIES), "CrossOver"));
 		 JLabel lCruce = new JLabel("CrossoverB");
 		 setDimLabel(lCruce, dim2);
 		 cross1.add(lCruce);
-		 
-		 String[] selec2 = { "Single point", "Uniform", "Aritmetic", "Discret"};
-		 selectCross = new JComboBox<String>(selec2);
-		 selectCross.setEditable(false);
-		 seleccionarCruce(selec2[0]);
-		 selectCross.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					seleccionarCruce((String)selectCross.getSelectedItem());
-				}
-		 });
-		 setDimCombobox(selectCross, dim2);
+		 changeCross(selecBin);
 		 cross1.add(selectCross);
 		 crossOverPanel.add(cross1);
 	 
@@ -215,25 +212,14 @@ public class SetingsPanel extends JPanel implements observer{
 		 mutationPanel.setPreferredSize(new Dimension(180, 100));
 		 mutationPanel.setMinimumSize(new Dimension(180, 100));
 		 mutationPanel.setMaximumSize(new Dimension(180, 100));
-		 JPanel mut1=new JPanel();
+		 mut1=new JPanel();
 		 BoxLayout box3=new BoxLayout(mut1, BoxLayout.X_AXIS);
 		 mutationPanel.setBorder(BorderFactory.createTitledBorder(
 				 BorderFactory.createSoftBevelBorder(PROPERTIES), "Mutation"));
 		 JLabel lMut = new JLabel("MutationB");
 		 setDimLabel(lMut, dim2);
 		 mut1.add(lMut);
-		 
-		 String[] selec3 = { "Basic", "Uniform"};
-		 selectMut = new JComboBox<String>(selec3);
-		 selectMut.setEditable(false);
-		 seleccionarMutacion(selec3[0]);
-		 selectMut.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					seleccionarMutacion((String)selectMut.getSelectedItem());
-				}
-		 });
-		 setDimCombobox(selectMut, dim2);
-		 mut1.add(selectMut);
+		 changeMut(mutBin);
 		 mutationPanel.add(mut1);
 		 
 		 JPanel mut2=new JPanel();
@@ -290,6 +276,7 @@ public class SetingsPanel extends JPanel implements observer{
 		 });
 		 elitePanel.add(tElite);
 		 this.add(elitePanel);
+		 
 		//Funciones-----------------------------------------------------------
 		 JLabel lFun = new JLabel("Function");
 		 setDimLabel(lFun, dim1);
@@ -315,19 +302,15 @@ public class SetingsPanel extends JPanel implements observer{
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					ctrl.elegirCodificacion(1);
-					seleccionarCruce("Aritmetic");
-					selectCross.setEnabled(false);
-					selectCross.setSelectedIndex(2);
+					changeCross(selecReal);
 					selectFunc.setEnabled(false);
-					selectMut.setEnabled(false);
-					selectMut.setSelectedIndex(1);
-					seleccionarMutacion("Uniform");
+					changeMut(mutReal);
 				}
 				else {
-					selectCross.setEnabled(true);
 					ctrl.elegirCodificacion(0);
 					selectFunc.setEnabled(true);
-					selectMut.setEnabled(true);
+					changeCross(selecBin);
+					changeMut(mutBin);
 				}
 			}
 		});
@@ -372,6 +355,40 @@ public class SetingsPanel extends JPanel implements observer{
 		genNum=100;
 	}
 	
+	public void changeMut(String [] selec) {
+		if(selectMut!=null)
+			mut1.remove(selectMut);
+		 selectMut = new JComboBox<String>(selec);
+		 selectMut.setEditable(false);
+		 seleccionarMutacion(selec[0]);
+		 selectMut.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					seleccionarMutacion((String)selectMut.getSelectedItem());
+				}
+		 });
+		 setDimCombobox(selectMut, dim2);
+		 mut1.add(selectMut);
+		 mut1.validate();
+		 mut1.repaint();
+		 this.repaint();
+	}
+	public void changeCross(String [] selec) {
+		if(selectCross!=null)
+			cross1.remove(selectCross);
+		selectCross = new JComboBox<String>(selec);
+		 selectCross.setEditable(false);
+		 seleccionarCruce(selec[0]);
+		 selectCross.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					seleccionarCruce((String)selectCross.getSelectedItem());
+				}
+		 });
+		 setDimCombobox(selectCross, dim2);
+		 cross1.add(selectCross);
+		 cross1.validate();
+		 cross1.repaint();
+		 this.repaint();
+	}
 	public void refreshText() {
 		selectSelect.setSelectedIndex(0);
 		selectCross.setSelectedIndex(0);
@@ -387,13 +404,16 @@ public class SetingsPanel extends JPanel implements observer{
 	private void seleccionarCruce(String cruce) {
 		switch(cruce) {
 		case "Single point":
-			ctrl.setCrossFunct(0);
+			if(cod==0) {
+				ctrl.setCrossFunct(0);
+			}else {
+				ctrl.setCrossFunct(4);
+			}
 			break;
 		case "Uniform":
 			ctrl.setCrossFunct(1);
 			break;
 		case "Aritmetic":
-			ctrl.elegirCodificacion(1);
 			ctrl.setCrossFunct(2);
 			break;
 		case "Discret":
@@ -545,6 +565,10 @@ public class SetingsPanel extends JPanel implements observer{
 		c.setAlignmentX(CENTER_ALIGNMENT);
 	}
 
+	@Override
+	public void changedCode(int codificacion) {
+		cod=codificacion;
+	}
 
 	@Override
 	public void onFinished(double[][] best, double[][] bestGen, double[][] average) {
@@ -558,4 +582,5 @@ public class SetingsPanel extends JPanel implements observer{
 		// TODO Auto-generated method stub
 		
 	}
+
 }

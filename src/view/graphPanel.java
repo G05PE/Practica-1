@@ -12,7 +12,7 @@ import model.observer;
 
 public class graphPanel extends JPanel implements observer {
 	private controller ctrl;
-	Plot2DPanel plot;
+	private Plot2DPanel plot;
 	private int tam;
 	
 	public graphPanel(controller c) {
@@ -48,6 +48,12 @@ public class graphPanel extends JPanel implements observer {
 	}
 	@Override
 	public void onNextGeneration() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changedCode(int codificacion) {
 		// TODO Auto-generated method stub
 		
 	}

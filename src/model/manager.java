@@ -188,6 +188,9 @@ public class manager {
 		case 3:
 			algCruce=new discretoUniforme();
 			break;
+		case 4:
+			//algCruce=new monopuntoReal();
+			break;
 		default:
 			break;
 		}
