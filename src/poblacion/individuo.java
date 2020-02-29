@@ -179,6 +179,7 @@ public class individuo {
 	public int getCodificacion() {
 		return cod;
 	}
+	
 	public gen getCromosomaAt(int i) {
 		if(cod==0) {
 		return cromosoma.get(i);
@@ -186,6 +187,7 @@ public class individuo {
 			return cromosomaReal.get(i);
 		}
 	}
+	
 	public List<Double> getFenotipos(){
 		return fenotipos;
 	}
@@ -263,6 +265,16 @@ public class individuo {
 		}
 		
 	}
+	
+	public void cruzaReales(double inicio, double fin, individuo padre) {
+		
+		//Para todos los genes
+		for(int i = 0; i < cromosomaReal.size(); i++) {
+			double aux = padre.getCromosomaAt(i).getvalorReal();
+			getCromosomaAt(i).setvalorReal(aux);	
+		}
+	}
+	
 
 	public double getGenotipoReal(int j) {
 		return (double) cromosomaReal.get(j).getGenotipo();
