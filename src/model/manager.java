@@ -154,6 +154,9 @@ public class manager {
 		case 3:
 			algSel=new algoritmoEstocasticoUniv();
 			break;
+		case 4:
+			algSel=new algoritmoTruncamiento();
+			break;
 		}
 	}
 	public double[][] getBest() {

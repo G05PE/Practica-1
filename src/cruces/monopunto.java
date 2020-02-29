@@ -12,7 +12,7 @@ public class monopunto extends algoritmoCruce{
 	
 	public monopunto() {}
 
-	//Seleccionar individuos a cruzarse y almacenarlos en el array reproductores
+	//Seleccionar individuos a cruzarse y almacenarlos en el	 array reproductores
 	@Override	
 	public poblacion cruzar(poblacion seleccionados, double prob) {
 		ini(prob, seleccionados);
@@ -24,8 +24,9 @@ public class monopunto extends algoritmoCruce{
 	private void creaDescendientes() {
 		r=new Random();
 		
-		//Punto es un numero entre 0 y la logitud del cromosoma
+		//Punto es un numero entre 0 y la logitud del cromosoma	
 		punto = (r.nextInt()%getSeleccionadoConcreto(0).longitudCromosoma());
+		
 		if(punto < 0) punto = -punto;
 		
 		for(int i = 0; i < getReproductoresSize()- 1; i += 2) {
@@ -42,10 +43,17 @@ public class monopunto extends algoritmoCruce{
 	private void mezcla(individuo hijo1, individuo hijo2, individuo padre1, individuo padre2) {
 		
 		//Incluimos por mitades
-		hijo1.cruza(punto, padre2.longitudCromosoma(), padre2);
-		hijo2.cruza(0, punto, padre1);
-		hijo1.recalcularFenotipos();
-		hijo2.recalcularFenotipos();
+		if(hijo1.getCodificacion() == 0) {
+			hijo1.cruza(punto, padre2.longitudCromosoma(), padre2);
+			hijo2.cruza(0, punto, padre1);
+			hijo1.recalcularFenotipos();
+			hijo2.recalcularFenotipos();
+		}
+		else {
+			hijo1.cruzaReales(punto, padre2.longitudCromosoma(), padre2);
+			hijo2.cruzaReales(0, punto, padre1);	
+		}
+		
 		hijo1.calcularFitness();
 		hijo2.calcularFitness();
 	}

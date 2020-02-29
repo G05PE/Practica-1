@@ -153,7 +153,8 @@ public class SetingsPanel extends JPanel implements observer{
 		 this.add(lnAlgSel);
 		 this.add(Box.createHorizontalGlue());
 		 String[] selec = { "Roulette", "Determinist Tournament",
-				"Probabilistic Tournament", "Universal Stochastic"};
+				"Probabilistic Tournament", "Universal Stochastic",
+				"Truncation"};
 		 selectSelect = new JComboBox<String>(selec);
 		 selectSelect.setEditable(false);
 		 seleccionar(selec[0]);
@@ -404,11 +405,7 @@ public class SetingsPanel extends JPanel implements observer{
 	private void seleccionarCruce(String cruce) {
 		switch(cruce) {
 		case "Single point":
-			if(cod==0) {
-				ctrl.setCrossFunct(0);
-			}else {
-				ctrl.setCrossFunct(4);
-			}
+			ctrl.setCrossFunct(0);
 			break;
 		case "Uniform":
 			ctrl.setCrossFunct(1);
@@ -436,7 +433,10 @@ public class SetingsPanel extends JPanel implements observer{
 			ctrl.establecerMetodoSeleccion(2);
 			break;
 		case "Universal Stochastic":
-			ctrl.establecerMetodoSeleccion(2);
+			ctrl.establecerMetodoSeleccion(3);
+			break;
+		case "Truncation":
+			ctrl.establecerMetodoSeleccion(4);
 			break;
 			default:
 				break;
