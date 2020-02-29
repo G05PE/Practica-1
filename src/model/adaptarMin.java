@@ -24,6 +24,7 @@ public class adaptarMin extends adaptacion{
 	}
 	
 	public void deshacer(poblacion p) {
+		setAdaptado(false);
 		double valor;
 		for(int i=0; i < p.getSize(); i++) {
 			valor=getLimit() - p.getIndividuo(i).getFitness();

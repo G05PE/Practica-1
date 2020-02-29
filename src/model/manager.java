@@ -65,7 +65,9 @@ public class manager {
 		generation++;
 		while(generation < maxIter) {
 			elite.escogerElites(poblacion, probElite);
+			adaptar();
 			seleccion();
+			desadaptar();
 			reproduccion();
 			mutacion();
 			elite.incluirElites(poblacion);
@@ -76,6 +78,12 @@ public class manager {
 		for(int i=0; i < observers.size(); i++) {
 			observers.get(i).onFinished( best, bestGen, average);
 		}
+	}
+	private void desadaptar() {
+		funcion.desadaptar(poblacion);
+	}
+	private void adaptar() {
+		funcion.adaptar(poblacion);
 	}
 	private void seleccion() {
 		poblacion=algSel.ini(poblacion, funcion);

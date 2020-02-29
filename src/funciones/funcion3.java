@@ -2,10 +2,13 @@ package funciones;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.adaptarMin;
+
 public class funcion3 extends funcion{
 	
 	public funcion3(int var) {
 		super(var);
+		super.setAdapt(new adaptarMin());
 	}
 
 	public void establecerMinimosMaximos() {
@@ -37,11 +40,21 @@ public class funcion3 extends funcion{
 
 	@Override
 	public boolean best(double fitness, double best) {
-		return fitness < best;
+		if(getAdapt().getAdaptado())
+		{
+			return fitness > best;
+		}else {
+			return fitness < best;
+		}
 	}
 
 	@Override
 	public boolean worst(double fitness, double fitness2) {
-		return fitness > fitness2;
+		if(getAdapt().getAdaptado())
+		{
+			return fitness < fitness2;
+		}else {
+			return fitness > fitness2;
+		}
 	}
 }

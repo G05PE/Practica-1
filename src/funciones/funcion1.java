@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import genetica.gen;
+import model.adaptarMax;
 
 public class funcion1 extends funcion{
 	public funcion1() {
 		super(2);
+		super.setAdapt(new adaptarMax());
 	}
+	
 	public void establecerMinimosMaximos() {
 		List<Double>minimos=new ArrayList<Double>();
 		minimos.add(-3.0);
