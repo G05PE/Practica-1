@@ -282,4 +282,8 @@ public class individuo {
 		}
 	}
 
+	public void setFitness(double d) {
+		fitness=d;
+	}
+
 }
