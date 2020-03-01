@@ -5,6 +5,7 @@ import java.util.List;
 
 import genetica.gen;
 import model.adaptacion;
+import poblacion.individuo;
 import poblacion.poblacion;
 
 public abstract class funcion {
@@ -22,6 +23,7 @@ public abstract class funcion {
 	public abstract boolean best(double fitness, double best);
 	public abstract double calcularFuncion(List<Double> fenotipos);
 	public abstract void establecerMinimosMaximos();
+	public abstract void addElite(List<individuo> objetivo, List<individuo> fuente, double tamElite);
 	
 	public void setAdapt(adaptacion a) {
 		adp=a;

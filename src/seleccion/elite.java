@@ -29,10 +29,8 @@ public class elite {
 		//Determina el tama�o de la elite
 		tamElite=Math.floor(poblacion.getSize()*por);
 		//A�ade la elite
-		int last=aux.size()-1;
-		for(int i=0; i < tamElite; i++) {
-			elite.add(new individuo(aux.get(last-i)));
-		}
+		poblacion.getFuncion().addElite(elite, aux, tamElite);
+		
 	}
 	/**
 	 * A�ade la elite, previamente escogida, a la nueva poblaci�n*/

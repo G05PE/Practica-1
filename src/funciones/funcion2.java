@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.adaptarMax;
 import model.adaptarMin;
+import poblacion.individuo;
 
 public class funcion2 extends funcion{
 	
@@ -52,5 +53,11 @@ public class funcion2 extends funcion{
 		}else {
 			return fitness > fitness2;
 		}	
+	}
+	@Override
+	public void addElite(List<individuo> objetivo, List<individuo> fuente, double tamElite) {
+		for(int i=0; i < tamElite; i++) {
+			objetivo.add(new individuo(fuente.get(i)));
+		}
 	}
 }

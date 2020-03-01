@@ -1,9 +1,13 @@
 package funciones;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.adaptarMin;
+import poblacion.individuo;
 
 public class funcion4 extends funcion{
 	
@@ -28,13 +32,29 @@ public class funcion4 extends funcion{
 
 	public double calcularFuncion(List<Double> fitness) {
 		double resultado=0;
+		double sen1, sen2, valor;
 		for(int i=0; i < getSize(); i++) {
-			resultado+=Math.sin(fitness.get(i)*Math.pow(
-					Math.sin((i+1)*Math.pow(fitness.get(i), 2)/Math.PI), 20));
+			sen1=Math.sin(fitness.get(i));
+			//sen1=Math.toRadians(sen1);
+			//sen1=truncar(sen1);
+			valor= ((i+2)*Math.pow(fitness.get(i), 2))/Math.PI;
+			//valor=truncar(valor);
+			sen2=Math.pow(Math.sin(valor), 20);
+			resultado+=sen1*sen2;
 		}
 		return -resultado;
 	}
-
+	
+	public double truncar(double x) {
+		String st=x+"";
+		double res;
+		String st2="";
+		for(int i=0; i < st.length() && i < 15; i++) {
+			st2+=st.charAt(i);
+		}
+		res=Double.parseDouble(st2);
+		return res;
+	}
 	@Override
 	public boolean best(double fitness, double best) {
 		if(getAdapt().getAdaptado())
@@ -52,6 +72,13 @@ public class funcion4 extends funcion{
 			return fitness < fitness2;
 		}else {
 			return fitness > fitness2;
+		}
+	}
+
+	@Override
+	public void addElite(List<individuo> objetivo, List<individuo> fuente, double tamElite) {
+		for(int i=0; i < tamElite; i++) {
+			objetivo.add(new individuo(fuente.get(i)));
 		}
 	}
 	

@@ -243,8 +243,13 @@ public class individuo {
 	
 	public double longitudCromosoma() {
 		int lg = 0;
-		for(int i = 0; i < cromosoma.size(); i++) {
-			lg += getCromosomaAt(i).getTam();
+		if(cod == 0) {
+			for(int i = 0; i < cromosoma.size(); i++) {
+				lg += getCromosomaAt(i).getTam();
+			}
+		}
+		else {
+			return cromosomaReal.size();
 		}
 		return lg;
 	}
@@ -283,7 +288,11 @@ public class individuo {
 	}
 
 	public void setFitness(double d) {
-		fitness=d;
+		if(cod==0) {
+			fitness=d;
+		}else {
+			fitnessReal=d;
+		}
 	}
 	
 public void cruzaReales(double inicio, double fin, individuo padre) {
