@@ -34,7 +34,18 @@ public class genReal extends gen{
 		genotipo=d;
 		fenotipo=genotipo;
 	}
-
+	
+	public double truncar(double x) {
+		String st=x+"";
+		double res;
+		String st2="";
+		for(int i=0; i < st.length() && i < 10; i++) {
+			st2+=st.charAt(i);
+		}
+		res=Double.parseDouble(st2);
+		return res;
+	}
+	
 	public double getMin() {
 		return min;
 	}
@@ -58,8 +69,10 @@ public class genReal extends gen{
 		double valor=Math.random()%max + min;
 		if(valor > max)
 			return (valor-min);
+		
 		return valor;
 	}
+
 	public void setCod(int cod) {
 		super.setCod(cod);
 	}

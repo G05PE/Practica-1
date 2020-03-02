@@ -32,13 +32,11 @@ public class funcion4 extends funcion{
 
 	public double calcularFuncion(List<Double> fitness) {
 		double resultado=0;
-		double sen1, sen2, valor;
+		double sen1, sen2, valor, fit;
 		for(int i=0; i < getSize(); i++) {
-			sen1=Math.sin(fitness.get(i));
-			//sen1=Math.toRadians(sen1);
-			//sen1=truncar(sen1);
-			valor= ((i+2)*Math.pow(fitness.get(i), 2))/Math.PI;
-			//valor=truncar(valor);
+			fit=fitness.get(i);
+			sen1=Math.sin(fit);
+			valor= ((i+2)*Math.pow(fit, 2))/Math.PI;
 			sen2=Math.pow(Math.sin(valor), 20);
 			resultado+=sen1*sen2;
 		}
@@ -49,7 +47,7 @@ public class funcion4 extends funcion{
 		String st=x+"";
 		double res;
 		String st2="";
-		for(int i=0; i < st.length() && i < 15; i++) {
+		for(int i=0; i < st.length() && i < 10; i++) {
 			st2+=st.charAt(i);
 		}
 		res=Double.parseDouble(st2);

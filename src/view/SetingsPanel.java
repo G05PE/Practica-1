@@ -391,6 +391,9 @@ public class SetingsPanel extends JPanel implements observer{
 		 this.repaint();
 	}
 	public void refreshText() {
+		ctrl.elegirCodificacion(0);
+		changeCross(selecBin);
+		changeMut(mutBin);
 		selectSelect.setSelectedIndex(0);
 		selectCross.setSelectedIndex(0);
 		selectMut.setSelectedIndex(0);
@@ -400,6 +403,8 @@ public class SetingsPanel extends JPanel implements observer{
 		tElite.setText(elitePer+"");
 		tPopul.setText(popSize+"");
 		tMut.setText(mutPer+"");
+		selectFunc.setEnabled(true);
+		selectMut.setEnabled(true);
 		this.repaint();
 	}
 	private void seleccionarCruce(String cruce) {

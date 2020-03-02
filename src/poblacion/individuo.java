@@ -298,7 +298,7 @@ public class individuo {
 public void cruzaReales(double inicio, double fin, individuo padre) {
 		
 		//Para todos los genes
-		for(int i = 0; i < cromosomaReal.size(); i++) {
+		for(int i = (int)inicio; i < cromosomaReal.size() && i < (int)fin; i++) {
 			double aux = (double) padre.getCromosomaAt(i).getGenotipo();
 			((genReal)getCromosomaAt(i)).setGenotipo(aux);
 		}
