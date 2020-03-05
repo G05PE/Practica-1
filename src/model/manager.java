@@ -5,6 +5,7 @@ import java.util.List;
 
 import cruces.*;
 import funciones.*;
+import poblacion.individuo;
 import poblacion.poblacion;
 import seleccion.*;
 
@@ -17,6 +18,7 @@ public class manager {
 	private double bestGen [][];
 	private double average [][];
 	private double best [][];
+	private List<Double> bestVars;;
 	private mutacion algMut;
 	private funcion funcion;
 	private int codificacion;//0=binario, 1=real
@@ -31,6 +33,7 @@ public class manager {
 
 	public manager() {
 		observers=new ArrayList<observer>();
+		bestVars=new ArrayList<Double>();
 		elite=new elite();
 		iniciarDatos();
 	}
@@ -76,7 +79,7 @@ public class manager {
 		}
 		
 		for(int i=0; i < observers.size(); i++) {
-			observers.get(i).onFinished( best, bestGen, average);
+			observers.get(i).onFinished( best, bestGen, average, bestVars);
 		}
 	}
 	private void desadaptar() {
@@ -106,6 +109,12 @@ public class manager {
 		bestGen[1][generation]=poblacion.getBest();
 		if(generation==0 || funcion.best(bestGen[1][generation], best[1][generation-1])) {
 			best[1][generation]=bestGen[1][generation];
+			bestVars.clear();
+			bestVars.add(best[1][generation]);
+			individuo mejor=poblacion.getMejorInd();
+			for(int i=0; i < mejor.getLongitud(); i++) {
+				bestVars.add(mejor.getCromosomaAt(i).getvalorReal());
+			}
 		}
 		else
 		{
@@ -171,6 +180,7 @@ public class manager {
 	public void setPopulationSize(int popSize) {
 		tamPob=popSize;
 	}
+
 	public void setGenerationNumber(int genNum) {
 		maxIter=genNum;
 	}

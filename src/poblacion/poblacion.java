@@ -90,4 +90,14 @@ public class poblacion {
 			poblacion.get(i).setCod(codificacion);
 		}
 	}
+
+	public individuo getMejorInd() {
+		individuo mejor=poblacion.get(0);
+		for(int i=0; i < poblacion.size(); i++) {
+			if(fun.best(poblacion.get(i).getFitness(), mejor.getFitness())){
+				mejor=poblacion.get(i);
+			}
+		}
+		return mejor;
+	}
 }

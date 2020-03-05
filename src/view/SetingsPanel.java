@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -70,6 +71,7 @@ public class SetingsPanel extends JPanel implements observer{
 	private void initGUI() {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
 
 		//Population----------------------------------------------------
 		JLabel lPopSize = new JLabel("Population size");
@@ -576,7 +578,7 @@ public class SetingsPanel extends JPanel implements observer{
 	}
 
 	@Override
-	public void onFinished(double[][] best, double[][] bestGen, double[][] average) {
+	public void onFinished(double[][] best, double[][] bestGen, double[][] average, List<Double> bestVars) {
 		// TODO Auto-generated method stub
 		
 	}
