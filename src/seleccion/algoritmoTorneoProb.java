@@ -3,6 +3,7 @@ package seleccion;
 import java.util.Random;
 
 import funciones.funcion;
+import poblacion.individuo;
 import poblacion.poblacion;
 
 public class algoritmoTorneoProb extends algoritmoTorneo{
@@ -21,7 +22,7 @@ public class algoritmoTorneoProb extends algoritmoTorneo{
 					ganador=i;
 				}
 			}
-			addSeleccionado(getFromRing(ganador));		
+			addSeleccionado(new individuo(getFromRing(ganador)));		
 			ganador=0;
 			clearRing();
 		}
