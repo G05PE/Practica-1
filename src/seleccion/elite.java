@@ -26,17 +26,14 @@ public class elite {
 			public int compare(individuo i1, individuo i2) {
 				return new Double(i1.getFitness()).compareTo(new Double(i2.getFitness()));
 			}});
-		//Determina el tamaño de la elite
+		//Determina el tamaï¿½o de la elite
 		tamElite=Math.floor(poblacion.getSize()*por);
-		//Añade la elite
-		int last=aux.size()-1;
-		for(int i=0; i < tamElite; i++) {
-			elite.add(new individuo(aux.get(last-i)));
-		}
+		//Aï¿½ade la elite
+		poblacion.getFuncion().addElite(elite, aux, tamElite);
 		
 	}
 	/**
-	 * Añade la elite, previamente escogida, a la nueva población*/
+	 * Aï¿½ade la elite, previamente escogida, a la nueva poblaciï¿½n*/
 	public void incluirElites(poblacion poblacion) {
 		int last=poblacion.getSize()-1;
 		for(int i=0; i < elite.size(); i++ ) {
@@ -44,5 +41,5 @@ public class elite {
 		}
 		elite.clear();
 	}
-
+	
 }

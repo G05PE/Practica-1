@@ -20,10 +20,10 @@ public class poblacion {
 		precision=prec;
 	}
 	
-	public void iniciarPoblacion() {
+	public void iniciarPoblacion(int codificacion) {
 		
 		for(int i=0; i < tam; i++) {
-			individuo cromosoma=new individuo(fun, precision);
+			individuo cromosoma=new individuo(fun, precision, codificacion);
 			poblacion.add(cromosoma);
 		}
 		iniBest();
@@ -61,7 +61,6 @@ public class poblacion {
 	
 	public void borraUltimo() {
 		poblacion.remove(poblacion.size()-1);
-		tam--;
 	}
 	
 	public double getPrecision() {
@@ -80,5 +79,26 @@ public class poblacion {
 
 	public void setIndividuoAt(int i, individuo individuo) {
 		poblacion.set(i, new individuo(individuo));
+	}
+
+	public void setSize(int num_sele_cruce) {
+		this.tam = num_sele_cruce;
+	}
+
+	public void setCod(int codificacion) {
+		for(int i=0; i < poblacion.size(); i++) {
+			poblacion.get(i).setCod(codificacion);
+		}
+	}
+
+	public individuo getMejorInd() {
+		individuo mejor=poblacion.get(0);
+		for(int i=0; i < poblacion.size(); i++) {
+			if(fun.best(poblacion.get(i).getFitness(), mejor.getFitness())){
+				mejor=poblacion.get(i);
+			}
+		}
+		return mejor;
+		
 	}
 }

@@ -7,25 +7,28 @@ import java.util.Random;
 import funciones.funcion;
 public class gen {
 	private List<Boolean> genotipo;
-	private double fenotipo;
+	private double valorReal;
 	private funcion funcion;
 	private double tam;
 	private Random rand;
+	private int cod;
+	
+	public gen() {}
 	public gen(funcion f, double precision, double tam) {
 		funcion=f;
 		this.tam=tam;
 		generarGen();
-		calcularFenotipo();
 	}
 	
 	public gen(gen gen) {
+		cod=gen.cod;
 		rand=new Random();
-		fenotipo=gen.getFenotipo();
+		valorReal=gen.getvalorReal();
 		funcion=gen.getFuncion();
 		tam=gen.getTam();
 		genotipo=new ArrayList<Boolean>();
-		for(int i=0; i < gen.getGenotipo().size(); i++) {
-			genotipo.add(new Boolean(gen.getGenotipo().get(i)));
+		for(int i=0; i < ((List<Boolean>) gen.getGenotipo()).size(); i++) {
+			genotipo.add(new Boolean(((List<Boolean>) gen.getGenotipo()).get(i)));
 		}
 	}
 	
@@ -44,21 +47,31 @@ public class gen {
 			genotipo.add(new Boolean(rand.nextBoolean()));
 		}
 	}
-	
-	public void calcularFenotipo() {
-		
-	}
-	public double getFenotipo() {
-		return fenotipo;
+	public double getvalorReal() {
+		return valorReal;
 	}
 	public void setBit(int i, Boolean bit) {
 		Boolean newBit=new Boolean(bit.booleanValue());
 		genotipo.set(i, newBit);
 	}
-	public List<Boolean> getGenotipo() {
-		return genotipo;
+	
+	public Object getGenotipo() {
+		if(cod==0) {
+			return genotipo;
+		}else {
+			return ((genReal)this).getGenotipoReal();
+		}
 	}
-	public void setFenotipo(double d) {
-		fenotipo=d;
+	public void setvalorReal(double d) {
+		valorReal=d;
+	}
+	public void setCod(int cod2) {
+		this.cod=cod2;
+	}
+	public int getCod() {
+		return cod;
+	}
+	public void setFunct(funciones.funcion f) {
+		funcion=f;
 	}
 }

@@ -33,7 +33,9 @@ public class mainWindow extends JFrame{
 		this.setPreferredSize(new Dimension(900,700));
 		this.setMinimumSize(new Dimension(900,700));
 		this.setMaximumSize(new Dimension(900,700));
-		this.setResizable(false);
+		//this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    // Al cerrarlo se termina la aplicación.
+		this.setLocationRelativeTo(null);
 		this.pack();
 		this.setVisible(true);
 	}

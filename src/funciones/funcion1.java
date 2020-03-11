@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import genetica.gen;
+import model.adaptarMax;
+import poblacion.individuo;
 
 public class funcion1 extends funcion{
 	public funcion1() {
 		super(2);
+		super.setAdapt(new adaptarMax());
 	}
+	
 	public void establecerMinimosMaximos() {
 		List<Double>minimos=new ArrayList<Double>();
 		minimos.add(-3.0);
@@ -35,6 +39,14 @@ public class funcion1 extends funcion{
 	@Override
 	public boolean worst(double fitness, double fitness2) {
 		return fitness < fitness2;
+	}
+
+	@Override
+	public void addElite(List<individuo> elite, List<individuo> aux, double tamElite) {
+		int last=aux.size()-1;
+		for(int i=0; i < tamElite; i++) {
+			elite.add(new individuo(aux.get(last-i)));
+		}
 	}
 	
 }

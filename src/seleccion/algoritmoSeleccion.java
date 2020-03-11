@@ -10,8 +10,8 @@ import poblacion.poblacion;
 public abstract class algoritmoSeleccion {
 	private poblacion seleccionados;
 	
-	public abstract void seleccionar(poblacion p);
-	public abstract poblacion ini(poblacion p);
+	public abstract void seleccionar(poblacion p, funcion f);
+	public abstract poblacion ini(poblacion p, funcion f);
 	
 	public void addSeleccionado(individuo i) {
 		seleccionados.addIndividuo(i);
